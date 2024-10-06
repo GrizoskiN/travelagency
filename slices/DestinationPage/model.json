@@ -1,0 +1,58 @@
+{
+  "id": "destination_page",
+  "type": "SharedSlice",
+  "name": "DestinationPage",
+  "description": "DestinationPage",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "header_image": {
+          "type": "Image",
+          "config": {
+            "label": "Header Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "gallery": {
+          "type": "Group",
+          "config": {
+            "label": "Gallery",
+            "repeat": true,
+            "fields": {
+              "imagegallery": {
+                "type": "Image",
+                "config": {
+                  "label": "ImageGallery",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        },
+        "destination": {
+          "type": "Text",
+          "config": {
+            "label": "destination",
+            "placeholder": ""
+          }
+        },
+        "text": {
+          "type": "Text",
+          "config": {
+            "label": "text",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

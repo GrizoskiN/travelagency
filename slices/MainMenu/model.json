@@ -1,0 +1,114 @@
+{
+  "id": "main_menu",
+  "type": "SharedSlice",
+  "name": "MainMenu",
+  "description": "MainMenu",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "logo": {
+          "type": "Image",
+          "config": {
+            "label": "Logo",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "menulink": {
+          "type": "Group",
+          "config": {
+            "label": "MenuLink",
+            "repeat": true,
+            "fields": {
+              "menu_item": {
+                "type": "Text",
+                "config": {
+                  "label": "Menu Item",
+                  "placeholder": "Menu Item"
+                }
+              },
+              "menu_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Menu link",
+                  "placeholder": "Menu Item Link",
+                  "allowTargetBlank": false,
+                  "select": null
+                }
+              }
+            }
+          }
+        },
+        "cta_button": {
+          "type": "Link",
+          "config": {
+            "label": "CTA button",
+            "placeholder": "CTA Button",
+            "allowTargetBlank": false,
+            "select": null
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "subMenuItem",
+      "name": "Sub Menu Item",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "logo": {
+          "type": "Image",
+          "config": {
+            "label": "Logo",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "menulink": {
+          "type": "Group",
+          "config": {
+            "label": "MenuLink",
+            "repeat": true,
+            "fields": {
+              "menu_item": {
+                "type": "Text",
+                "config": {
+                  "label": "Menu Item",
+                  "placeholder": "Menu Item"
+                }
+              },
+              "menu_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Menu link",
+                  "placeholder": "Menu Item Link",
+                  "allowTargetBlank": false,
+                  "select": null
+                }
+              }
+            }
+          }
+        },
+        "cta_button": {
+          "type": "Link",
+          "config": {
+            "label": "CTA button",
+            "placeholder": "CTA Button",
+            "allowTargetBlank": false,
+            "select": null
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

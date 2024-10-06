@@ -1,0 +1,41 @@
+{
+  "id": "header",
+  "type": "SharedSlice",
+  "name": "HeaderImg",
+  "description": "Header",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "header_image": {
+          "type": "Image",
+          "config": {
+            "label": "Header Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "header_text": {
+          "type": "Text",
+          "config": {
+            "label": "Header Text",
+            "placeholder": "EXPLORE"
+          }
+        },
+        "sub_header": {
+          "type": "Text",
+          "config": {
+            "label": "Sub Header",
+            "placeholder": "the beauty of the world"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
