@@ -84,6 +84,17 @@ interface DestinationsDocumentData {
   specific_date: prismic.DateField;
 
   /**
+   * City field in *destination*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: City
+   * - **API ID Path**: destinations.city
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  city: prismic.KeyTextField;
+
+  /**
    * Slice Zone field in *destination*
    *
    * - **Field Type**: Slice Zone

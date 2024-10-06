@@ -36,7 +36,7 @@ export function DatePickerWithRange({
             id="date"
             variant={"outline"}
             className={cn(
-              "w-auto bg-transparent border-none rounded-xl shadow-none justify-start text-left font-normal text-white",
+              "w-auto bg-transparent border-none rounded-full shadow-none justify-start text-left font-normal text-white",
               !date && "text-white"
             )}
             onClick={() => setOpen(true)}

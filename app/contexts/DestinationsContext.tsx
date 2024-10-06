@@ -7,17 +7,24 @@ import { createContext, useContext, ReactNode } from "react";
 type Destination = {
   value: string;
   label: string;
+  cities?: string[];
 };
 
 type DestinationsContextProps = {
   destinations: Destination[];
+  onChange: (value: string) => void;
 };
 
 const DestinationsContext = createContext<DestinationsContextProps | undefined>(undefined);
 
 export const DestinationsProvider = ({ children, destinations }: { children: ReactNode; destinations: Destination[] }) => {
+  const handleChange = (value: string) => {
+    // Implement the handler logic if needed
+    console.log("Country changed:", value);
+  };
+
   return (
-    <DestinationsContext.Provider value={{ destinations }}>
+    <DestinationsContext.Provider value={{ destinations, onChange: handleChange }}>
       {children}
     </DestinationsContext.Provider>
   );

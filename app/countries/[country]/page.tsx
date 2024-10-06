@@ -111,7 +111,7 @@ export default async function CountryPage({
 
       {/* Display non-matched destinations below */}
       <div className="non-matched-destinations my-8">
-        <h2 className="text-3xl font-semibold mb-4">Other Destinations</h2>
+        {startDateStr && <h2 className="text-3xl font-semibold mb-4">Other Destinations</h2>}
         <div className="destination-grid grid grid-cols-5 gap-4">
           {nonMatchedDestinations.map((destinationsDoc: PrismicDocument) => {
             const { country_image, meta_title } = destinationsDoc.data;

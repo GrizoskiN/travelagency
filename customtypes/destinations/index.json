@@ -63,6 +63,13 @@
           "placeholder": "Offer with fixed dates"
         }
       },
+      "city": {
+        "type": "Text",
+        "config": {
+          "label": "City",
+          "placeholder": "City"
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

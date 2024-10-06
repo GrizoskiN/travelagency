@@ -44,10 +44,13 @@ const SearchBar: React.FC = () => {
       console.error("Navigation error:", error);
     }
   };
-
+  const handleCountryChange = (value: string) => {
+    setSelectedCountry(value)
+    console.log(`Selected country: ${value}`);
+  };
   return (
     <div className="w-full flex justify-center mt-10 z-40 font-abel">
-      <div className="flex items-center bg-white/20 backdrop-blur-sm border-t-white/40 border-t-[1px] text-white py-3 px-11 rounded-xl shadow-lg space-x-3">
+      <div className="flex items-center bg-white/20 backdrop-blur-sm border-t-white/40 border-t-[1px] text-white p-3 rounded-full shadow-lg space-x-3">
         <DatePickerWithRange
           date={
             dateRange
@@ -67,12 +70,12 @@ const SearchBar: React.FC = () => {
         />
         <DestinationSelect
           destinations={destinations}
-          onChange={(value) => setSelectedCountry(value)}
+          onChange={handleCountryChange}
         />
 
         {/* Search Button */}
         <button
-          className="bg-white px-11 py-[6px] rounded-xl text-gray-700 hover:bg-gray-100 transition-all"
+          className="bg-white px-11 py-[6px] rounded-full text-gray-700 hover:bg-gray-100 transition-all"
           onClick={handleSearch}
         >
           Search

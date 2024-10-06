@@ -1,5 +1,3 @@
-// app/layout.tsx
-
 import "./globals.css";
 import { createClient } from "@/prismicio";
 import { DestinationsProvider } from "./contexts/DestinationsContext";
@@ -11,8 +9,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const client = createClient();
   const travelByDestination = await client.getAllByType("destinations");
 
-  // Prepare unique destinations data
-  const countrySet = new Set<string>();
+  // Prepare unique destinations data with cities
+  const destinationMap = new Map<string, { label: string; cities: string[] }>();
+
   travelByDestination.forEach((doc) => {
     const country = Array.isArray(doc.data.country) && doc.data.country.length > 0
       ? doc.data.country[0]?.text
@@ -20,16 +19,29 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       ? doc.data.country
       : "";
 
+    const city = doc.data.city;
+
     if (country.trim() !== "") {
       const normalizedCountry = country.trim().toLowerCase();
-      countrySet.add(normalizedCountry);
+
+      if (!destinationMap.has(normalizedCountry)) {
+        destinationMap.set(normalizedCountry, {
+          label: country.charAt(0).toUpperCase() + country.slice(1),
+          cities: [],
+        });
+      }
+
+      if (city && typeof city === "string") {
+        destinationMap.get(normalizedCountry)?.cities.push(city);
+      }
     }
   });
 
-  // Mapping the unique countries to the required structure
-  const uniqueCountries = Array.from(countrySet).map((country) => ({
+  // Map the destination data to the required format
+  const uniqueCountries = Array.from(destinationMap.entries()).map(([country, data]) => ({
     value: country,
-    label: country.charAt(0).toUpperCase() + country.slice(1),
+    label: data.label,
+    cities: data.cities,
   }));
 
   return (
