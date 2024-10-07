@@ -9,10 +9,6 @@
     "lint": "next lint",
     "slicemachine": "start-slicemachine"
   },
-  "resolutions": {
-  "date-fns": "^2.28.0"
-},
-
   "dependencies": {
     "@prismicio/client": "^7.11.0",
     "@prismicio/next": "^1.7.0",
@@ -42,7 +38,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "postcss": "^8.4.47",
-    "slice-machine-ui": "^0.7.1",
+    "slice-machine-ui": "^2.8.1",
     "tailwindcss": "^3.4.13",
     "typescript": "^5"
   }

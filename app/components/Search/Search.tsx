@@ -45,7 +45,7 @@ const SearchBar: React.FC = () => {
     }
   };
   const handleCountryChange = (value: string) => {
-    setSelectedCountry(value)
+    setSelectedCountry(value);
     console.log(`Selected country: ${value}`);
   };
   return (
@@ -64,7 +64,7 @@ const SearchBar: React.FC = () => {
             setDateRange(
               range
                 ? { startDate: range.from ?? null, endDate: range.to ?? null }
-                : undefined
+                : undefined,
             );
           }}
         />
@@ -76,8 +76,7 @@ const SearchBar: React.FC = () => {
         {/* Search Button */}
         <button
           className="bg-white px-11 py-[6px] rounded-full text-gray-700 hover:bg-gray-100 transition-all"
-          onClick={handleSearch}
-        >
+          onClick={handleSearch}>
           Search
         </button>
       </div>
