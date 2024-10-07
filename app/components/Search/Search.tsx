@@ -6,6 +6,7 @@ import { useDestinations } from "@/app/contexts/DestinationsContext";
 import { DatePickerWithRange } from "./DateRangePicker";
 import DestinationSelect from "./DestinationSelect";
 
+
 type DateRange = {
   startDate: Date | null;
   endDate: Date | null;
