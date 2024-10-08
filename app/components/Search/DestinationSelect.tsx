@@ -47,10 +47,10 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
   };
 
   return (
-    <div className="flex flex-col md:flex-row ">
+    <div className="flex gap-2 rounded-xl">
       {/* Country Select */}
       <Select onValueChange={handleCountryChange}>
-        <SelectTrigger className="rounded-full border-none shadow-none outline-none focus:ring-white">
+        <SelectTrigger className="rounded-xl  border-white/20 shadow-md focus:ring-white">
           <SelectValue placeholder="Select a Country" />
         </SelectTrigger>
         <SelectContent>
@@ -64,9 +64,9 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
 
       {/* City Select: Only visible after a country is selected and there are cities available */}
       {selectedCountry && availableCities.length > 0 && (
-        <div className="">
+        <div className="w-full">
           <Select onValueChange={handleCityChange}>
-            <SelectTrigger className="rounded-full border-none shadow-none outline-none focus:ring-white">
+            <SelectTrigger className="rounded-xl border-white/20 shadow-md  focus:ring-white">
               <SelectValue placeholder="Select a City" />
             </SelectTrigger>
             <SelectContent>

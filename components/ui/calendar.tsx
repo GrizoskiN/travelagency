@@ -53,7 +53,7 @@ function Calendar({
       className={cn("p-3 ", className)}
     
       classNames={{
-        months: "flex flex-col md:flex-row  relative",
+        months: "flex  relative",
         month_caption: "flex w-32 justify-center h-7 mx-10 relative items-center",
         weekdays: "flex flex-row",
         weekday: "text-muted-foreground w-8 font-normal text-[0.8rem]",
@@ -77,7 +77,7 @@ function Calendar({
         nav: "flex items-start",
         month_grid: "mt-4",
         week: "flex w-full mt-2",
-        day: "p-0 size-8 text-sm flex-1 flex items-center justify-center has-[button]:hover:!bg-accent rounded-md has-[button]:hover:aria-selected:!bg-primary has-[button]:hover:text-accent-foreground has-[button]:hover:aria-selected:text-primary-foreground",
+        day: "p-0 size-5 md:size-8 text-sm flex-1 flex items-center justify-center has-[button]:hover:!bg-accent rounded-md has-[button]:hover:aria-selected:!bg-primary has-[button]:hover:text-accent-foreground has-[button]:hover:aria-selected:text-primary-foreground",
         day_button: cn(
           buttonVariants({ variant: "ghost" }),
           "size-8 p-0 font-normal transition-none hover:bg-transparent hover:text-inherit aria-selected:opacity-100"

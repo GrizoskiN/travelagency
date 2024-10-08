@@ -7,6 +7,7 @@ import { DatePickerWithRange } from "./DateRangePicker";
 import DestinationSelect from "./DestinationSelect";
 
 
+
 type DateRange = {
   startDate: Date | null;
   endDate: Date | null;
@@ -50,8 +51,8 @@ const SearchBar: React.FC = () => {
     console.log(`Selected country: ${value}`);
   };
   return (
-    <div className="w-10/12 md:w-full flex  justify-center mt-10 z-40 font-abel">
-      <div className="w-full flex flex-col md:flex-row md:items-center space-y-3 bg-white/20 backdrop-blur-sm border-t-white/40 border-t-[1px] text-white p-3 rounded-xl md:rounded-full shadow-lg space-x-3">
+    <div className="w-10/12 md:w-auto flex items-center justify-center mt-10 z-40 font-abel">
+      <div className="w-full flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 bg-white/10 md:px-11 backdrop-blur-sm border-t-white/40 border-t-[1px] text-white p-3 rounded-xl  shadow-lg md:space-x-3">
         <DatePickerWithRange
           date={
             dateRange
@@ -75,8 +76,8 @@ const SearchBar: React.FC = () => {
         />
 
         {/* Search Button */}
-        <button
-          className="bg-white px-11 py-[6px] rounded-full text-gray-700 hover:bg-gray-100 transition-all"
+        <button 
+          className=" bg-[#ef4444] px-11 py-[6px] rounded-xl text-white hover:bg-gray-100 transition-all"
           onClick={handleSearch}
         >
           Search
