@@ -47,7 +47,7 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
   };
 
   return (
-    <div className="flex ">
+    <div className="flex flex-col md:flex-row ">
       {/* Country Select */}
       <Select onValueChange={handleCountryChange}>
         <SelectTrigger className="rounded-full border-none shadow-none outline-none focus:ring-white">

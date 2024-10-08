@@ -50,16 +50,14 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
-      style={{
-        width: 248.8 * (columnsDisplayed ?? 1) + "px",
-      }}
+      className={cn("p-3 ", className)}
+    
       classNames={{
-        months: "flex  relative",
-        month_caption: "flex justify-center h-7 mx-10 relative items-center",
+        months: "flex flex-col md:flex-row  relative",
+        month_caption: "flex w-32 justify-center h-7 mx-10 relative items-center",
         weekdays: "flex flex-row",
         weekday: "text-muted-foreground w-8 font-normal text-[0.8rem]",
-        month: "gap-y-4 overflow-x-hidden w-full",
+        month: "gap-y-4 px-2 overflow-x-hidden w-full",
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium truncate",
         button_next: cn(

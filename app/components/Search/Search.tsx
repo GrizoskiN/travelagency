@@ -50,8 +50,8 @@ const SearchBar: React.FC = () => {
     console.log(`Selected country: ${value}`);
   };
   return (
-    <div className="w-full flex justify-center mt-10 z-40 font-abel">
-      <div className="flex items-center bg-white/20 backdrop-blur-sm border-t-white/40 border-t-[1px] text-white p-3 rounded-full shadow-lg space-x-3">
+    <div className="w-10/12 md:w-full flex  justify-center mt-10 z-40 font-abel">
+      <div className="w-full flex flex-col md:flex-row md:items-center space-y-3 bg-white/20 backdrop-blur-sm border-t-white/40 border-t-[1px] text-white p-3 rounded-xl md:rounded-full shadow-lg space-x-3">
         <DatePickerWithRange
           date={
             dateRange
