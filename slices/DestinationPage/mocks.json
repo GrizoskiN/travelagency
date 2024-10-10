@@ -67,10 +67,12 @@
 				"value": "came",
 				"type": "Text"
 			},
-			"text": {
-				"__TYPE__": "FieldContent",
-				"value": "characteristic",
-				"type": "Text"
+			"location": {
+				"position": {
+					"lat": 48.8583736,
+					"lng": 2.2922926
+				},
+				"__TYPE__": "GeoPointContent"
 			}
 		},
 		"items": []

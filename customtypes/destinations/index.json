@@ -12,6 +12,13 @@
           "label": "UID"
         }
       },
+      "meta_title": {
+        "type": "Text",
+        "config": {
+          "label": "meta_title",
+          "placeholder": "Name of the place"
+        }
+      },
       "continent": {
         "type": "Select",
         "config": {
@@ -25,20 +32,6 @@
             "Africa",
             "Australia"
           ]
-        }
-      },
-      "country": {
-        "type": "Text",
-        "config": {
-          "label": "Country",
-          "placeholder": "France"
-        }
-      },
-      "meta_title": {
-        "type": "Text",
-        "config": {
-          "label": "meta_title",
-          "placeholder": "Name of the place"
         }
       },
       "meta_description": {
@@ -63,11 +56,26 @@
           "placeholder": "Offer with fixed dates"
         }
       },
+      "country": {
+        "type": "Text",
+        "config": {
+          "label": "Country",
+          "placeholder": "France"
+        }
+      },
       "city": {
         "type": "Text",
         "config": {
           "label": "City",
           "placeholder": "City"
+        }
+      },
+      "destination_tag": {
+        "type": "Link",
+        "config": {
+          "label": "destination tag",
+          "select": "document",
+          "customtypes": ["destinations"]
         }
       },
       "slices": {

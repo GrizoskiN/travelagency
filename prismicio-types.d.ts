@@ -4,12 +4,99 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type ContinentTextDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Continent text documents
+ */
+interface ContinentTextDocumentData {
+  /**
+   * Continent Description field in *Continent text*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: continent_text.continent_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  continent_description: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *Continent text*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: continent_text.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ContinentTextDocumentDataSlicesSlice> /**
+   * Meta Title field in *Continent text*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: continent_text.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Continent text*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: continent_text.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Continent text*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: continent_text.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Continent text document from Prismic
+ *
+ * - **API ID**: `continent_text`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ContinentTextDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<ContinentTextDocumentData>,
+    "continent_text",
+    Lang
+  >;
+
 type DestinationsDocumentDataSlicesSlice = DestinationPageSlice;
 
 /**
  * Content for destination documents
  */
 interface DestinationsDocumentData {
+  /**
+   * meta_title field in *destination*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Name of the place
+   * - **API ID Path**: destinations.meta_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+
   /**
    * Continent field in *destination*
    *
@@ -27,28 +114,6 @@ interface DestinationsDocumentData {
     | "Africa"
     | "Australia"
   >;
-
-  /**
-   * Country field in *destination*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: France
-   * - **API ID Path**: destinations.country
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  country: prismic.KeyTextField;
-
-  /**
-   * meta_title field in *destination*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Name of the place
-   * - **API ID Path**: destinations.meta_title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
 
   /**
    * meta_description field in *destination*
@@ -84,6 +149,17 @@ interface DestinationsDocumentData {
   specific_date: prismic.DateField;
 
   /**
+   * Country field in *destination*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: France
+   * - **API ID Path**: destinations.country
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  country: prismic.KeyTextField;
+
+  /**
    * City field in *destination*
    *
    * - **Field Type**: Text
@@ -93,6 +169,17 @@ interface DestinationsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   city: prismic.KeyTextField;
+
+  /**
+   * destination tag field in *destination*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destinations.destination_tag
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  destination_tag: prismic.ContentRelationshipField<"destinations">;
 
   /**
    * Slice Zone field in *destination*
@@ -249,6 +336,7 @@ export type MenuDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenuDocumentData>, "menu", Lang>;
 
 export type AllDocumentTypes =
+  | ContinentTextDocument
   | DestinationsDocument
   | HeaderimageDocument
   | MenuDocument;
@@ -305,14 +393,14 @@ export interface DestinationPageSliceDefaultPrimary {
   destination: prismic.KeyTextField;
 
   /**
-   * text field in *DestinationPage → Default → Primary*
+   * Location field in *DestinationPage → Default → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: GeoPoint
    * - **Placeholder**: *None*
-   * - **API ID Path**: destination_page.default.primary.text
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **API ID Path**: destination_page.default.primary.location
+   * - **Documentation**: https://prismic.io/docs/field#geopoint
    */
-  text: prismic.KeyTextField;
+  location: prismic.GeoPointField;
 }
 
 /**
@@ -595,6 +683,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      ContinentTextDocument,
+      ContinentTextDocumentData,
+      ContinentTextDocumentDataSlicesSlice,
       DestinationsDocument,
       DestinationsDocumentData,
       DestinationsDocumentDataSlicesSlice,

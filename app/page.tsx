@@ -1,4 +1,8 @@
+import GridDestinations from "./components/LandingPage/GridDestinations";
 import Header from "./components/LandingPage/Header";
+import SliderDestinations from "./components/LandingPage/SliderDestinations";
+
+
 
 export default async function HomePage() {
 
@@ -6,7 +10,8 @@ export default async function HomePage() {
     <div>
    
       <Header  />
-      <Header  />
+      <SliderDestinations />
+      <GridDestinations />
     </div>
   );
 }

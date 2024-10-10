@@ -7,7 +7,9 @@ import { createContext, useContext, ReactNode } from "react";
 type Destination = {
   value: string;
   label: string;
-  cities?: string[];
+  image: string; 
+  tags: string[]; 
+  continent: string;
 };
 
 type DestinationsContextProps = {

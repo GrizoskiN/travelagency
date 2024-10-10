@@ -11,6 +11,7 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+			backgroundColor: '#ececec',
   			background: 'hsl(var(--background))',
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
@@ -76,10 +77,10 @@ const config: Config = {
   		xl: '1440px',
   		'2xl': '1536px'
   	},
-  	fontFamily: {
-		 abel: ['Abel', 'sans-serif'],
-         aboreto: ['Aboreto', 'serif'],
-  	}
+  	// fontFamily: {
+	// 	 abel: ['Abel', 'sans-serif'],
+    //      aboreto: ['Aboreto', 'serif'],
+  	// }
   },
   plugins: [tailwindcssAnimate],
 };

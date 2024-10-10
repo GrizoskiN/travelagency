@@ -44,11 +44,10 @@
             "placeholder": ""
           }
         },
-        "text": {
-          "type": "Text",
+        "location": {
+          "type": "GeoPoint",
           "config": {
-            "label": "text",
-            "placeholder": ""
+            "label": "Location"
           }
         }
       },
