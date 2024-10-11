@@ -59,7 +59,7 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
           key={index}
           className={`px-11 py-2 h-fit rounded-full capitalize ${
             selectedTags.includes(tag)
-              ? "bg-primary text-white"
+              ? "bg-primary-foreground text-white"
               : "bg-none border-[1px] border-gray-400 text-gray-700"
           }`}
           onClick={() => handleTagClick(tag)}

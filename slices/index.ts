@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 
 export const components = {
-  
+  continents_text: dynamic(() => import("./ContinentsText")),
   destination_page: dynamic(() => import("./DestinationPage")),
   header: dynamic(() => import("./HeaderImg")),
   main_menu: dynamic(() => import("./MainMenu")),

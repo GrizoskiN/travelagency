@@ -4,7 +4,7 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type ContinentTextDocumentDataSlicesSlice = never;
+type ContinentTextDocumentDataSlicesSlice = ContinentsTextSlice;
 
 /**
  * Content for Continent text documents
@@ -340,6 +340,61 @@ export type AllDocumentTypes =
   | DestinationsDocument
   | HeaderimageDocument
   | MenuDocument;
+
+/**
+ * Primary content in *ContinentsText → Default → Primary*
+ */
+export interface ContinentsTextSliceDefaultPrimary {
+  /**
+   * Heading text field in *ContinentsText → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: continents_text.default.primary.heading_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading_text: prismic.KeyTextField;
+
+  /**
+   * Last card text field in *ContinentsText → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: continents_text.default.primary.last_card_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  last_card_text: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for ContinentsText Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContinentsTextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ContinentsTextSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContinentsText*
+ */
+type ContinentsTextSliceVariation = ContinentsTextSliceDefault;
+
+/**
+ * ContinentsText Shared Slice
+ *
+ * - **API ID**: `continents_text`
+ * - **Description**: ContinentsText
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContinentsTextSlice = prismic.SharedSlice<
+  "continents_text",
+  ContinentsTextSliceVariation
+>;
 
 /**
  * Item in *DestinationPage → Default → Primary → Gallery*
@@ -696,6 +751,10 @@ declare module "@prismicio/client" {
       MenuDocumentData,
       MenuDocumentDataSlicesSlice,
       AllDocumentTypes,
+      ContinentsTextSlice,
+      ContinentsTextSliceDefaultPrimary,
+      ContinentsTextSliceVariation,
+      ContinentsTextSliceDefault,
       DestinationPageSlice,
       DestinationPageSliceDefaultPrimaryGalleryItem,
       DestinationPageSliceDefaultPrimary,

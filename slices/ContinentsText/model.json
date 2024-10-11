@@ -1,0 +1,33 @@
+{
+  "id": "continents_text",
+  "type": "SharedSlice",
+  "name": "ContinentsText",
+  "description": "ContinentsText",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading_text": {
+          "type": "Text",
+          "config": {
+            "label": "Heading text",
+            "placeholder": ""
+          }
+        },
+        "last_card_text": {
+          "type": "Text",
+          "config": {
+            "label": "Last card text",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -5,12 +5,12 @@ interface FeaturedCountryCardProps {
     label: string;
     image: string;
     continent: string;
- 
   };
   continents: string[];
   continentDetails: {
     uid: string;
     continent_description: string;
+    heading_text: string;
   }[];
   onContinentChange: (continent: string) => void;
 }
@@ -34,7 +34,7 @@ const FeaturedCountryCard: FC<FeaturedCountryCardProps> = ({
   const matchedContinentDetail = continentDetails.find(
     (detail) => detail.uid.toLowerCase() === selectedContinent.toLowerCase()
   );
-
+  console.log(`what the hell is this: ${matchedContinentDetail}`)
   return (
     <div className="relative w-full mx-auto p-2 xl:p-6">
       {/* Continent/Earth Dropdown */}
@@ -44,13 +44,12 @@ const FeaturedCountryCard: FC<FeaturedCountryCardProps> = ({
             Select a continent 
           </label>
           <select
-          
             value={selectedContinent}
             onChange={handleContinentChange}
             className="px-11 my-1 py-2 text-primary rounded-full bg-[#D9D9D9] focus:outline-none "
           >
             {['Earth', ...continents].map((continent, index) => (
-              <option key={index} value={continent} className=''>
+              <option key={index} value={continent}>
                 {continent}   
               </option>
             ))}
@@ -58,11 +57,10 @@ const FeaturedCountryCard: FC<FeaturedCountryCardProps> = ({
         </div>
       </div>
 
-      {/* Travel description or continent description */}
+      {/* Heading Text or Fallback Text */}
       <p className="mt-4 text-gray-700">
-        {matchedContinentDetail
-          ? matchedContinentDetail.continent_description
-          : `Explore the beauty and unique experiences that ${featuredCountry.label} has to offer. From adventures to luxury escapes, discover your perfect destination today.`}
+        {matchedContinentDetail?.heading_text ||
+          `Explore the beauty and unique experiences that ${featuredCountry.label} has to offer. From adventures to luxury escapes, discover your perfect destination today.`}
       </p>
     </div>
   );

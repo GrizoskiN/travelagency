@@ -1,0 +1,19 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"last_card_text": {
+				"__TYPE__": "FieldContent",
+				"value": "flat",
+				"type": "Text"
+			},
+			"heading_text": {
+				"__TYPE__": "FieldContent",
+				"value": "headed",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

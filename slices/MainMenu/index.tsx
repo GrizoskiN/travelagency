@@ -1,3 +1,4 @@
+import FullButton from "@/app/components/Buttons/FullButton";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
@@ -33,9 +34,9 @@ const MainMenu = ({ slice }: MainMenuProps): JSX.Element => {
         ))}
       </div>
 
-      <PrismicNextLink field={slice.primary.cta_button} className="cta_button">
-        Book Now ↩
-      </PrismicNextLink>
+     
+       <FullButton text={"Book Now"} link={"/contact"}/>
+     
     </section>
   );
 };

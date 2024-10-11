@@ -1,25 +1,24 @@
-"use client";
-
-import { createContext, useContext, ReactNode } from "react";
+'use client'
+import { createContext, ReactNode, useContext } from "react";
 
 type Destination = {
-  
   label: string;
   image: string;
-  tags: string[];
   continent: string;
-
+  tags: string[];
 };
 
 type ContinentDetail = {
   uid: string;
   continent_description: string;
+  heading_text: string; // Add heading text field
+  last_card_text: string; // Add last card text field
 };
 
 type DestinationsContextProps = {
   destinations: Destination[];
   continentDetails: ContinentDetail[];
-  onChange: (value: string) => void;
+  uniqueCountries: Destination[];
 };
 
 const DestinationsContext = createContext<DestinationsContextProps | undefined>(undefined);
@@ -28,17 +27,21 @@ export const DestinationsProvider = ({
   children,
   destinations,
   continentDetails,
+  uniqueCountries,
 }: {
   children: ReactNode;
   destinations: Destination[];
   continentDetails: ContinentDetail[];
+  uniqueCountries: Destination[];
 }) => {
-  const handleChange = (value: string) => {
-    console.log("Country changed:", value);
-  };
-
   return (
-    <DestinationsContext.Provider value={{ destinations, continentDetails, onChange: handleChange }}>
+    <DestinationsContext.Provider
+      value={{
+        destinations,
+        continentDetails,
+        uniqueCountries,
+      }}
+    >
       {children}
     </DestinationsContext.Provider>
   );

@@ -23,7 +23,11 @@
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "continents_text": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },
