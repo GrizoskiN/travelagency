@@ -83,7 +83,7 @@ export default async function CountryPage({
             {matchedDestinations.map((destinationsDoc: PrismicDocument) => {
               const { country_image, meta_title } = destinationsDoc.data;
               const uid = destinationsDoc.uid;
-
+              console.log(uid)
               return (
                 <Link
                   href={`/destination/${uid}`}

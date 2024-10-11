@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import Menu from "./components/MainMenu";
 import { createClient } from "@/prismicio";
 import { DestinationsProvider } from "./contexts/DestinationsContext";
-import { abel } from "./fonts"
+import { abel } from "./fonts";
 
 export default async function RootLayout({
   children,
@@ -12,51 +12,49 @@ export default async function RootLayout({
   // Fetch data from Prismic
   const client = createClient();
   const travelByDestination = await client.getAllByType("destinations");
+  const continentTexts = await client.getAllByType("continent_text"); // Fetch continent texts separately
 
-  // Prepare unique destinations data with continents and country images
-  const destinationMap = new Map<string, { label: string; image: string; continent: string; tags: string[] }>();
+  // Prepare continent details
+  interface ContinentDoc {
+    uid: string;
+    data: {
+      continent_description: string | null; // Account for possible null value
+    };
+  }
 
-  travelByDestination.forEach((doc) => {
+  const continentDetails = continentTexts.map((continentDoc: ContinentDoc) => ({
+    uid: continentDoc.uid, // UID (Name of the continent)
+    continent_description: continentDoc.data.continent_description || "", // Assuming the field name is continent_description
+  }));
+
+  // Create an array to store all destinations
+  const destinations = travelByDestination.map((doc) => {
     const country =
       Array.isArray(doc.data.country) && doc.data.country.length > 0
         ? doc.data.country[0]?.text
         : typeof doc.data.country === "string"
         ? doc.data.country
         : "";
-  
+
     const tags = doc.tags || [];
-  
     const countryImage = doc.data.country_image?.url || "";
     const continent = doc.data.continent || "";
-  
-    if (country.trim() !== "") {
-      const normalizedCountry = country.trim().toLowerCase();
-  
-      if (!destinationMap.has(normalizedCountry)) {
-        destinationMap.set(normalizedCountry, {
-          label: country.charAt(0).toUpperCase() + country.slice(1),
-          image: countryImage,
-          continent, // Ensure continent is added
-          tags, // Add tags here
-        });
-      }
-    }
+
+    return {
+      label: country.charAt(0).toUpperCase() + country.slice(1).trim(),
+      image: countryImage,
+      continent,
+      tags,
+    };
   });
-  
-  // Create uniqueCountries array
-  const uniqueCountries = Array.from(destinationMap.entries()).map(([country, data]) => ({
-    value: country,
-    label: data.label,
-    image: data.image,
-    continent: data.continent,
-    tags: data.tags, // Include tags in the structure
-  }));
-  
 
   return (
-    <html lang="en" className={abel.className} >
+    <html lang="en" className={abel.className}>
       <body className="bg-backgroundColor">
-        <DestinationsProvider destinations={uniqueCountries}>
+        <DestinationsProvider
+          destinations={destinations} // Pass all destinations
+          continentDetails={continentDetails} // Provide continent details to the context
+        >
           <Menu />
           {children}
         </DestinationsProvider>

@@ -1,32 +1,44 @@
-// app/contexts/DestinationsContext.tsx
-
 "use client";
 
 import { createContext, useContext, ReactNode } from "react";
 
 type Destination = {
-  value: string;
+  
   label: string;
-  image: string; 
-  tags: string[]; 
+  image: string;
+  tags: string[];
   continent: string;
+
+};
+
+type ContinentDetail = {
+  uid: string;
+  continent_description: string;
 };
 
 type DestinationsContextProps = {
   destinations: Destination[];
+  continentDetails: ContinentDetail[];
   onChange: (value: string) => void;
 };
 
 const DestinationsContext = createContext<DestinationsContextProps | undefined>(undefined);
 
-export const DestinationsProvider = ({ children, destinations }: { children: ReactNode; destinations: Destination[] }) => {
+export const DestinationsProvider = ({
+  children,
+  destinations,
+  continentDetails,
+}: {
+  children: ReactNode;
+  destinations: Destination[];
+  continentDetails: ContinentDetail[];
+}) => {
   const handleChange = (value: string) => {
-    // Implement the handler logic if needed
     console.log("Country changed:", value);
   };
 
   return (
-    <DestinationsContext.Provider value={{ destinations, onChange: handleChange }}>
+    <DestinationsContext.Provider value={{ destinations, continentDetails, onChange: handleChange }}>
       {children}
     </DestinationsContext.Provider>
   );

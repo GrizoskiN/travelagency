@@ -18,6 +18,21 @@ const SearchBar: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState<string>(""); // Added city state
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
+  // Extract unique countries for the dropdown
+  const uniqueCountries = Array.from(
+    destinations.reduce((acc, destination) => {
+      const normalizedCountry = destination.label.trim().toLowerCase();
+      if (!acc.has(normalizedCountry)) {
+        acc.set(normalizedCountry, {
+          value: normalizedCountry,
+          label: destination.label.trim(),
+        });
+      }
+      return acc;
+    }, new Map<string, { value: string; label: string }>())
+  ).map(([, country]) => country);
+  
+
   // Handle search button click
   const handleSearch = () => {
     let targetUrl = "";
@@ -54,17 +69,15 @@ const SearchBar: React.FC = () => {
   const handleCountryChange = (value: string) => {
     setSelectedCountry(value);
     setSelectedCity(""); // Reset the city when a new country is selected
-
   };
 
   const handleCityChange = (value: string) => {
     setSelectedCity(value);
-  
   };
 
   return (
     <div className="w-10/12 md:w-auto flex items-center justify-center mt-10 z-40 font-abel">
-      <div className="w-full flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 bg-white/10 md:px-11 backdrop-blur-sm border-t-white/40 border-t-[1px] text-white text- p-3 rounded-xl  shadow-lg md:space-x-3">
+      <div className="w-full flex flex-col md:flex-row md:items-center space-y-3 md:space-y-0 bg-white/10 md:px-11 backdrop-blur-sm border-t-white/40 border-t-[1px] text-white text- p-3 rounded-xl shadow-lg md:space-x-3">
         <DatePickerWithRange
           date={
             dateRange
@@ -82,17 +95,16 @@ const SearchBar: React.FC = () => {
             );
           }}
         />
-        {/* Pass both the selected country and handleCityChange for city selection */}
+        {/* Pass unique countries to DestinationSelect */}
         <DestinationSelect
-          destinations={destinations}
-          
+          destinations={uniqueCountries}
           onCountryChange={handleCountryChange}
           onCityChange={handleCityChange} // Add city change handler
         />
 
         {/* Search Button */}
         <button
-          className=" bg-[#ef4444] px-11 py-[5px] rounded-xl text-lg lg:texl-xl text-white hover:bg-[#da4040] transition-all"
+          className="bg-[#ef4444] px-11 py-[5px] rounded-xl text-lg lg:text-xl text-white hover:bg-[#da4040] transition-all"
           onClick={handleSearch}
         >
           Search

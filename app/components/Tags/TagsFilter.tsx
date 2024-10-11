@@ -35,9 +35,14 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
   };
 
   return (
-    <div className="flex flex-wrap gap-2 my-6">
-      {/* All Experiences Button */}
-      <button
+    <div className="lg:px-11 my-6 items-center justify-center lg:w-1/2">
+      
+      <div className="flex justify-between mb-5">
+        <h4 className="text-3xl">Select your experience type</h4>
+        <h4>*You can select multiple tags</h4>
+      </div>
+     <div className="flex flex-wrap  gap-2">
+     <button
         className={`px-11 py-2 h-fit rounded-full capitalize ${
           selectedTags.length === 0
             ? "bg-primary text-white"
@@ -62,6 +67,7 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
           {tag}
         </button>
       ))}
+     </div>
     </div>
   );
 };
