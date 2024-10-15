@@ -1,7 +1,7 @@
+import "@/app/globals.css";
 import { ReactNode } from "react";
 import Menu from "./components/MainMenu";
 import { abel } from "./fonts";
-import "@/app/globals.css";
 import { fetchDestinations, fetchContinentDetails } from "@/lib/fetchData";
 import { DestinationsProvider } from "./contexts/DestinationsContext";
 

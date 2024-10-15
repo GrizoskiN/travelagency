@@ -34,7 +34,10 @@ const FeaturedCountryCard: FC<FeaturedCountryCardProps> = ({
   const matchedContinentDetail = continentDetails.find(
     (detail) => detail.uid.toLowerCase() === selectedContinent.toLowerCase()
   );
-  console.log(`what the hell is this: ${matchedContinentDetail}`)
+
+  console.log(`Selected Continent: ${selectedContinent}`);
+  console.log(`Matched Continent Detail: ${JSON.stringify(matchedContinentDetail, null, 2)}`);
+
   return (
     <div className="relative w-full mx-auto p-2 xl:p-6">
       {/* Continent/Earth Dropdown */}
@@ -59,8 +62,9 @@ const FeaturedCountryCard: FC<FeaturedCountryCardProps> = ({
 
       {/* Heading Text or Fallback Text */}
       <p className="mt-4 text-gray-700">
-        {matchedContinentDetail?.heading_text ||
-          `Explore the beauty and unique experiences that ${featuredCountry.label} has to offer. From adventures to luxury escapes, discover your perfect destination today.`}
+        {matchedContinentDetail?.heading_text
+          ? matchedContinentDetail.heading_text
+          : `Explore the beauty and unique experiences that ${featuredCountry.label} has to offer. From adventures to luxury escapes, discover your perfect destination today.`}
       </p>
     </div>
   );
