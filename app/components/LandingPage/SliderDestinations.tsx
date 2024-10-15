@@ -1,11 +1,11 @@
 "use client";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useDestinations } from "@/app/contexts/DestinationsContext";
 import Image from "next/image";
 import "swiper/css";
+import "swiper/css/effect-cards";
 import "@/app/globals.css";
-
-// Import Swiper modules
 import { EffectCards } from "swiper/modules";
 import Link from "next/link";
 import HeadingText from "../TextModules/HeadingText";
@@ -25,7 +25,7 @@ const SliderDestinations = () => {
         grabCursor={true}
         loop={true}
         modules={[EffectCards]}
-        className="mySwiper w-full lg:w-2/3"
+        className="mySwiper "
       >
         {uniqueCountries.length > 0 ? (
           uniqueCountries.map((destination, index) => (
@@ -36,8 +36,8 @@ const SliderDestinations = () => {
               >
                 <div className="relative w-[20rem] lg:w-[30rem] mx-auto">
                   <Image
-                    src={destination.image} // Dynamic image from context
-                    alt={destination.label} // Alt text from the context
+                    src={destination.image}
+                    alt={destination.label}
                     className="w-[20rem] h-[25rem] lg:w-[35rem] lg:h-[35rem] object-cover rounded-lg"
                     width={300}
                     height={400}
