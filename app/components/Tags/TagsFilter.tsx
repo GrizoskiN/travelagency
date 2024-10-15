@@ -2,13 +2,12 @@ import { FC, useState } from "react";
 import { useDestinations } from "@/app/contexts/DestinationsContext";
 
 interface TagsFilterProps {
-  onTagSelect: (selectedTags: string[]) => void; // Allow multiple tag selections
+  onTagSelect: (selectedTags: string[]) => void;
 }
 
 const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
   const { destinations } = useDestinations();
 
-  // Extract unique tags from all destinations
   const uniqueTags = Array.from(
     new Set(destinations.flatMap((destination) => destination.tags))
   );
@@ -16,22 +15,16 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const handleTagClick = (tag: string) => {
-    // If the tag is already selected, remove it (unselect)
-    if (selectedTags.includes(tag)) {
-      const updatedTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
-      setSelectedTags(updatedTags);
-      onTagSelect(updatedTags);
-    } else {
-      // Add the newly selected tag to the list
-      const updatedTags = [...selectedTags, tag];
-      setSelectedTags(updatedTags);
-      onTagSelect(updatedTags);
-    }
+    const updatedTags = selectedTags.includes(tag)
+      ? selectedTags.filter((selectedTag) => selectedTag !== tag)
+      : [...selectedTags, tag];
+    setSelectedTags(updatedTags);
+    onTagSelect(updatedTags);
   };
 
   const handleAllExperiencesClick = () => {
-    setSelectedTags([]); // Clear all selected tags
-    onTagSelect([]); // Pass an empty array to show all destinations
+    setSelectedTags([]);
+    onTagSelect([]);
   };
 
   return (
@@ -51,8 +44,6 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
         >
           All Experiences
         </button>
-
-        {/* Dynamic Tag Buttons */}
         {uniqueTags.map((tag, index) => (
           <button
             key={index}
@@ -67,13 +58,14 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
           </button>
         ))}
       </div>
-      {selectedTags.length > 0 && destinations.filter(destination =>
-        selectedTags.every(tag => destination.tags.includes(tag))
-      ).length === 0 && (
-        <div className="mt-4 text-gray-600">
-          No destinations match your selected tags. Please try selecting different tags.
-        </div>
-      )}
+      {selectedTags.length > 0 &&
+        destinations.filter((destination) =>
+          selectedTags.every((tag) => destination.tags.includes(tag))
+        ).length === 0 && (
+          <div className="mt-4 text-gray-600">
+            No destinations match your selected tags. Please try selecting different tags.
+          </div>
+        )}
     </div>
   );
 };

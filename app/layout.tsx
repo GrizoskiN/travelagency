@@ -1,9 +1,9 @@
-import "@/app/globals.css";
 import { ReactNode } from "react";
 import Menu from "./components/MainMenu";
 import { abel } from "./fonts";
 import { fetchDestinations, fetchContinentDetails } from "@/lib/fetchData";
 import { DestinationsProvider } from "./contexts/DestinationsContext";
+import "@/app/globals.css";
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // Fetch data

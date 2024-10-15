@@ -7,9 +7,8 @@ interface DestinationGalleryProps {
     label: string;
     image: string;
     tags: string[];
-   
   };
-  destinationCount: number; // New prop for the number of destinations
+  destinationCount: number;
 }
 
 const DestinationGallery: FC<DestinationGalleryProps> = ({
@@ -30,7 +29,8 @@ const DestinationGallery: FC<DestinationGalleryProps> = ({
           {destination.tags.map((tag, index) => (
             <p
               key={index}
-              className="bg-white text-primary text-lg px-6 capitalize py-1 rounded-full">
+              className="bg-white text-primary text-lg px-6 capitalize py-1 rounded-full"
+            >
               {tag}
             </p>
           ))}
@@ -41,9 +41,10 @@ const DestinationGallery: FC<DestinationGalleryProps> = ({
             <span className="text-4xl">{destination.label}</span>
           </h3>
           <div className="text-center">
-            
-            <p>{` ${destinationCount} ${destinationCount === 1 ? 'Tour' : "Tours"}`}</p>
-            <p className="border-[1px] border-white rounded-xl w-fit px-3 py-1">View the listings</p>
+            <p>{`${destinationCount} ${destinationCount === 1 ? 'Tour' : 'Tours'}`}</p>
+            <p className="border-[1px] border-white rounded-xl w-fit px-3 py-1">
+              View the listings
+            </p>
           </div>
         </div>
       </div>
