@@ -102,7 +102,7 @@ body {
   }
 }
 .swiper-3d .swiper-slide-shadow {
-  background: none;
+  background: none!important;
 }
 /* Blurring all slides by default */
 @media only screen and (min-width:800px) {
