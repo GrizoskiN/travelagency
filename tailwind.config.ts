@@ -79,7 +79,7 @@ const config: Config = {
   	},
   	// fontFamily: {
 	// 	 abel: ['Abel', 'sans-serif'],
-    //      aboreto: ['Aboreto', 'serif'],
+    //    aboreto: ['Aboreto', 'serif'],
   	// }
   },
   plugins: [tailwindcssAnimate],

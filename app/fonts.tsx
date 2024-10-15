@@ -1,4 +1,4 @@
-import { Allura, Abel } from 'next/font/google'
+import { Allura, Abel, Aboreto } from 'next/font/google'
  
 export const allura = Allura ({
   subsets: ['latin'],
@@ -7,6 +7,11 @@ export const allura = Allura ({
 })
  
 export const abel = Abel ({
+    weight: '400',
+    subsets: ['latin'],
+    display: 'swap',
+  })
+export const aboreto = Aboreto ({
     weight: '400',
     subsets: ['latin'],
     display: 'swap',

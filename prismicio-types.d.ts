@@ -4,6 +4,71 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type AboutUsDocumentDataSlicesSlice = AboutUsSlice;
+
+/**
+ * Content for About Us documents
+ */
+interface AboutUsDocumentData {
+  /**
+   * Slice Zone field in *About Us*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_us.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<AboutUsDocumentDataSlicesSlice> /**
+   * Meta Title field in *About Us*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: about_us.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *About Us*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: about_us.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *About Us*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_us.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * About Us document from Prismic
+ *
+ * - **API ID**: `about_us`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AboutUsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<AboutUsDocumentData>,
+    "about_us",
+    Lang
+  >;
+
 type ContinentTextDocumentDataSlicesSlice = ContinentsTextSlice;
 
 /**
@@ -336,10 +401,123 @@ export type MenuDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenuDocumentData>, "menu", Lang>;
 
 export type AllDocumentTypes =
+  | AboutUsDocument
   | ContinentTextDocument
   | DestinationsDocument
   | HeaderimageDocument
   | MenuDocument;
+
+/**
+ * Item in *AboutUs → Default → Primary → List Items*
+ */
+export interface AboutUsSliceDefaultPrimaryListItemsItem {
+  /**
+   * List Icon field in *AboutUs → Default → Primary → List Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_us.default.primary.list_items[].list_icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  list_icon: prismic.ImageField<never>;
+
+  /**
+   * List Title field in *AboutUs → Default → Primary → List Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_us.default.primary.list_items[].list_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  list_title: prismic.KeyTextField;
+
+  /**
+   * List Description field in *AboutUs → Default → Primary → List Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_us.default.primary.list_items[].list_description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  list_description: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *AboutUs → Default → Primary*
+ */
+export interface AboutUsSliceDefaultPrimary {
+  /**
+   * About Us Image field in *AboutUs → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_us.default.primary.about_us_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  about_us_image: prismic.ImageField<never>;
+
+  /**
+   * About Text field in *AboutUs → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Plan your trips with us
+   * - **API ID Path**: about_us.default.primary.about_text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  about_text: prismic.RichTextField;
+
+  /**
+   * List Items field in *AboutUs → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_us.default.primary.list_items[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  list_items: prismic.GroupField<
+    Simplify<AboutUsSliceDefaultPrimaryListItemsItem>
+  >;
+
+  /**
+   * button link field in *AboutUs → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Link to page
+   * - **API ID Path**: about_us.default.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  button_link: prismic.LinkField;
+}
+
+/**
+ * Default variation for AboutUs Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AboutUsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AboutUsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *AboutUs*
+ */
+type AboutUsSliceVariation = AboutUsSliceDefault;
+
+/**
+ * AboutUs Shared Slice
+ *
+ * - **API ID**: `about_us`
+ * - **Description**: AboutUs
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AboutUsSlice = prismic.SharedSlice<
+  "about_us",
+  AboutUsSliceVariation
+>;
 
 /**
  * Primary content in *ContinentsText → Default → Primary*
@@ -738,6 +916,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AboutUsDocument,
+      AboutUsDocumentData,
+      AboutUsDocumentDataSlicesSlice,
       ContinentTextDocument,
       ContinentTextDocumentData,
       ContinentTextDocumentDataSlicesSlice,
@@ -751,6 +932,11 @@ declare module "@prismicio/client" {
       MenuDocumentData,
       MenuDocumentDataSlicesSlice,
       AllDocumentTypes,
+      AboutUsSlice,
+      AboutUsSliceDefaultPrimaryListItemsItem,
+      AboutUsSliceDefaultPrimary,
+      AboutUsSliceVariation,
+      AboutUsSliceDefault,
       ContinentsTextSlice,
       ContinentsTextSliceDefaultPrimary,
       ContinentsTextSliceVariation,
