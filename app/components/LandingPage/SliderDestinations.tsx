@@ -6,7 +6,7 @@ import { useDestinations } from "@/app/contexts/DestinationsContext";
 import Image from "next/image";
 
 // Import Swiper modules
-import { EffectCards, EffectCoverflow } from "swiper/modules";
+import {  EffectCoverflow } from "swiper/modules";
 import Link from "next/link";
 import HeadingText from "../TextModules/HeadingText";
 
