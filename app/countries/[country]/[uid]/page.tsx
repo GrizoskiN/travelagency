@@ -2,14 +2,16 @@ import { createClient } from "@/prismicio";
 import Link from "next/link";
 import Image from "next/image";
 import { PrismicDocument } from "@prismicio/types";
-
+import { useRouter } from "next/router";
 export default async function Page() {
+
   const agencyName = process.env.NEXT_PUBLIC_AGENCY_NAME;
   const client = createClient();
   const fetchedDestination = await client.getAllByType("destinations");
-
+  
   // Group destinations by country
   const groupedByCountry: Record<string, PrismicDocument[]> = {};
+  
   fetchedDestination.forEach((destinationDoc: PrismicDocument) => {
     const { country } = destinationDoc.data;
 

@@ -400,12 +400,78 @@ interface MenuDocumentData {
 export type MenuDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<MenuDocumentData>, "menu", Lang>;
 
+type TestimonialsDocumentDataSlicesSlice = TestimonialSlice;
+
+/**
+ * Content for Testimonials documents
+ */
+interface TestimonialsDocumentData {
+  /**
+   * Slice Zone field in *Testimonials*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<TestimonialsDocumentDataSlicesSlice> /**
+   * Meta Title field in *Testimonials*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: testimonials.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Testimonials*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: testimonials.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Testimonials*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Testimonials document from Prismic
+ *
+ * - **API ID**: `testimonials`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TestimonialsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<TestimonialsDocumentData>,
+    "testimonials",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | AboutUsDocument
   | ContinentTextDocument
   | DestinationsDocument
   | HeaderimageDocument
-  | MenuDocument;
+  | MenuDocument
+  | TestimonialsDocument;
 
 /**
  * Item in *AboutUs → Default → Primary → List Items*
@@ -895,6 +961,81 @@ export type MainMenuSlice = prismic.SharedSlice<
   MainMenuSliceVariation
 >;
 
+/**
+ * Primary content in *Testimonial → Default → Primary*
+ */
+export interface TestimonialSliceDefaultPrimary {
+  /**
+   * Testimonial image field in *Testimonial → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.default.primary.testimonial_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  testimonial_image: prismic.ImageField<never>;
+
+  /**
+   * Testimonial Name field in *Testimonial → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Sarah W.
+   * - **API ID Path**: testimonial.default.primary.testimonial_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  testimonial_name: prismic.KeyTextField;
+
+  /**
+   * Persons description field in *Testimonial → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Traveller, Paris, France
+   * - **API ID Path**: testimonial.default.primary.persons_description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  persons_description: prismic.KeyTextField;
+
+  /**
+   * Testimonial text field in *Testimonial → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.default.primary.testimonial_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  testimonial_text: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Testimonial Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TestimonialSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TestimonialSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Testimonial*
+ */
+type TestimonialSliceVariation = TestimonialSliceDefault;
+
+/**
+ * Testimonial Shared Slice
+ *
+ * - **API ID**: `testimonial`
+ * - **Description**: Testimonial
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TestimonialSlice = prismic.SharedSlice<
+  "testimonial",
+  TestimonialSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -931,6 +1072,9 @@ declare module "@prismicio/client" {
       MenuDocument,
       MenuDocumentData,
       MenuDocumentDataSlicesSlice,
+      TestimonialsDocument,
+      TestimonialsDocumentData,
+      TestimonialsDocumentDataSlicesSlice,
       AllDocumentTypes,
       AboutUsSlice,
       AboutUsSliceDefaultPrimaryListItemsItem,
@@ -958,6 +1102,10 @@ declare module "@prismicio/client" {
       MainMenuSliceVariation,
       MainMenuSliceDefault,
       MainMenuSliceSubMenuItem,
+      TestimonialSlice,
+      TestimonialSliceDefaultPrimary,
+      TestimonialSliceVariation,
+      TestimonialSliceDefault,
     };
   }
 }

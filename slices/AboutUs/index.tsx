@@ -49,10 +49,10 @@ const AboutUs = ({ slice }: AboutUsProps): JSX.Element => {
       className="customWidth relative py-16"
     >
       <div className="flex flex-col lg:flex-row items-center">
-        <div className="xl:w-1/2">
+        <div className="lg:w-1/2">
           <PrismicNextImage
             field={slice.primary.about_us_image}
-            className="relative z-40 mx-auto lg:w-10/12 rounded-xl object-fit"
+            className="relative z-40 mx-auto w-11/12 rounded-xl object-fit"
           />
         </div>
         <div className="rounded-xl p-5 lg:p-11 lg:w-1/2 ml-auto relative z-40">

@@ -8,4 +8,5 @@ export const components = {
   destination_page: dynamic(() => import("./DestinationPage")),
   header: dynamic(() => import("./HeaderImg")),
   main_menu: dynamic(() => import("./MainMenu")),
+  testimonial: dynamic(() => import("./Testimonial")),
 };

@@ -105,15 +105,7 @@ body {
   background: none!important;
 }
 /* Blurring all slides by default */
-@media only screen and (min-width:800px) {
-  
-  .swiper-slide .slide-content {
-    filter: blur(6px); /* Adjust the blur intensity as needed */
-    transform: scale(0.9); /* Optionally scale down non-active slides */
-    transition: all 0.3s ease; /* Smooth transition */
-    
-  }
-}
+
 
 /* Remove blur and scale for the active (centered) slide */
 .swiper-slide-active .slide-content {
@@ -123,40 +115,3 @@ body {
 
 /* SliderStyles.css */
 
-.slider-container {
-  width: 100%;
-  max-width: 1400px;
-  margin: auto;
- 
-}
-.swiper-slide .swiper-slide-visible .swiper-slide-fully-visible .swiper-slide-active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
- 
-}
-
-.slide-item {
-  transition: transform 0.3s ease-in-out;
-  border-radius: 15px;
-  overflow: hidden;
-
- 
-}
-
-.large-slide img {
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
- 
-}
-
-.small-slide img {
-  width: 80%;
-  height: auto;
-  border-radius: 15px;
-}
-
-.mySwiper .swiper-slide-active .slide-item {
-  transform: scale(1.1);
-}
