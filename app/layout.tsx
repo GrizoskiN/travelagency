@@ -2,13 +2,14 @@ import "@/app/globals.css";
 import { ReactNode } from "react";
 import Menu from "./components/MainMenu";
 import { abel } from "./fonts";
-import { fetchDestinations, fetchContinentDetails } from "@/lib/fetchData";
+import { fetchDestinations, fetchContinentDetails, fetchTestimonials } from "@/lib/fetchData";
 import { DestinationsProvider } from "./contexts/DestinationsContext";
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // Fetch data
   const destinations = await fetchDestinations();
   const continentDetails = await fetchContinentDetails();
+  const testimonials = await fetchTestimonials(); // Ensure this is correctly called.
 
   // Extract unique countries
   const uniqueCountries = Array.from(
@@ -27,6 +28,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           destinations={destinations}
           continentDetails={continentDetails}
           uniqueCountries={uniqueCountries}
+          testimonials={testimonials} // Ensure testimonials are passed down.
         >
           <Menu />
           {children}

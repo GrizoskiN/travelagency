@@ -1,12 +1,10 @@
-// lib/fetchData.ts
-
 import { createClient } from "@/prismicio";
-import { KeyTextField } from "@prismicio/types";
+import { PrismicDocument, KeyTextField } from "@prismicio/types";
 
 // Adjusting Slice interface
 interface Slice {
   primary?: {
-    heading_text?: KeyTextField; // Use KeyTextField for Prismic's key text type
+    heading_text?: KeyTextField;
     last_card_text?: KeyTextField;
   };
 }
@@ -19,6 +17,14 @@ interface ContinentDoc {
     slices?: Slice[];
   };
 }
+export interface Testimonial {
+  uid: string | null;
+  testimonial_image: string;
+  testimonial_name: string;
+  persons_description: string;
+  testimonial_text: string;
+}
+
 
 // Function to fetch all destinations
 export async function fetchDestinations() {
@@ -51,16 +57,34 @@ export async function fetchContinentDetails() {
   const client = createClient();
   const continentTexts = await client.getAllByType("continent_text");
 
-  // Prepare continent details
   return continentTexts.map((continentDoc: ContinentDoc) => {
     const slices = continentDoc.data?.slices || [];
     const primarySlice = slices.find((slice: Slice) => slice.primary) || {};
 
     return {
       uid: continentDoc.uid,
-      continent_description: continentDoc.data?.continent_description?.toString() || "", // Convert KeyTextField to string
+      continent_description: continentDoc.data?.continent_description?.toString() || "",
       heading_text: primarySlice?.primary?.heading_text?.toString() || "",
       last_card_text: primarySlice?.primary?.last_card_text?.toString() || "",
+    };
+  });
+}
+
+// Function to fetch testimonials
+export async function fetchTestimonials() {
+  const client = createClient();
+  const testimonials = await client.getAllByType("testimonials");
+
+  return testimonials.map((testimonialDoc: PrismicDocument) => {
+    const slices = testimonialDoc.data?.slices || [];
+    const primarySlice = slices.find((slice: Slice) => slice.primary) || {};
+
+    return {
+      uid: testimonialDoc.uid,
+      testimonial_image: primarySlice?.primary?.testimonial_image?.url || "",
+      testimonial_name: primarySlice?.primary?.testimonial_name?.toString() || "",
+      persons_description: primarySlice?.primary?.persons_description?.toString() || "",
+      testimonial_text: primarySlice?.primary?.testimonial_text?.toString() || "",
     };
   });
 }

@@ -1,45 +1,46 @@
 'use client'
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext } from 'react';
+import { Testimonial } from '@/lib/fetchData';
 
-type Destination = {
+interface Destination {
   label: string;
   image: string;
   continent: string;
   tags: string[];
-};
+}
 
-type ContinentDetail = {
+interface ContinentDetail {
   uid: string;
   continent_description: string;
-  heading_text: string; // Add heading text field
-  last_card_text: string; // Add last card text field
-};
+  heading_text: string;
+  last_card_text: string;
+}
 
-type DestinationsContextProps = {
+interface DestinationsProviderProps {
   destinations: Destination[];
   continentDetails: ContinentDetail[];
   uniqueCountries: Destination[];
-};
+  testimonials: Testimonial[]; // Use the imported Testimonial type
+  children: ReactNode;
+}
 
-const DestinationsContext = createContext<DestinationsContextProps | undefined>(undefined);
+const DestinationsContext = createContext<DestinationsProviderProps | undefined>(undefined);
 
 export const DestinationsProvider = ({
   children,
   destinations,
   continentDetails,
   uniqueCountries,
-}: {
-  children: ReactNode;
-  destinations: Destination[];
-  continentDetails: ContinentDetail[];
-  uniqueCountries: Destination[];
-}) => {
+  testimonials,
+}: DestinationsProviderProps) => {
   return (
     <DestinationsContext.Provider
       value={{
         destinations,
         continentDetails,
         uniqueCountries,
+        testimonials,
+        children, // Include children in the provider's value
       }}
     >
       {children}
@@ -49,8 +50,8 @@ export const DestinationsProvider = ({
 
 export const useDestinations = () => {
   const context = useContext(DestinationsContext);
-  if (!context) {
-    throw new Error("useDestinations must be used within a DestinationsProvider");
+  if (context === undefined) {
+    throw new Error('useDestinations must be used within a DestinationsProvider');
   }
   return context;
 };
