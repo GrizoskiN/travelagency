@@ -28,7 +28,7 @@ const BlogSection: FC = () => {
 
   return (
     <motion.div className="w-[95%] rounded-xl ml-auto bg-white py-16 overflow-hidden">
-      <div className="w-[95%] mx-auto flex justify-between items-end">
+      <div className="w-[95%] mx-auto flex flex-col md:flex-row md:justify-between md:items-end space-y-6">
         <HeadingText
           heading2={"News, tips, guides"}
           heading3={"You’ve read it here first"}
@@ -36,7 +36,7 @@ const BlogSection: FC = () => {
         />
         <FullButton link={"/blog"} text={"View All"} />
       </div>
-      <div className="w-[97.2%] mt-16 ml-auto overflow-hidden relative">
+      <div className="w-[97.2%] mt-6 md:mt-16 ml-auto overflow-hidden relative">
         <motion.div
           ref={carouselRef}
           className="flex gap-7 cursor-pointer w-full "

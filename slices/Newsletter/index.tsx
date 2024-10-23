@@ -13,12 +13,12 @@ export type NewsletterProps = SliceComponentProps<Content.NewsletterSlice>;
 const Newsletter = ({ slice }: NewsletterProps): JSX.Element => {
   return (
     <section
-      className="customWidth xl:w-2/3  m-auto relative my-32  "
+      className="customWidth xl:w-2/3  mx-auto relative md:h-[20rem] lg:h-[25rem] 2xl:h-[35rem] my-32 rounded-xl overflow-hidden "
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}>
-      <div className="w-full 2xl:ml-32 md:p-8 2xl:pt-24 md:w-1/2 2xl:w-1/3 space-y-4 ">
+      <div className="w-full 2xl:ml-32 md:p-8 2xl:pt-24 md:w-1/2 2xl:w-[40%] space-y-4 ">
         <h1 className="bg-[#F9FD27] text-xl lg:text-2xl w-fit py-2 px-5 rounded-full">{slice.primary.title}</h1>
-        <p className="text-xl xl:text-3xl xl:pb-16">{slice.primary.text}</p>
+        <p className="text-xl xl:text-3xl lg:pb-11 xl:pb-16">{slice.primary.text}</p>
         <form className="flex items-center bg-white rounded-full overflow-hidden shadow-lg p-[5px] w-full">
           <input
             type="email"
@@ -37,7 +37,7 @@ const Newsletter = ({ slice }: NewsletterProps): JSX.Element => {
       </div>
       <PrismicNextImage
         field={slice.primary.image}
-        className="md:absolute inset-0 -z-10 rounded-xl"
+        className="md:absolute inset-0 -z-10 h-full rounded-xl w-full  object-cover"
       />
     </section>
   );

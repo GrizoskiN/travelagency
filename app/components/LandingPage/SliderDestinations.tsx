@@ -16,7 +16,7 @@ const SliderDestinations = () => {
   return (
     <div className="overflow-hidden customWidth py-11 my-6 bg-white rounded-xl">
       <div className=" mx-auto  text-center mb-11">
-        <HeadingText
+        <HeadingText customWidth
           heading3="Top Destinations"
           heading2="Our Featured Destination"
         />

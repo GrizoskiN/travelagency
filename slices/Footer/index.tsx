@@ -12,8 +12,8 @@ export type FooterProps = SliceComponentProps<Content.FooterSlice>;
  */
 const Footer = ({ slice }: FooterProps): JSX.Element => {
   return (
-    <section
-      className="bg-black py-11"
+    <div
+      className="bg-black py-11 mt-11"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}>
       <div className="customWidth  xl:w-2/3 mx-auto text-primary-foreground">
@@ -117,7 +117,7 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

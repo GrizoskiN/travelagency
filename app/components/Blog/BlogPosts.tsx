@@ -14,8 +14,8 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ pointer }) => {
       {blogPosts.map((blog, index) => (
         <div
           key={index}
-          className="min-w-[37rem] flex flex-col justify-between overflow-hidden">
-          <div>
+          className={`${pointer ? "min-w-96" : ""} flex flex-col justify-between overflow-hidden`}>
+          <div className="">
             <div
               className={`${pointer ? "pointer-events-none" : "pointer-events-auto"} overflow-hidden  rounded-2xl  block`}>
               <Link href={`blog/${blog.uid}`}>
