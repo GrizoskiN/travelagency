@@ -46,7 +46,7 @@ const AboutUs = ({ slice }: AboutUsProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="customWidth relative py-16"
+      className="customWidth relative  mt-32 py-16"
     >
       <div className="flex flex-col lg:flex-row items-center">
         <div className="lg:w-1/2">

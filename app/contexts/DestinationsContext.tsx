@@ -1,6 +1,6 @@
 'use client'
 import { createContext, ReactNode, useContext } from 'react';
-import { Testimonial } from '@/lib/fetchData';
+import { Testimonial, BlogPost } from '@/lib/fetchData'; // Import BlogPost type as well
 
 interface Destination {
   label: string;
@@ -21,6 +21,7 @@ interface DestinationsProviderProps {
   continentDetails: ContinentDetail[];
   uniqueCountries: Destination[];
   testimonials: Testimonial[]; // Use the imported Testimonial type
+  blogPosts: BlogPost[]; // Add blog posts
   children: ReactNode;
 }
 
@@ -32,7 +33,15 @@ export const DestinationsProvider = ({
   continentDetails,
   uniqueCountries,
   testimonials,
+  blogPosts, // Add blog posts to the provider
 }: DestinationsProviderProps) => {
+  // Utility function to fetch related blog posts based on tags
+  // const getRelatedPosts = (currentPostUid: string, currentTags: string[]) => {
+  //   return blogPosts.filter(
+  //     (post) => post.uid !== currentPostUid && post.tags.some((tag) => currentTags.includes(tag))
+  //   ).slice(0, 3); // Return only 3 related posts
+  // };
+
   return (
     <DestinationsContext.Provider
       value={{
@@ -40,7 +49,8 @@ export const DestinationsProvider = ({
         continentDetails,
         uniqueCountries,
         testimonials,
-        children, // Include children in the provider's value
+        blogPosts,
+        children,
       }}
     >
       {children}

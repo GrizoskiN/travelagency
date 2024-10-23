@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from 'tailwindcss-animate';
+
 const config: Config = {
     darkMode: ["class"],
     content: [
@@ -10,6 +11,7 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+		
   		colors: {
 			backgroundColor: '#ececec',
   			background: 'hsl(var(--background))',
@@ -82,6 +84,7 @@ const config: Config = {
     //    aboreto: ['Aboreto', 'serif'],
   	// }
   },
-  plugins: [tailwindcssAnimate],
+  plugins: 
+  [tailwindcssAnimate], 
 };
 export default config;

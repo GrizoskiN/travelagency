@@ -19,6 +19,7 @@ body {
 
   background:"#ececec";
 }
+
 .customWidth {
   max-width: 95%;
   margin-left: auto;
@@ -112,6 +113,4 @@ body {
   filter: none;
   transform: scale(1); /* Restore the original size for the centered slide */
 }
-
-/* SliderStyles.css */
 

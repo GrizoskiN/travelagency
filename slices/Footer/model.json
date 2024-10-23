@@ -1,0 +1,213 @@
+{
+  "id": "footer",
+  "type": "SharedSlice",
+  "name": "Footer",
+  "description": "Footer",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "logo": {
+          "type": "Image",
+          "config": {
+            "label": "Logo",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "phone_number": {
+          "type": "Text",
+          "config": {
+            "label": "Phone Number",
+            "placeholder": ""
+          }
+        },
+        "address": {
+          "type": "Text",
+          "config": {
+            "label": "Address",
+            "placeholder": ""
+          }
+        },
+        "working_hours": {
+          "type": "Text",
+          "config": {
+            "label": "Working Hours",
+            "placeholder": ""
+          }
+        },
+        "email_address": {
+          "type": "Text",
+          "config": {
+            "label": "Email Address",
+            "placeholder": ""
+          }
+        },
+        "social_media": {
+          "type": "Group",
+          "config": {
+            "label": "Social Media",
+            "repeat": true,
+            "fields": {
+              "social_media_icon": {
+                "type": "Image",
+                "config": {
+                  "label": "Social Media Icon",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "social_media_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Social Media link",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "select": null
+                }
+              }
+            }
+          }
+        },
+        "support": {
+          "type": "Group",
+          "config": {
+            "label": "Support",
+            "repeat": true,
+            "fields": {
+              "support_sub_menu": {
+                "type": "Text",
+                "config": {
+                  "label": "Support Sub Menu",
+                  "placeholder": ""
+                }
+              },
+              "support_links": {
+                "type": "Link",
+                "config": {
+                  "label": "Support links",
+                  "placeholder": "",
+                  "allowTargetBlank": false,
+                  "select": null
+                }
+              }
+            }
+          }
+        },
+        "company": {
+          "type": "Group",
+          "config": {
+            "label": "Company",
+            "repeat": true,
+            "fields": {
+              "company_sub_menu": {
+                "type": "Text",
+                "config": {
+                  "label": "Company Sub Menu",
+                  "placeholder": ""
+                }
+              },
+              "company_links": {
+                "type": "Link",
+                "config": {
+                  "label": "Company links",
+                  "placeholder": "",
+                  "allowTargetBlank": false,
+                  "select": null
+                }
+              }
+            }
+          }
+        },
+        "services": {
+          "type": "Group",
+          "config": {
+            "label": "Services",
+            "repeat": true,
+            "fields": {
+              "services_sub_items": {
+                "type": "Text",
+                "config": {
+                  "label": "Services Sub items",
+                  "placeholder": ""
+                }
+              },
+              "services_links": {
+                "type": "Link",
+                "config": {
+                  "label": "Services links",
+                  "placeholder": "",
+                  "allowTargetBlank": false,
+                  "select": null
+                }
+              }
+            }
+          }
+        },
+        "legal": {
+          "type": "Group",
+          "config": {
+            "label": "Legal",
+            "repeat": true,
+            "fields": {
+              "legal_sub_items": {
+                "type": "Text",
+                "config": {
+                  "label": "Legal Sub Items",
+                  "placeholder": ""
+                }
+              },
+              "legal_sub_links": {
+                "type": "Link",
+                "config": {
+                  "label": "Legal Sub Links",
+                  "placeholder": "",
+                  "allowTargetBlank": false,
+                  "select": null
+                }
+              }
+            }
+          }
+        },
+        "all_rights_reserved": {
+          "type": "Text",
+          "config": {
+            "label": "All Rights Reserved",
+            "placeholder": ""
+          }
+        },
+        "footer_menu": {
+          "type": "Group",
+          "config": {
+            "label": "Footer Menu",
+            "repeat": true,
+            "fields": {
+              "footer_item": {
+                "type": "Text",
+                "config": {
+                  "label": "Footer Item",
+                  "placeholder": ""
+                }
+              },
+              "footer_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Footer Link",
+                  "placeholder": "",
+                  "allowTargetBlank": false,
+                  "select": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

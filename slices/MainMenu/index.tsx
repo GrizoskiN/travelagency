@@ -16,16 +16,26 @@ export type MainMenuProps = SliceComponentProps<Content.MainMenuSlice>;
 const MainMenu = ({ slice }: MainMenuProps): JSX.Element => {
   return (
     <section
-      className="flex  items-center justify-between customWidth mt-11 mb-6"
+      className="customWidth  flex items-center justify-between mt-11 mb-6"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}>
-    <Link href="/">  <PrismicNextImage field={slice.primary.logo} alt=""  className="max-w-32" /></Link>
-      <div className="hidden xl:flex">
+      <Link href="/" className="">
+        {" "}
+        <PrismicNextImage
+          field={slice.primary.logo}
+          alt=""
+          className="max-w-[10rem]"
+        />
+      </Link>
+      <div className="hidden xl:flex justify-between ">
         {slice.primary.menulink.map((item, index) => (
-          <div key={index} className="relative flex items-center">
-            <PrismicNextLink field={item.menu_link} className="relative flex text-xl">
+          <div key={index} className="relative flex items-center space-x-5">
+            <PrismicNextLink
+              field={item.menu_link}
+              className="relative flex text-xl">
               {item.menu_item}
             </PrismicNextLink>
+            <span className="last:hidden">|</span>
             {/* The dividers, but only show if it's not the last item */}
             {index < slice.primary.menulink.length - 1 && (
               <div className="h-2/3 w-[1px] mx-5 bg-accentColor"></div>
@@ -34,9 +44,7 @@ const MainMenu = ({ slice }: MainMenuProps): JSX.Element => {
         ))}
       </div>
 
-     
-       <FullButton text={"Book Now"} link={"/contact"}/>
-     
+      <div className=""><FullButton text={"Book Now"} link={"/contact"}  /></div>
     </section>
   );
 };

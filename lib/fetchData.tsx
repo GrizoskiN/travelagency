@@ -24,8 +24,16 @@ export interface Testimonial {
   persons_description: string;
   testimonial_text: string;
 }
-
-
+export interface BlogPost {
+  uid: string | null;
+  title: string;
+  image: string;
+  excerpt: string;
+  date: string;
+  author: string;
+  minutes: string;
+  tags: string[];
+}
 // Function to fetch all destinations
 export async function fetchDestinations() {
   const client = createClient();
@@ -86,5 +94,27 @@ export async function fetchTestimonials() {
       persons_description: primarySlice?.primary?.persons_description?.toString() || "",
       testimonial_text: primarySlice?.primary?.testimonial_text?.toString() || "",
     };
+  });
+}
+export async function fetchBlogPosts () {
+  const client = createClient();
+  const blogPosts = await client.getAllByType("blogpost");
+
+  return blogPosts.map((blogDoc: PrismicDocument) => {
+    const slices = blogDoc.data?.slices || [];
+    const primarySlice = slices.find((slice: Slice) => slice.primary) || {};
+
+    return {
+
+      uid: blogDoc.uid,
+      title: primarySlice?.primary?.title?.toString() ||  '', // Ensure text extraction
+      image: primarySlice?.primary?.blog_image?.url || '', // Fetch image URL
+      excerpt: primarySlice?.primary?.excerpt.toString() ||  '',
+      date: primarySlice?.primary?.date || '',
+      author: primarySlice?.primary?.author.toString() ||  '',
+      minutes: primarySlice?.primary?.minutes.toString() ||  '',
+   
+      tags: primarySlice?.primary?.tags || [],
+    } 
   });
 }

@@ -4,9 +4,13 @@ import dynamic from "next/dynamic";
 
 export const components = {
   about_us: dynamic(() => import("./AboutUs")),
+  blogpost: dynamic(() => import("./Blogpost")),
+  call_to_action: dynamic(() => import("./CallToAction")),
   continents_text: dynamic(() => import("./ContinentsText")),
   destination_page: dynamic(() => import("./DestinationPage")),
+  footer: dynamic(() => import("./Footer")),
   header: dynamic(() => import("./HeaderImg")),
   main_menu: dynamic(() => import("./MainMenu")),
+  newsletter: dynamic(() => import("./Newsletter")),
   testimonial: dynamic(() => import("./Testimonial")),
 };

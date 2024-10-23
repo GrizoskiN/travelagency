@@ -69,7 +69,7 @@ const GridDestinations: FC = () => {
       {/* Heading Section */}
       <div className="flex flex-col lg:flex-row justify-between">
         <div className="bg-white lg:w-1/2 text-center py-11 rounded-xl ">
-          <HeadingText heading3="Best Locations" heading2="Travel by continent" />
+          <HeadingText heading3="Best Locations" heading2="Travel by continent" customWidth={false}/>
         </div>
 
         {/* Tags Filter */}
