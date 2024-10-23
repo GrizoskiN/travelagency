@@ -36,16 +36,16 @@ const SliderDestinations = () => {
         }}
         pagination={false}
         modules={[EffectCoverflow]}
-        className="w-10/12 mx-auto">
+        className="w-11/12 mx-auto">
         {uniqueCountries.length > 0 ? (
           uniqueCountries.map((destination, index) => (
             <SwiperSlide key={index}>
               <Link href={`/countries/${destination.label}`} className="">
-                <div className="relative w-[20rem] lg:w-[35rem] m-auto -ml-24 md:-ml-0">
+                <div className="relative w-[19rem] h-[25rem] lg:w-[35rem] m-auto -ml-24 md:-ml-0">
                   <Image
                     src={destination.image} // Dynamic image from context
                     alt={destination.label} // Alt text from the context
-                    className=" lg:w-[35rem] lg:h-[35rem] object-cover rounded-lg"
+                    className=" w-full lg:w-[35rem] h-full lg:h-[35rem] object-cover rounded-lg"
                     width={300}
                     height={400}
                   />
