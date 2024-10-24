@@ -37,7 +37,11 @@ const Newsletter = ({ slice }: NewsletterProps): JSX.Element => {
       </div>
       <PrismicNextImage
         field={slice.primary.image}
-        className="md:absolute inset-0 -z-10 h-full rounded-xl w-full  object-cover"
+        className="hidden md:block md:absolute  inset-0 -z-10 h-full rounded-xl w-full  object-cover"
+      />
+      <PrismicNextImage
+        field={slice.primary.mobile}
+        className="md:hidden relative -mt-48 -z-20 h-full rounded-xl w-full  object-cover"
       />
     </section>
   );

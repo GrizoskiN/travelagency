@@ -20,6 +20,14 @@
             "thumbnails": []
           }
         },
+        "mobile": {
+          "type": "Image",
+          "config": {
+            "label": "mobile",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
         "title": {
           "type": "Text",
           "config": {

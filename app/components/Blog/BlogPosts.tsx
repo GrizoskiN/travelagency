@@ -24,6 +24,7 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ pointer }) => {
                   alt={blog.title}
                   width={500}
                   height={100}
+                  loading="lazy"
                   className="rounded-xl w-full overflow-hidden hover:scale-105 transition-transform duration-300"
                 />
               </Link>

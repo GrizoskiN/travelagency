@@ -41,7 +41,7 @@ const SliderDestinations = () => {
           uniqueCountries.map((destination, index) => (
             <SwiperSlide key={index}>
               <Link href={`/countries/${destination.label}`} className="">
-                <div className="relative w-[19rem] h-[25rem] lg:w-[35rem] m-auto -ml-24 md:-ml-0">
+                <div className="relative w-[19rem] h-[25rem] lg:w-[35rem] lg:h-auto m-auto -ml-24 md:-ml-0">
                   <Image
                     src={destination.image} // Dynamic image from context
                     alt={destination.label} // Alt text from the context

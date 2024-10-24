@@ -1576,6 +1576,16 @@ export interface NewsletterSliceDefaultPrimary {
   image: prismic.ImageField<never>;
 
   /**
+   * mobile field in *Newsletter → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: newsletter.default.primary.mobile
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  mobile: prismic.ImageField<never>;
+
+  /**
    * Title field in *Newsletter → Default → Primary*
    *
    * - **Field Type**: Text
