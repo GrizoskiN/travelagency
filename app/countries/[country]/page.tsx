@@ -93,7 +93,7 @@ export default async function CountryPage({
                   {country_image?.url && (
                     <Image
                       src={country_image.url}
-                      alt={`Travel in ${params.country} with ${process.env.NEXT_PUBLIC_AGENCY_NAME}`}
+                      alt={`Travel in ${params.country} with ${process.env.AGENCY_NAME}`}
                       width={500}
                       height={500}
                       className="rounded-lg my-4"
@@ -126,7 +126,7 @@ export default async function CountryPage({
                 {country_image?.url && (
                   <Image
                     src={country_image.url}
-                    alt={`Travel in ${params.country} with ${process.env.NEXT_PUBLIC_AGENCY_NAME}`}
+                    alt={`Travel in ${params.country} with ${process.env.AGENCY_NAME}`}
                     width={500}
                     height={500}
                     className="rounded-lg my-4"

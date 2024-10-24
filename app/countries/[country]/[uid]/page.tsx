@@ -5,7 +5,7 @@ import { PrismicDocument } from "@prismicio/types";
 
 export default async function Page() {
 
-  const agencyName = process.env.NEXT_PUBLIC_AGENCY_NAME;
+  const agencyName = process.env.AGENCY_NAME;
   const client = createClient();
   const fetchedDestination = await client.getAllByType("destinations");
   
