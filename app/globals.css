@@ -16,8 +16,8 @@
 
 body {
   color: var(--accentColor);
-
   background:"#ececec";
+ 
 }
 
 .customWidth {
@@ -114,3 +114,17 @@ body {
   transform: scale(1); /* Restore the original size for the centered slide */
 }
 
+/* Hide scrollbar for WebKit-based browsers */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+
+/* Optional: Hide scrollbar track for consistency */
+.scrollbar-hide::-webkit-scrollbar-track {
+  background: transparent;
+}

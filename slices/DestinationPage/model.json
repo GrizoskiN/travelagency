@@ -37,13 +37,6 @@
             }
           }
         },
-        "destination": {
-          "type": "Text",
-          "config": {
-            "label": "destination",
-            "placeholder": ""
-          }
-        },
         "location": {
           "type": "GeoPoint",
           "config": {

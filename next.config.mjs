@@ -1,11 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'images.prismic.io',
-      // Add any other domains your images might come from
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.prismic.io",
+        pathname: "/**",
+      },
     ],
   },
-}
+};
 
 export default nextConfig;

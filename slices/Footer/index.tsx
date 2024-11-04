@@ -19,7 +19,7 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
       <div className="customWidth  xl:w-2/3 mx-auto text-primary-foreground">
         <div className="flex  justify-between border-b-[1px] border-gray-600 pb-5">
           <PrismicNextImage
-            field={slice.primary.logo}
+            field={slice.primary.logo} alt=""
             width={200}
             height={100} className="w-1/3 lg:w-48 object-contain"
           />
@@ -56,7 +56,7 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
                 {slice.primary.social_media.map((item, index) => (
                   <PrismicNextLink key={index} field={item.social_media_link}>
                     <PrismicNextImage
-                      field={item.social_media_icon}
+                      field={item.social_media_icon} alt=""
                       className="w-8"
                     />
                   </PrismicNextLink>

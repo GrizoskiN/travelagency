@@ -1,4 +1,5 @@
 "use client";
+
 import { FC, useState, useEffect } from "react";
 import TagsFilter from "../Tags/TagsFilter";
 import DestinationGallery from "../Gallery/DestinationGallery";
@@ -53,7 +54,19 @@ const GridDestinations: FC = () => {
       );
     }
 
-    setFilteredDestinations(filtered);
+    // Remove duplicate countries by adding each country only once
+    const uniqueCountries = new Set<string>();
+    const uniqueFilteredDestinations = filtered.filter((destination) => {
+      const country = destination.label.trim().toLowerCase();
+      if (uniqueCountries.has(country)) {
+        return false;
+      } else {
+        uniqueCountries.add(country);
+        return true;
+      }
+    });
+
+    setFilteredDestinations(uniqueFilteredDestinations);
   }, [selectedContinent, selectedTags, destinations]);
 
   // Find the matched continent detail based on the selected continent

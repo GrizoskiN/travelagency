@@ -1,12 +1,17 @@
-'use client'
+"use client";
 import { createContext, ReactNode, useContext } from 'react';
-import { Testimonial, BlogPost } from '@/lib/fetchData'; // Import BlogPost type as well
+import { Testimonial, BlogPost } from '@/lib/fetchData';
 
 interface Destination {
-  label: string;
-  image: string;
+  uid: string; // Add uid for unique identification
+  label: string; // Country label
+  image: string; // URL for the country image
   continent: string;
   tags: string[];
+  start_date?: string; // Optional: Start date for availability
+  end_date?: string; // Optional: End date for availability
+  group_size?: string; // Optional: Group size information (e.g., "2-4", "5+")
+  meta_title?: string; // Title for displaying purposes
 }
 
 interface ContinentDetail {
@@ -20,8 +25,8 @@ interface DestinationsProviderProps {
   destinations: Destination[];
   continentDetails: ContinentDetail[];
   uniqueCountries: Destination[];
-  testimonials: Testimonial[]; // Use the imported Testimonial type
-  blogPosts: BlogPost[]; // Add blog posts
+  testimonials: Testimonial[];
+  blogPosts: BlogPost[];
   children: ReactNode;
 }
 
@@ -33,28 +38,22 @@ export const DestinationsProvider = ({
   continentDetails,
   uniqueCountries,
   testimonials,
-  blogPosts, // Add blog posts to the provider
+  blogPosts,
 }: DestinationsProviderProps) => {
-  // Utility function to fetch related blog posts based on tags
-  // const getRelatedPosts = (currentPostUid: string, currentTags: string[]) => {
-  //   return blogPosts.filter(
-  //     (post) => post.uid !== currentPostUid && post.tags.some((tag) => currentTags.includes(tag))
-  //   ).slice(0, 3); // Return only 3 related posts
-  // };
-
   return (
     <DestinationsContext.Provider
-      value={{
-        destinations,
-        continentDetails,
-        uniqueCountries,
-        testimonials,
-        blogPosts,
-        children,
-      }}
-    >
-      {children}
-    </DestinationsContext.Provider>
+    value={{
+      destinations,
+      continentDetails,
+      uniqueCountries,
+      testimonials,
+      blogPosts,
+      children,  
+    }}
+  >
+    {children}
+  </DestinationsContext.Provider>
+  
   );
 };
 

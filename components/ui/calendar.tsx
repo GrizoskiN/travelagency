@@ -38,13 +38,13 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("p-3 ", className)}
+      className={cn("p-7 m-6", className)}
       classNames={{
         months: "flex  relative",
-        month_caption: "flex w-32 justify-center h-7 mx-10 relative items-center",
-        weekdays: "flex flex-row",
-        weekday: "text-muted-foreground w-8 font-normal text-[0.8rem]",
-        month: "gap-y-4 px-2 overflow-x-hidden w-full",
+        month_caption: "flex w-2/3  justify-center h-7 mx-10 relative items-center",
+        weekdays: "flex flex-row justify-between ",
+        weekday: "text-muted-foreground w-8 font-normal text-[0.8rem] ",
+        month: "gap-y-4 px-2 text-2xl overflow-x-hidden w-full",
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium truncate",
         button_next: cn(
@@ -58,27 +58,27 @@ function Calendar({
           buttonVariants({
             variant: "outline",
             className:
-              "absolute left-0 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+              "absolute left-0 h-7 w-7  p-0 opacity-50 hover:opacity-100",
           })
         ),
-        nav: "flex items-start",
+        nav: "flex items-start ",
         month_grid: "mt-4",
-        week: "flex w-full mt-2",
-        day: "p-0 size-5 md:size-8 text-sm flex-1 flex items-center justify-center has-[button]:hover:!bg-accent rounded-md has-[button]:hover:aria-selected:!bg-primary has-[button]:hover:text-accent-foreground has-[button]:hover:aria-selected:text-primary-foreground",
+        week: "flex w-full  mt-2 text-lg  ",
+        day: " p-0 h-6 w-6 size-5 md:size-11 text-lg  flex items-center justify-center has-[button]:hover:!bg-accent has-[button]:hover:aria-selected:!bg-accent has-[button]:hover:text-accent-foreground ",
         day_button: cn(
           buttonVariants({ variant: "ghost" }),
-          "size-8 p-0 font-normal transition-none hover:bg-transparent hover:text-inherit aria-selected:opacity-100"
+          "size-8 p-0 font-normal transition-none  hover:text-inherit aria-selected:opacity-100"
         ),
-        range_start: "day-range-start rounded-s-md",
-        range_end: "day-range-end rounded-e-md",
+        range_start: "day-range-start rounded-s-lg",
+        range_end: "day-range-end rounded-e-lg",
         selected:
-          "bg-primary text-primary-foreground hover:!bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
-        today: "bg-accent text-accent-foreground",
+          "text-white hover:bg-black hover:text-white focus:text-white  has-[button]:bg-black ",
+        today: "bg-none border-2 border-accent text-accent-foreground ",
         outside:
-          "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
+          "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent aria-selected:text-muted-foreground aria-selected:opacity-30",
         disabled: "text-muted-foreground opacity-50",
         range_middle:
-          "aria-selected:bg-accent hover:aria-selected:!bg-accent rounded-none aria-selected:text-accent-foreground hover:aria-selected:text-accent-foreground",
+          "aria-selected:bg-accent   rounded-none aria-selected:text-accent-foreground hover:aria-selected:text-accent-foreground",
         hidden: "invisible",
         ...classNames,
       }}
@@ -133,9 +133,9 @@ function Calendar({
         },
         CaptionLabel: ({ children }) => (
           <Button
-            className="h-7 w-full truncate text-sm font-medium"
+            className="h-7 w-full mx-auto truncate text-xl text-center font-medium"
             variant="ghost"
-            size="sm"
+            size="icon"
             onClick={() =>
               setNavView((prev) => (prev === "days" ? "years" : "days"))
             }

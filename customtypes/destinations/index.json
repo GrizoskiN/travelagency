@@ -6,10 +6,11 @@
   "status": true,
   "json": {
     "Main": {
-      "uid": {
-        "type": "UID",
+      "start_date": {
+        "type": "Date",
         "config": {
-          "label": "UID"
+          "label": "Start Date",
+          "placeholder": "Offer with fixed dates"
         }
       },
       "meta_title": {
@@ -17,6 +18,50 @@
         "config": {
           "label": "meta_title",
           "placeholder": "Name of the place"
+        }
+      },
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "country": {
+        "type": "Text",
+        "config": {
+          "label": "Country",
+          "placeholder": "France"
+        }
+      },
+      "destination_tag": {
+        "type": "Link",
+        "config": {
+          "label": "destination tag",
+          "select": "document",
+          "customtypes": ["destinations"]
+        }
+      },
+      "group_size": {
+        "type": "Select",
+        "config": {
+          "label": "Group Size",
+          "placeholder": "",
+          "options": ["1-2", "2-4", "5+"]
+        }
+      },
+      "country_image": {
+        "type": "Image",
+        "config": {
+          "label": "country_image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "meta_description",
+          "placeholder": "Description"
         }
       },
       "continent": {
@@ -34,48 +79,11 @@
           ]
         }
       },
-      "meta_description": {
-        "type": "Text",
-        "config": {
-          "label": "meta_description",
-          "placeholder": "Description"
-        }
-      },
-      "country_image": {
-        "type": "Image",
-        "config": {
-          "label": "country_image",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
-      "specific_date": {
+      "end_date": {
         "type": "Date",
         "config": {
-          "label": "Specific Date",
-          "placeholder": "Offer with fixed dates"
-        }
-      },
-      "country": {
-        "type": "Text",
-        "config": {
-          "label": "Country",
-          "placeholder": "France"
-        }
-      },
-      "city": {
-        "type": "Text",
-        "config": {
-          "label": "City",
-          "placeholder": "City"
-        }
-      },
-      "destination_tag": {
-        "type": "Link",
-        "config": {
-          "label": "destination tag",
-          "select": "document",
-          "customtypes": ["destinations"]
+          "label": "End Date",
+          "placeholder": ""
         }
       },
       "slices": {

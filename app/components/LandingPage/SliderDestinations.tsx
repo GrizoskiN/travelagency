@@ -6,7 +6,7 @@ import { useDestinations } from "@/app/contexts/DestinationsContext";
 import Image from "next/image";
 
 // Import Swiper modules
-import {  EffectCoverflow } from "swiper/modules";
+import { EffectCoverflow } from "swiper/modules";
 import Link from "next/link";
 import HeadingText from "../TextModules/HeadingText";
 
@@ -16,7 +16,8 @@ const SliderDestinations = () => {
   return (
     <div className="overflow-hidden customWidth py-11 my-6 bg-white rounded-xl">
       <div className=" mx-auto  text-center mb-11">
-        <HeadingText customWidth
+        <HeadingText
+          customWidth
           heading3="Top Destinations"
           heading2="Our Featured Destination"
         />
@@ -29,7 +30,7 @@ const SliderDestinations = () => {
         loop={true}
         coverflowEffect={{
           rotate: 0,
-        
+
           depth: 200,
           modifier: 1,
           slideShadows: false,

@@ -17,6 +17,19 @@ interface ContinentDoc {
     slices?: Slice[];
   };
 }
+
+export interface Destination {
+  uid: string; // Unique identifier for destination
+  label: string; // Country label
+  image: string; // URL for the country image
+  continent: string; // Continent
+  tags: string[]; // Tags for the destination
+  start_date?: string; // Optional: Start date for availability
+  end_date?: string; // Optional: End date for availability
+  group_size?: string; // Optional: Group size information (e.g., "2-4", "5+")
+  meta_title?: string; // Optional: Title for displaying purposes
+}
+
 export interface Testimonial {
   uid: string | null;
   testimonial_image: string;
@@ -24,6 +37,7 @@ export interface Testimonial {
   persons_description: string;
   testimonial_text: string;
 }
+
 export interface BlogPost {
   uid: string | null;
   title: string;
@@ -34,8 +48,9 @@ export interface BlogPost {
   minutes: string;
   tags: string[];
 }
+
 // Function to fetch all destinations
-export async function fetchDestinations() {
+export async function fetchDestinations(): Promise<Destination[]> {
   const client = createClient();
   const travelByDestination = await client.getAllByType("destinations");
 
@@ -50,12 +65,22 @@ export async function fetchDestinations() {
     const tags = doc.tags || [];
     const countryImage = doc.data.country_image?.url || "";
     const continent = doc.data.continent || "";
+    const uid = doc.uid || "";
+    const start_date = doc.data.start_date || "";
+    const end_date = doc.data.end_date || "";
+    const group_size = doc.data.group_size || "";
+    const meta_title = doc.data.meta_title || "";
 
     return {
+      uid,
       label: country.charAt(0).toUpperCase() + country.slice(1).trim(),
       image: countryImage,
       continent,
       tags,
+      start_date,
+      end_date,
+      group_size,
+      meta_title,
     };
   });
 }
@@ -96,7 +121,8 @@ export async function fetchTestimonials() {
     };
   });
 }
-export async function fetchBlogPosts () {
+
+export async function fetchBlogPosts(): Promise<BlogPost[]> {
   const client = createClient();
   const blogPosts = await client.getAllByType("blogpost");
 
@@ -105,16 +131,14 @@ export async function fetchBlogPosts () {
     const primarySlice = slices.find((slice: Slice) => slice.primary) || {};
 
     return {
-
       uid: blogDoc.uid,
-      title: primarySlice?.primary?.title?.toString() ||  '', // Ensure text extraction
-      image: primarySlice?.primary?.blog_image?.url || '', // Fetch image URL
-      excerpt: primarySlice?.primary?.excerpt.toString() ||  '',
+      title: primarySlice?.primary?.title?.toString() || '',
+      image: primarySlice?.primary?.blog_image?.url || '',
+      excerpt: primarySlice?.primary?.excerpt?.toString() || '',
       date: primarySlice?.primary?.date || '',
-      author: primarySlice?.primary?.author.toString() ||  '',
-      minutes: primarySlice?.primary?.minutes.toString() ||  '',
-   
+      author: primarySlice?.primary?.author?.toString() || '',
+      minutes: primarySlice?.primary?.minutes?.toString() || '',
       tags: primarySlice?.primary?.tags || [],
-    } 
+    };
   });
 }

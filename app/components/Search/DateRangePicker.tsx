@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+// import { Calendar as CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
@@ -50,45 +50,63 @@ export function DatePickerWithRange({
   }, []);
 
   return (
-    <div className={cn("grid gap-2", className)}>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            id="date"
-            variant={"outline"}
-            className={cn(
-              "w-auto justify-start text-left font-normal text-md  text-black border-white/20 shadow-md rounded-xl",
-              !date && "text-muted-foreground"
-            )}
-            onClick={() => setOpen(true)}
-          >
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            {date?.from ? (
-              date.to ? (
-                <>
-                  {format(date.from, "LLL dd, y")} -{" "}
-                  {format(date.to, "LLL dd, y")}
-                </>
-              ) : (
+    <div className={cn("grid gap-2 grid-cols-2 ", className)}>
+      {/* Check-in Button */}
+      <div>
+        <p className="text-gray-500 text-left text-sm pl-4 ">Check In</p>
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              id="check-in"
+              variant={"outline"}
+              className={cn(
+                "w-full  justify-start text-left font-normal text-xl text-black border-white/20 shadow-none rounded-xl"
+               
+              )}
+              onClick={() => setOpen(true)}>
+              {/* <CalendarIcon className="mr-2 h-4 w-4" /> */}
+              {date?.from ? (
                 format(date.from, "LLL dd, y")
-              )
-            ) : (
-              <span>Start Date - End Date</span>
-            )}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
-            mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={(range) => {
-              onChange(range)
-            }}
-            numberOfMonths={numberOfMonths} // Use dynamic number of months
-          />
-        </PopoverContent>
-      </Popover>
+              ) : (
+                <span>Check-in Date</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+        </Popover>
+      </div>
+      {/* Check-out Button */}
+      <div>
+        <p className="text-gray-500 text-left text-sm pl-4 ">Check Out</p>
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              id="check-out"
+              variant={"outline"}
+              className={cn(
+                "w-full  justify-start text-left font-normal text-xl text-black border-white/20 shadow-none rounded-xl"
+              )}
+              onClick={() => setOpen(true)}>
+              {/* <CalendarIcon className="mr-2 h-4 w-4" /> */}
+              {date?.to ? (
+                format(date.to, "LLL dd, y")
+              ) : (
+                <span>Check-out Date</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto -ml-40" align="center">
+            <Calendar
+              mode="range"
+              defaultMonth={date?.from}
+              selected={date}
+              onSelect={(range) => {
+                onChange(range);
+              }}
+              numberOfMonths={numberOfMonths} // Use dynamic number of months
+            />
+          </PopoverContent>
+        </Popover>
+      </div>
     </div>
   );
 }

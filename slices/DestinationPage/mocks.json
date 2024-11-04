@@ -62,11 +62,6 @@
 					}
 				]
 			},
-			"destination": {
-				"__TYPE__": "FieldContent",
-				"value": "came",
-				"type": "Text"
-			},
 			"location": {
 				"position": {
 					"lat": 48.8583736,
