@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useDestinations } from "@/app/contexts/DestinationsContext";
 import { format } from "date-fns";
 import { Destination } from "@/lib/fetchData";
+import Link from "next/link";
 
 export default function CountryPage({
   params,
@@ -111,6 +112,7 @@ export default function CountryPage({
           </h2>
           <div className="destination-grid grid grid-cols-5 gap-4">
             {matchedDestinations.map((dest) => (
+          <Link href={`/destination/${dest.uid}`} key={dest.uid} className="block">
               <div key={dest.uid} className="block">
                 {dest.image && (
                   <Image
@@ -125,6 +127,7 @@ export default function CountryPage({
                   {dest.meta_title || "Untitled Destination"}
                 </h2>
               </div>
+            </Link>
             ))}
           </div>
         </div>
