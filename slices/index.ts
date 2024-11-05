@@ -11,5 +11,6 @@ export const components = {
   header: dynamic(() => import("./HeaderImg")),
   main_menu: dynamic(() => import("./MainMenu")),
   newsletter: dynamic(() => import("./Newsletter")),
+  tag: dynamic(() => import("./Tag")),
   testimonial: dynamic(() => import("./Testimonial")),
 };

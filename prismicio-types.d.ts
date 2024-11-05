@@ -210,6 +210,21 @@ export type ContinentTextDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *destination → Destination tag*
+ */
+export interface DestinationsDocumentDataDestinationTagItem {
+  /**
+   * Tags link field in *destination → Destination tag*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destinations.destination_tag[].tags_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  tags_link: prismic.ContentRelationshipField<"tags">;
+}
+
 type DestinationsDocumentDataSlicesSlice = DestinationPageSlice;
 
 /**
@@ -248,17 +263,6 @@ interface DestinationsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   country: prismic.KeyTextField;
-
-  /**
-   * destination tag field in *destination*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: destinations.destination_tag
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  destination_tag: prismic.ContentRelationshipField<"destinations">;
 
   /**
    * Group Size field in *destination*
@@ -321,6 +325,19 @@ interface DestinationsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#date
    */
   end_date: prismic.DateField;
+
+  /**
+   * Destination tag field in *destination*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destinations.destination_tag[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  destination_tag: prismic.GroupField<
+    Simplify<DestinationsDocumentDataDestinationTagItem>
+  >;
 
   /**
    * Slice Zone field in *destination*
@@ -597,6 +614,45 @@ export type NewsletterDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for tags documents
+ */
+interface TagsDocumentData {
+  /**
+   * Tag name field in *tags*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tags.tag_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  tag_name: prismic.KeyTextField;
+
+  /**
+   * Icon field in *tags*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tags.icon
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+}
+
+/**
+ * tags document from Prismic
+ *
+ * - **API ID**: `tags`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TagsDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<TagsDocumentData>, "tags", Lang>;
+
 type TestimonialsDocumentDataSlicesSlice = TestimonialSlice;
 
 /**
@@ -671,6 +727,7 @@ export type AllDocumentTypes =
   | HeaderimageDocument
   | MenuDocument
   | NewsletterDocument
+  | TagsDocument
   | TestimonialsDocument;
 
 /**
@@ -1658,6 +1715,58 @@ export type NewsletterSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Tag → Default → Primary*
+ */
+export interface TagSliceDefaultPrimary {
+  /**
+   * Icon text field in *Tag → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tag.default.primary.icon_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  icon_text: prismic.KeyTextField;
+
+  /**
+   * Icon image field in *Tag → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tag.default.primary.icon_image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon_image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Tag Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TagSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TagSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Tag*
+ */
+type TagSliceVariation = TagSliceDefault;
+
+/**
+ * Tag Shared Slice
+ *
+ * - **API ID**: `tag`
+ * - **Description**: Tag
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TagSlice = prismic.SharedSlice<"tag", TagSliceVariation>;
+
+/**
  * Primary content in *Testimonial → Default → Primary*
  */
 export interface TestimonialSliceDefaultPrimary {
@@ -1764,6 +1873,7 @@ declare module "@prismicio/client" {
       ContinentTextDocumentDataSlicesSlice,
       DestinationsDocument,
       DestinationsDocumentData,
+      DestinationsDocumentDataDestinationTagItem,
       DestinationsDocumentDataSlicesSlice,
       FooterDocument,
       FooterDocumentData,
@@ -1777,6 +1887,8 @@ declare module "@prismicio/client" {
       NewsletterDocument,
       NewsletterDocumentData,
       NewsletterDocumentDataSlicesSlice,
+      TagsDocument,
+      TagsDocumentData,
       TestimonialsDocument,
       TestimonialsDocumentData,
       TestimonialsDocumentDataSlicesSlice,
@@ -1825,6 +1937,10 @@ declare module "@prismicio/client" {
       NewsletterSliceDefaultPrimary,
       NewsletterSliceVariation,
       NewsletterSliceDefault,
+      TagSlice,
+      TagSliceDefaultPrimary,
+      TagSliceVariation,
+      TagSliceDefault,
       TestimonialSlice,
       TestimonialSliceDefaultPrimary,
       TestimonialSliceVariation,

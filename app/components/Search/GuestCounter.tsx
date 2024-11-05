@@ -79,7 +79,7 @@ export function GuestSelector({ onGroupSizeChange }: GuestSelectorProps) {
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className="rounded-full border-none px-4">
+            className="rounded-full border-none px-4 shadow-none">
             <div>
               <h1 className="w-full justify-start text-left font-normal text-xl text-black border-white/20 shadow-none rounded-xl">
                 {totalGuests} guests {infants >= 1 && <span>{infants} infants</span>}

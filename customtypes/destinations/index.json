@@ -6,6 +6,12 @@
   "status": true,
   "json": {
     "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
       "start_date": {
         "type": "Date",
         "config": {
@@ -20,25 +26,11 @@
           "placeholder": "Name of the place"
         }
       },
-      "uid": {
-        "type": "UID",
-        "config": {
-          "label": "UID"
-        }
-      },
       "country": {
         "type": "Text",
         "config": {
           "label": "Country",
           "placeholder": "France"
-        }
-      },
-      "destination_tag": {
-        "type": "Link",
-        "config": {
-          "label": "destination tag",
-          "select": "document",
-          "customtypes": ["destinations"]
         }
       },
       "group_size": {
@@ -84,6 +76,23 @@
         "config": {
           "label": "End Date",
           "placeholder": ""
+        }
+      },
+      "destination_tag": {
+        "type": "Group",
+        "config": {
+          "label": "Destination tag",
+          "repeat": true,
+          "fields": {
+            "tags_link": {
+              "type": "Link",
+              "config": {
+                "label": "Tags link",
+                "select": "document",
+                "customtypes": ["tags"]
+              }
+            }
+          }
         }
       },
       "slices": {

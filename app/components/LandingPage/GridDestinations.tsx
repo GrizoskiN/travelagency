@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import { FC, useState, useEffect } from "react";
 import TagsFilter from "../Tags/TagsFilter";
 import DestinationGallery from "../Gallery/DestinationGallery";
@@ -9,96 +8,83 @@ import { useDestinations } from "@/app/contexts/DestinationsContext";
 import LastCard from "../Gallery/LastCard";
 
 const GridDestinations: FC = () => {
-  const { destinations, continentDetails } = useDestinations(); // Fetch destinations and continentDetails from context
+  const { destinations, continentDetails, tagsDictionary } = useDestinations();
 
-  // State for filtered destinations, selected continent, and selected tags
-  const [filteredDestinations, setFilteredDestinations] = useState(destinations);
+  // Transform each destination's tags to names immediately upon loading
+  const destinationsWithTagNames = destinations.map(destination => ({
+    ...destination,
+    tags: destination.tags.map(tagId => tagsDictionary[tagId]?.name || tagId) // Replace IDs with names
+  }));
+
+  const [filteredDestinations, setFilteredDestinations] = useState(destinationsWithTagNames);
   const [selectedContinent, setSelectedContinent] = useState("Earth");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  // Create a frequency map to count the number of destinations for each country
-  const countryDestinationCount = destinations.reduce((acc, destination) => {
-    const country = destination.label.trim().toLowerCase(); // Normalize the country name
-    if (acc[country]) {
-      acc[country] += 1;
-    } else {
-      acc[country] = 1;
-    }
+  const countryDestinationCount = destinationsWithTagNames.reduce((acc, destination) => {
+    const country = destination.label.trim().toLowerCase();
+    acc[country] = (acc[country] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
 
-  // Handle continent selection and reset selected tags
   const handleContinentChange = (continent: string) => {
     setSelectedContinent(continent);
-    setSelectedTags([]); // Reset tags when continent changes
+    setSelectedTags([]);
   };
 
-  // Handle tag selection
   const handleTagSelect = (selectedTags: string[]) => {
     setSelectedTags(selectedTags);
   };
 
-  // Effect to filter destinations based on selected continent and tags
   useEffect(() => {
-    let filtered = destinations;
+    let filtered = destinationsWithTagNames;
 
-    // Filter by selected continent
     if (selectedContinent !== "Earth") {
-      filtered = filtered.filter((destination) => destination.continent === selectedContinent);
-    }
-
-    // Further filter by selected tags if any tags are selected
-    if (selectedTags.length > 0) {
-      filtered = filtered.filter((destination) =>
-        selectedTags.every((tag) => destination.tags.includes(tag))
+      filtered = filtered.filter(
+        (destination) => destination.continent === selectedContinent
       );
     }
 
-    // Remove duplicate countries by adding each country only once
+    if (selectedTags.length > 0) {
+      filtered = filtered.filter((destination) =>
+        selectedTags.every((tagName) => destination.tags.includes(tagName))
+      );
+    }
+
     const uniqueCountries = new Set<string>();
     const uniqueFilteredDestinations = filtered.filter((destination) => {
       const country = destination.label.trim().toLowerCase();
-      if (uniqueCountries.has(country)) {
-        return false;
-      } else {
-        uniqueCountries.add(country);
-        return true;
-      }
+      if (uniqueCountries.has(country)) return false;
+      uniqueCountries.add(country);
+      return true;
     });
 
     setFilteredDestinations(uniqueFilteredDestinations);
-  }, [selectedContinent, selectedTags, destinations]);
+  }, [selectedContinent, selectedTags, destinationsWithTagNames]);
 
-  // Find the matched continent detail based on the selected continent
   const matchedContinentDetail = continentDetails.find(
     (detail) => detail.uid.toLowerCase() === selectedContinent.toLowerCase()
   );
 
-  // Limit the number of destinations to show to a maximum of 6
   const limitedDestinations = filteredDestinations.slice(0, 6);
 
   return (
     <div className="customWidth my-8">
-      {/* Heading Section */}
       <div className="flex flex-col lg:flex-row justify-between">
-        <div className="bg-white lg:w-1/2 text-center py-11 rounded-xl ">
-          <HeadingText heading3="Best Locations" heading2="Travel by continent" customWidth={false}/>
+        <div className="bg-white lg:w-1/2 text-center py-11 rounded-xl">
+          <HeadingText heading3="Best Locations" heading2="Travel by continent" customWidth={false} />
         </div>
 
-        {/* Tags Filter */}
         <TagsFilter key={selectedContinent} onTagSelect={handleTagSelect} />
       </div>
 
       <div className="destination-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
-        {/* First Grid Item - Featured Country */}
         <FeaturedCountryCard
-          featuredCountry={filteredDestinations[0] || destinations[0]} // Fallback to the first destination if filtered list is empty
-          continents={Array.from(new Set(destinations.map((dest) => dest.continent)))}
+          featuredCountry={filteredDestinations[0] || destinationsWithTagNames[0]}
+          continents={Array.from(new Set(destinationsWithTagNames.map((dest) => dest.continent)))}
           continentDetails={continentDetails}
           onContinentChange={handleContinentChange}
         />
 
-        {/* Other Destinations (limited to a max of 6) */}
         {limitedDestinations.length > 0 ? (
           limitedDestinations.map((destination, index) => (
             <div key={index} className="relative">
@@ -114,7 +100,6 @@ const GridDestinations: FC = () => {
           </div>
         )}
 
-        {/* Last Card Component (always included) */}
         <LastCard lastCardText={matchedContinentDetail?.last_card_text || ""} />
       </div>
     </div>

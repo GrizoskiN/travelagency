@@ -69,8 +69,8 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="w-10/12 md:w-auto flex items-center justify-center mt-10 z-40 bg-background rounded-full pr-2 relative">
-      <div className="w-full flex justify-between flex-col md:flex-row md:items-center space-y-3 md:space-y-0 bg-white border-t-white/40 border-t-[1px] text-white rounded-full shadow-lg pl-11 pr-2 py-2 md:space-x-3">
+    <div className="w-2/4 mx-auto  flex items-center justify-center mt-10 z-40 bg-background rounded-full pr-2 relative">
+      <div className="w-full flex justify-between flex-col md:flex-row md:items-center space-y-3 md:space-y-0 bg-white border-t-white/40 border-t-[1px] text-white rounded-full shadow-lg pl-11 pr-2  py-2 ">
         <DestinationSelect
           destinations={uniqueCountries}
           onCountryChange={handleCountryChange}
@@ -95,8 +95,8 @@ const SearchBar: React.FC = () => {
         <GuestSelector onGroupSizeChange={(size) => setGroupSize(size)} />
 
         {/* Search Button */}
-        <SearchButton handleSearch={handleSearch} />
       </div>
+        <SearchButton handleSearch={handleSearch} />
     </div>
   );
 };

@@ -6,20 +6,24 @@ interface TagsFilterProps {
 }
 
 const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
-  const { destinations } = useDestinations();
+  const { tagsDictionary } = useDestinations();
 
-  const uniqueTags = Array.from(
-    new Set(destinations.flatMap((destination) => destination.tags))
-  );
+  // Convert tagsDictionary to an array of tag objects
+  const uniqueTags = Object.entries(tagsDictionary).map(([id, tagData]) => ({
+    
+    ...tagData,
+  }));
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const handleTagClick = (tag: string) => {
-    const updatedTags = selectedTags.includes(tag)
-      ? selectedTags.filter((selectedTag) => selectedTag !== tag)
-      : [...selectedTags, tag];
+  const handleTagClick = (tagId: string) => {
+    const updatedTags = selectedTags.includes(tagId)
+      ? selectedTags.filter((selectedTag) => selectedTag !== tagId)
+      : [...selectedTags, tagId];
     setSelectedTags(updatedTags);
     onTagSelect(updatedTags);
+    
+    console.log("Selected Tags after click:", updatedTags); // Debug: Log selected tags after click
   };
 
   const handleAllExperiencesClick = () => {
@@ -44,28 +48,20 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
         >
           All Experiences
         </button>
-        {uniqueTags.map((tag, index) => (
+        {uniqueTags.map((tag) => (
           <button
-            key={index}
+            key={tag.id}
             className={`px-11 py-2 h-fit rounded-full capitalize ${
-              selectedTags.includes(tag)
+              selectedTags.includes(tag.id)
                 ? "bg-primary-foreground text-white"
                 : "bg-none border-[1px] border-gray-400 text-gray-700"
             }`}
-            onClick={() => handleTagClick(tag)}
+            onClick={() => handleTagClick(tag.id)}
           >
-            {tag}
+            {tag.name}
           </button>
         ))}
       </div>
-      {selectedTags.length > 0 &&
-        destinations.filter((destination) =>
-          selectedTags.every((tag) => destination.tags.includes(tag))
-        ).length === 0 && (
-          <div className="mt-4 text-gray-600">
-            No destinations match your selected tags. Please try selecting different tags.
-          </div>
-        )}
     </div>
   );
 };

@@ -1,13 +1,19 @@
 "use client";
 import { createContext, ReactNode, useContext } from 'react';
-import { Testimonial, BlogPost } from '@/lib/fetchData';
+import { Testimonial, BlogPost, Tag } from '@/lib/fetchData';
+
+// Define the shape of tagsDictionary as a Record of tags by their ID
+interface TagDictionary {
+  [id: string]: Tag;
+}
 
 interface Destination {
-  uid: string; // Add uid for unique identification
+  uid: string; // Unique identifier
   label: string; // Country label
   image: string; // URL for the country image
   continent: string;
-  tags: string[];
+  tags: string[]; // Allow both string[] (IDs) or Tag[]
+
   start_date?: string; // Optional: Start date for availability
   end_date?: string; // Optional: End date for availability
   group_size?: string; // Optional: Group size information (e.g., "2-4", "5+")
@@ -27,6 +33,7 @@ interface DestinationsProviderProps {
   uniqueCountries: Destination[];
   testimonials: Testimonial[];
   blogPosts: BlogPost[];
+  tagsDictionary: TagDictionary; // Add tagsDictionary as a prop
   children: ReactNode;
 }
 
@@ -39,21 +46,22 @@ export const DestinationsProvider = ({
   uniqueCountries,
   testimonials,
   blogPosts,
+  tagsDictionary
 }: DestinationsProviderProps) => {
   return (
     <DestinationsContext.Provider
-    value={{
-      destinations,
-      continentDetails,
-      uniqueCountries,
-      testimonials,
-      blogPosts,
-      children,  
-    }}
-  >
-    {children}
-  </DestinationsContext.Provider>
-  
+      value={{
+        destinations,
+        continentDetails,
+        uniqueCountries,
+        testimonials,
+        blogPosts,
+        tagsDictionary,
+        children 
+      }}
+    >
+      {children}
+    </DestinationsContext.Provider>
   );
 };
 

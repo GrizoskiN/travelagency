@@ -2,16 +2,17 @@ import "@/app/globals.css";
 import { ReactNode } from "react";
 import Menu from "./components/MainMenu";
 import { abel } from "./fonts";
-import { fetchDestinations, fetchContinentDetails, fetchTestimonials, fetchBlogPosts } from "@/lib/fetchData";
+import { fetchDestinations, fetchTags, fetchContinentDetails, fetchTestimonials, fetchBlogPosts } from "@/lib/fetchData";
 import { DestinationsProvider } from "./contexts/DestinationsContext";
 import Footer from "./components/Footer";
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // Fetch data
   const destinations = await fetchDestinations();
+  const tagsDictionary = await fetchTags(); // Fetch tags dictionary separately
   const continentDetails = await fetchContinentDetails();
-  const testimonials = await fetchTestimonials(); // Ensure this is correctly called.
-  const blogPosts = await fetchBlogPosts(); // Ensure this is correctly called.
+  const testimonials = await fetchTestimonials();
+  const blogPosts = await fetchBlogPosts();
 
   // Extract unique countries
   const uniqueCountries = Array.from(
@@ -28,14 +29,15 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body className="bg-backgroundColor">
         <DestinationsProvider
           destinations={destinations}
+          tagsDictionary={tagsDictionary} // Pass tagsDictionary here
           continentDetails={continentDetails}
           uniqueCountries={uniqueCountries}
           testimonials={testimonials}
-          blogPosts={blogPosts} // Ensure testimonials are passed down.
+          blogPosts={blogPosts}
         >
           <Menu />
           {children}
-          <Footer/>
+          <Footer />
         </DestinationsProvider>
       </body>
     </html>
