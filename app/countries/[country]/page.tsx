@@ -36,8 +36,6 @@ export default function CountryPage({
 
 // Function to check if a destination's tags match selected tags in tagsDictionary
 const matchesSelectedTags = (destination: Destination) => {
-  console.log("Selected Tags in CountryPage:", selectedTags); // Log selected tags to verify they're passed correctly
-  console.log("Tags Dictionary in CountryPage:", tagsDictionary); // Log tagsDictionary for reference
 
   // Check if the destination has any tag that matches the selected tags using tagsDictionary
   return (
