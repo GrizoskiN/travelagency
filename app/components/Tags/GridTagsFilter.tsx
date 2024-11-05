@@ -1,21 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, useState } from "react";
 import { useDestinations } from "@/app/contexts/DestinationsContext";
 
-interface TagsFilterProps {
+interface GridTagsFilterProps {
   onTagSelect: (selectedTags: string[]) => void;
 }
 
-const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
+const GridTagsFilter: FC<GridTagsFilterProps> = ({ onTagSelect }) => {
   const { tagsDictionary } = useDestinations();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   // Convert tagsDictionary to an array of tag objects
-  const uniqueTags = Object.entries(tagsDictionary).map(([id, tagData]) => ({
-    
+  const uniqueTags = Object.entries(tagsDictionary).map(([, tagData]) => ({
     ...tagData,
   }));
-
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  
 
   const handleTagClick = (tagId: string) => {
     const updatedTags = selectedTags.includes(tagId)
@@ -23,8 +21,6 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
       : [...selectedTags, tagId];
     setSelectedTags(updatedTags);
     onTagSelect(updatedTags);
-    
-    console.log("Selected Tags after click:", updatedTags); // Debug: Log selected tags after click
   };
 
   const handleAllExperiencesClick = () => {
@@ -33,11 +29,8 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
   };
 
   return (
-    <div className="lg:px-11 my-6 items-center justify-center lg:w-1/2">
-      <div className="flex justify-between mb-5">
-        <h4 className="text-3xl">Select your experience type</h4>
-        <h4>*You can select multiple tags</h4>
-      </div>
+    <div className="tag-filter lg:px-11 my-6 items-center justify-center lg:w-1/2">
+      <h4 className="text-3xl">Select your experience type</h4>
       <div className="flex flex-wrap gap-2">
         <button
           className={`px-11 py-2 h-fit rounded-full capitalize ${
@@ -50,21 +43,21 @@ const TagsFilter: FC<TagsFilterProps> = ({ onTagSelect }) => {
           All Experiences
         </button>
         {uniqueTags.map((tag) => (
-          <button
-            key={tag.id}
-            className={`px-11 py-2 h-fit rounded-full capitalize ${
-              selectedTags.includes(tag.id)
-                ? "bg-primary-foreground text-white"
-                : "bg-none border-[1px] border-gray-400 text-gray-700"
-            }`}
-            onClick={() => handleTagClick(tag.id)}
-          >
-            {tag.name}
-          </button>
+         <button
+         key={tag.id}
+         className={`px-11 py-2 h-fit rounded-full capitalize ${
+           selectedTags.includes(tag.id)
+             ? "bg-primary-foreground text-white"
+             : "bg-none border-[1px] border-gray-400 text-gray-700"
+         }`}
+         onClick={() => handleTagClick(tag.id)}
+       >
+         {tag.name}
+       </button>
         ))}
       </div>
     </div>
   );
 };
 
-export default TagsFilter;
+export default GridTagsFilter;

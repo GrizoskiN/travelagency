@@ -9,11 +9,13 @@ interface DestinationGalleryProps {
     tags: string[];
   };
   destinationCount: number;
+  tagsDictionary: Record<string, { name: string; image: string }>;
 }
 
 const DestinationGallery: FC<DestinationGalleryProps> = ({
   destination,
   destinationCount,
+  tagsDictionary,
 }) => {
   return (
     <Link href={`/countries/${destination.label}`} className="block">
@@ -21,19 +23,22 @@ const DestinationGallery: FC<DestinationGalleryProps> = ({
         <Image
           src={destination.image}
           alt={destination.label}
-          className="object-cover w-full h-full rounded-lg"
+          className="object-cover w-full h-full rounded-2xl"
           width={300}
           height={300}
         />
         <div className="absolute top-8 left-8 flex gap-2">
-          {destination.tags.map((tag, index) => (
-            <p
-              key={index}
-              className="bg-white text-primary text-lg px-6 capitalize py-1 rounded-full"
-            >
-              {tag}
-            </p>
-          ))}
+          {destination.tags.map((tagId, index) => {
+            const tag = tagsDictionary[tagId];
+            return tag ? (
+              <p
+                key={index}
+                className="bg-white text-primary text-lg px-6 capitalize py-1 rounded-full"
+              >
+                {tag.name}
+              </p>
+            ) : null;
+          })}
         </div>
         <div className="absolute flex justify-between bottom-4 left-4 right-4 bg-black/30 backdrop-blur-sm bg-opacity-50 text-white p-2 rounded-lg">
           <h3 className="text-sm font-light flex flex-col">

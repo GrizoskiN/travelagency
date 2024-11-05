@@ -7,8 +7,9 @@ import { format } from "date-fns";
 import { Destination } from "@/lib/fetchData";
 import Link from "next/link";
 import SearchBar from "@/app/components/Search/Search";
-import TagsFilter from "@/app/components/Tags/TagsFilter";
+
 import { useState } from "react";
+import CountryTagsFilter from "@/app/components/Tags/CountryTagsFilter";
 
 export default function CountryPage({
   params,
@@ -105,7 +106,7 @@ const matchesSelectedTags = (destination: Destination) => {
       <SearchBar />
       
       {/* Tags Filter Component */}
-      <TagsFilter onTagSelect={handleTagSelect} />
+      <CountryTagsFilter onTagSelect={handleTagSelect} />
 
       {/* Display matched destinations */}
       {matchedDestinations.length > 0 ? (

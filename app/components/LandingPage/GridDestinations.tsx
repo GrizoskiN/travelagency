@@ -1,26 +1,20 @@
 'use client';
 import { FC, useState, useEffect } from "react";
-import TagsFilter from "../Tags/TagsFilter";
 import DestinationGallery from "../Gallery/DestinationGallery";
 import FeaturedCountryCard from "../Gallery/FeaturedCountryCard";
 import HeadingText from "../TextModules/HeadingText";
 import { useDestinations } from "@/app/contexts/DestinationsContext";
 import LastCard from "../Gallery/LastCard";
+import GridTagsFilter from "../Tags/GridTagsFilter";
 
 const GridDestinations: FC = () => {
   const { destinations, continentDetails, tagsDictionary } = useDestinations();
 
-  // Transform each destination's tags to names immediately upon loading
-  const destinationsWithTagNames = destinations.map(destination => ({
-    ...destination,
-    tags: destination.tags.map(tagId => tagsDictionary[tagId]?.name || tagId) // Replace IDs with names
-  }));
-
-  const [filteredDestinations, setFilteredDestinations] = useState(destinationsWithTagNames);
+  const [filteredDestinations, setFilteredDestinations] = useState(destinations);
   const [selectedContinent, setSelectedContinent] = useState("Earth");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const countryDestinationCount = destinationsWithTagNames.reduce((acc, destination) => {
+  const countryDestinationCount = destinations.reduce((acc, destination) => {
     const country = destination.label.trim().toLowerCase();
     acc[country] = (acc[country] || 0) + 1;
     return acc;
@@ -36,7 +30,9 @@ const GridDestinations: FC = () => {
   };
 
   useEffect(() => {
-    let filtered = destinationsWithTagNames;
+    if (!tagsDictionary) return; // Ensure tagsDictionary is loaded before applying filters
+
+    let filtered = destinations;
 
     if (selectedContinent !== "Earth") {
       filtered = filtered.filter(
@@ -44,12 +40,14 @@ const GridDestinations: FC = () => {
       );
     }
 
+    // Filter by selected tags only if tags are selected
     if (selectedTags.length > 0) {
       filtered = filtered.filter((destination) =>
-        selectedTags.every((tagName) => destination.tags.includes(tagName))
+        selectedTags.every((tagId) => destination.tags.includes(tagId))
       );
     }
 
+    // Ensure we only display unique countries in the filtered destinations
     const uniqueCountries = new Set<string>();
     const uniqueFilteredDestinations = filtered.filter((destination) => {
       const country = destination.label.trim().toLowerCase();
@@ -59,13 +57,18 @@ const GridDestinations: FC = () => {
     });
 
     setFilteredDestinations(uniqueFilteredDestinations);
-  }, [selectedContinent, selectedTags, destinationsWithTagNames]);
+  }, [selectedContinent, selectedTags, destinations, tagsDictionary]);
 
   const matchedContinentDetail = continentDetails.find(
     (detail) => detail.uid.toLowerCase() === selectedContinent.toLowerCase()
   );
 
   const limitedDestinations = filteredDestinations.slice(0, 6);
+
+  if (!tagsDictionary) {
+    // Display a loader or return null if tagsDictionary is not yet available
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="customWidth my-8">
@@ -74,13 +77,13 @@ const GridDestinations: FC = () => {
           <HeadingText heading3="Best Locations" heading2="Travel by continent" customWidth={false} />
         </div>
 
-        <TagsFilter key={selectedContinent} onTagSelect={handleTagSelect} />
+        <GridTagsFilter key={selectedContinent} onTagSelect={handleTagSelect} />
       </div>
 
-      <div className="destination-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+      <div className="destination-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-11 my-8">
         <FeaturedCountryCard
-          featuredCountry={filteredDestinations[0] || destinationsWithTagNames[0]}
-          continents={Array.from(new Set(destinationsWithTagNames.map((dest) => dest.continent)))}
+          featuredCountry={filteredDestinations[0] || destinations[0]}
+          continents={Array.from(new Set(destinations.map((dest) => dest.continent)))}
           continentDetails={continentDetails}
           onContinentChange={handleContinentChange}
         />
@@ -91,6 +94,7 @@ const GridDestinations: FC = () => {
               <DestinationGallery
                 destination={destination}
                 destinationCount={countryDestinationCount[destination.label.trim().toLowerCase()] || 0}
+                tagsDictionary={tagsDictionary} // Pass tagsDictionary here
               />
             </div>
           ))

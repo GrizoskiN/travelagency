@@ -20,7 +20,6 @@ const SearchBar: React.FC = () => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
   const [groupSize, setGroupSize] = useState<number | undefined>(undefined);
 
-  // Extract unique countries for the dropdown
   const uniqueCountries = Array.from(
     destinations.reduce((acc, destination) => {
       const normalizedCountry = destination.label.trim().toLowerCase();
@@ -34,29 +33,25 @@ const SearchBar: React.FC = () => {
     }, new Map<string, { value: string; label: string }>())
   ).map(([, country]) => country);
 
-  // Handle search button click
   const handleSearch = () => {
     let targetUrl = `/countries/${selectedCountry}`;
   
     const query = new URLSearchParams();
   
-    // Add date range if provided
     if (dateRange?.startDate && dateRange.endDate) {
       query.set("startDate", dateRange.startDate.toISOString());
       query.set("endDate", dateRange.endDate.toISOString());
     }
   
-    // Add group size if it's greater than 0
     if (groupSize && groupSize > 0) {
       query.set("groupSize", groupSize.toString());
     }
   
-    // Construct the full URL
     if (Array.from(query).length > 0) {
       targetUrl += `?${query.toString()}`;
     }
   
-    // Navigate to the constructed URL
+    console.log("Navigating to URL:", targetUrl); // Debugging
     try {
       router.push(targetUrl);
     } catch (error) {
@@ -65,12 +60,13 @@ const SearchBar: React.FC = () => {
   };
   
   const handleCountryChange = (value: string) => {
+    console.log("Country selected:", value); // Debugging
     setSelectedCountry(value);
   };
 
   return (
-    <div className="w-2/4 mx-auto  flex items-center justify-center mt-10 z-40 bg-background rounded-full pr-2 relative">
-      <div className="w-full flex justify-between flex-col md:flex-row md:items-center space-y-3 md:space-y-0 bg-white border-t-white/40 border-t-[1px] text-white rounded-full shadow-lg pl-11 pr-2  py-2 ">
+    <div className="w-2/4 mx-auto flex items-center justify-center mt-10 z-40 bg-background rounded-full pr-2 relative">
+      <div className="w-full flex justify-between flex-col md:flex-row md:items-center space-y-3 md:space-y-0 bg-white border-t-white/40 border-t-[1px] text-white rounded-full shadow-lg pl-11 pr-2 py-2">
         <DestinationSelect
           destinations={uniqueCountries}
           onCountryChange={handleCountryChange}
@@ -93,10 +89,8 @@ const SearchBar: React.FC = () => {
           }
         />
         <GuestSelector onGroupSizeChange={(size) => setGroupSize(size)} />
-
-        {/* Search Button */}
       </div>
-        <SearchButton handleSearch={handleSearch} />
+      <SearchButton handleSearch={handleSearch} />
     </div>
   );
 };
