@@ -8,7 +8,7 @@ import { Destination } from "@/lib/fetchData";
 import Link from "next/link";
 import SearchBar from "@/app/components/Search/Search";
 import TagsFilter from "@/app/components/Tags/TagsFilter";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function CountryPage({
   params,

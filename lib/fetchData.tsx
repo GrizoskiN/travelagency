@@ -89,6 +89,7 @@ export async function fetchDestinations(): Promise<Destination[]> {
 
         const tags = Array.isArray(doc.data.destination_tag)
         ? doc.data.destination_tag
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .map((tag) => (tag?.tags_link as any)?.id) // Use type assertion to bypass TypeScript restriction
             .filter((tagId) => tagId && tagsDictionary[tagId] !== undefined) // Ensure tagId exists and is valid
         : [];
