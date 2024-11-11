@@ -13,6 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { DurationIcon } from "../Icons/SvgIcons";
 
 // DatePickerWithRange component
 type DatePickerWithRangeProps = {
@@ -50,9 +51,9 @@ export function DatePickerWithRange({
   }, []);
 
   return (
-    <div className={cn("grid gap-2 grid-cols-2 ", className)}>
+    <div className={cn("grid gap-2 lg:grid-cols-2 w-full lg:w-auto ", className)}>
       {/* Check-in Button */}
-      <div>
+      <div className="flex lg:flex-col  justify-between lg:items-start items-center bg-white lg:bg-transparent p-1 rounded-full lg:rounded-none">
         <p className="text-gray-500 text-left text-sm pl-4 ">Check In</p>
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
@@ -60,11 +61,11 @@ export function DatePickerWithRange({
               id="check-in"
               variant={"outline"}
               className={cn(
-                "w-full  justify-start text-left font-normal text-xl text-black border-white/20 shadow-none rounded-xl"
+                "lg:w-auto w-2/3 h-auto p-1 pr-4 lg:p-none lg:pr-none bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between lg:justify-start shadow-none border-none text-xl text-black "
                
               )}
               onClick={() => setOpen(true)}>
-              {/* <CalendarIcon className="mr-2 h-4 w-4" /> */}
+              <DurationIcon/>
               {date?.from ? (
                 format(date.from, "LLL dd, y")
               ) : (
@@ -75,7 +76,7 @@ export function DatePickerWithRange({
         </Popover>
       </div>
       {/* Check-out Button */}
-      <div>
+      <div className="flex  lg:flex-col justify-between lg:items-start items-center bg-white lg:bg-transparent p-1 rounded-full lg:rounded-none">
         <p className="text-gray-500 text-left text-sm pl-4 ">Check Out</p>
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
@@ -83,10 +84,10 @@ export function DatePickerWithRange({
               id="check-out"
               variant={"outline"}
               className={cn(
-                "w-full  justify-start text-left font-normal text-xl text-black border-white/20 shadow-none rounded-xl"
+                "lg:w-auto w-2/3 h-auto p-1 pr-4 lg:p-none lg:pr-none bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between lg:justify-start shadow-none border-none text-xl text-black "
               )}
               onClick={() => setOpen(true)}>
-              {/* <CalendarIcon className="mr-2 h-4 w-4" /> */}
+             <DurationIcon/>
               {date?.to ? (
                 format(date.to, "LLL dd, y")
               ) : (
@@ -94,7 +95,7 @@ export function DatePickerWithRange({
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto -ml-40" align="center">
+          <PopoverContent className=" lg:w-auto  lg:-ml-40" align="center">
             <Calendar
               mode="range"
               defaultMonth={date?.from}

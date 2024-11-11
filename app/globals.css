@@ -19,7 +19,9 @@ body {
   background:"#ececec";
  
 }
-
+.svg-icon {
+  stroke-width: black;
+}
 .customWidth {
   max-width: 95%;
   margin-left: auto;

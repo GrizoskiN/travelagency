@@ -11,6 +11,7 @@ import SearchBar from "@/app/components/Search/Search";
 import { useState } from "react";
 import CountryTagsFilter from "@/app/components/Tags/CountryTagsFilter";
 
+
 export default function CountryPage({
   params,
 }: {
@@ -100,9 +101,11 @@ const matchesSelectedTags = (destination: Destination) => {
   };
 
   return (
-    <div className="customWidth mt-24">
-      <SearchBar />
+    <div className="customWidth  mx-auto mt-24">
       
+      <SearchBar />
+   
+      {/* <MobileSearchBar/> */}
       {/* Tags Filter Component */}
       <CountryTagsFilter onTagSelect={handleTagSelect} />
 
@@ -121,7 +124,7 @@ const matchesSelectedTags = (destination: Destination) => {
               "All Destinations"
             )}
           </h2>
-          <div className="destination-grid grid grid-cols-3 gap-4">
+          <div className="destination-grid grid md:grid-cols-2 xl:grid-cols-4 gap-4 ">
             {matchedDestinations.map((dest) => (
               <Link href={`/destination/${dest.uid}`} key={dest.uid} className="block">
                 <div className="block">

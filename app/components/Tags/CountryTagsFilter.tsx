@@ -51,7 +51,7 @@ const CountryTagsFilter: FC<CountryTagsFilterProps> = ({ onTagSelect }) => {
                 : "text-gray-700 after:absolute after:bg-gray-400 after:h-[2px] after:rounded-full after:w-10 after:bottom-2"
             }`}
             onClick={handleAllExperiencesClick}>
-              <AllExperiences />
+              <span className={`w-10 h-10 ${  selectedTags.length === 0 ? "opacity-100" : "opacity-60"}`}  ><AllExperiences /></span>
               <span className={`${
                 selectedTags.length === 0 ? "text-primary" : "text-gray-400"} text-md  `}>All Experiences</span>
           </button>
@@ -68,10 +68,9 @@ const CountryTagsFilter: FC<CountryTagsFilterProps> = ({ onTagSelect }) => {
               <Image
                 src={tag.image}
                 alt={tag.name}
-                width={100}
-                height={100}
-                className="inline-block w-10 h-10 "
-              />
+                width={50}
+                height={50} 
+                className={`w-10 h-10 ${ selectedTags.includes(tag.id) ? "opacity-100" : "opacity-60"}`}              />
               <span className={`${
                 selectedTags.includes(tag.id) ? "text-primary" : "text-gray-400"} text-md  `}>{tag.name}</span>
             </button>

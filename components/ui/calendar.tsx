@@ -38,7 +38,7 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("p-7 m-6", className)}
+      className={cn("lg:p-7 lg:m-6 ", className)}
       classNames={{
         months: "flex  relative",
         month_caption: "flex w-2/3  justify-center h-7 mx-10 relative items-center",
@@ -62,9 +62,9 @@ function Calendar({
           })
         ),
         nav: "flex items-start ",
-        month_grid: "mt-4",
+        month_grid: "mt-4 w-full",
         week: "flex w-full  mt-2 text-lg  ",
-        day: " p-0 h-6 w-6 size-5 md:size-11 text-lg  flex items-center justify-center has-[button]:hover:!bg-accent has-[button]:hover:aria-selected:!bg-accent has-[button]:hover:text-accent-foreground ",
+        day: "w-full p-0 h-6 w-6 size-5 md:size-11 text-lg  flex items-center justify-center has-[button]:hover:!bg-accent has-[button]:hover:aria-selected:!bg-accent has-[button]:hover:text-accent-foreground ",
         day_button: cn(
           buttonVariants({ variant: "ghost" }),
           "size-8 p-0 font-normal transition-none  hover:text-inherit aria-selected:opacity-100"
