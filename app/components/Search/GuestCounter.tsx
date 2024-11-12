@@ -2,11 +2,6 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Minus, Plus } from "lucide-react";
 import { GroupIcon } from "../Icons/SvgIcons";
 
@@ -26,26 +21,26 @@ function GuestCounter({
   onDecrement,
 }: GuestCounterProps) {
   return (
-    <div className="flex justify-between items-center py-2">
+    <div className="flex justify-between items-center py-4 border-b border-gray-200 last:border-b-0 w-full  p-11">
       <div>
-        <p className="font-semibold text-gray-800">{label}</p>
+        <p className="text-lg font-medium text-black">{label}</p>
         <p className="text-sm text-gray-500">{description}</p>
       </div>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-3">
         <Button
           variant="outline"
           size="icon"
           onClick={onDecrement}
           disabled={count <= 0}
-          className="h-8 w-8 rounded-full border-gray-300 text-gray-700 hover:bg-gray-200">
+          className="h-8 w-8 rounded-full border-gray-400 text-black hover:bg-gray-100 disabled:opacity-50">
           <Minus className="h-4 w-4" />
         </Button>
-        <span className="text-lg font-medium">{count}</span>
+        <span className="text-lg text-black font-semibold">{count}</span>
         <Button
           variant="outline"
           size="icon"
           onClick={onIncrement}
-          className="h-8 w-8 rounded-full border-gray-300 text-gray-700 hover:bg-gray-200">
+          className="h-8 w-8 rounded-full border-gray-400 text-black hover:bg-gray-100">
           <Plus className="h-4 w-4" />
         </Button>
       </div>
@@ -58,7 +53,10 @@ type GuestSelectorProps = {
   resetCounters: (resetFunction: () => void) => void;
 };
 
-export function GuestSelector({ onGroupSizeChange, resetCounters }: GuestSelectorProps){
+export function GuestSelector({
+  onGroupSizeChange,
+  resetCounters,
+}: GuestSelectorProps) {
   const [open, setOpen] = React.useState(false);
 
   // State for each guest type
@@ -68,37 +66,62 @@ export function GuestSelector({ onGroupSizeChange, resetCounters }: GuestSelecto
 
   // Calculate total guests excluding infants
   const totalGuests = adults + children;
+
+  // Function to reset all counters
   const reset = () => {
-    setAdults(2); // Reset to default value
+    setAdults(2);
     setChildren(0);
     setInfants(0);
   };
+
   React.useEffect(() => {
     resetCounters(() => reset);
   }, [resetCounters]);
+
   // Notify parent component when group size changes
   React.useEffect(() => {
     onGroupSizeChange(totalGuests);
   }, [totalGuests, onGroupSizeChange]);
-// Function to reset all counters
+
+  // Close popover when clicking outside
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="w-full lg:w-auto flex lg:flex-col justify-between items-center lg:items-start bg-white lg:bg-transparent p-1 rounded-full lg:rounded-none">
-      <p className="text-gray-500 text-left text-sm pl-4">Group Size</p>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className="lg:w-auto w-2/3 h-auto p-1 pr-4 lg:p-none lg:pr-none bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between lg:justify-start shadow-none border-none text-xl text-black">
-            <GroupIcon />
-            <div>
-              <h1 className="w-full justify-start text-left font-normal text-xl text-black border-white/20 shadow-none rounded-xl">
-                {totalGuests} guests {infants >= 1 && <span>{infants} infants</span>}
-              </h1>
-            </div>
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent align="center" className="w-72 mt-4 p-4 shadow-lg rounded-lg">
+    <div
+      ref={containerRef}
+      className="relative min-w-40 w-full lg:w-auto flex lg:flex-col justify-between items-center lg:items-start bg-white lg:px-6 hover:bg-[#ececec] lg:bg-transparent rounded-full p-1 lg:h-16 ">
+      <p className="text-gray-500 text-left text-sm pl-4 lg:pl-0 mb-1">
+        Group Size
+      </p>
+      <div onClick={() => setOpen(!open)} className="w-2/3 cursor-pointer ">
+        <button className="w-full lg:w-auto h-auto  bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between lg:justify-start items-center shadow-none border-none text-lg text-black text-nowrap p-1 pr-4">
+          <GroupIcon />
+          <div className="ml-2 lg:ml-0">
+            <p className="text-lg text-black">
+              {totalGuests > 0 ? `${totalGuests} guests` : "Add guests"}
+              {infants >= 1 && <span>, {infants} infants</span>}
+            </p>
+          </div>
+        </button>
+      </div>
+
+      {open && (
+        <div className="absolute bottom-[3.989rem] lg:bottom-auto lg:top-[3.989rem] right-0 w-full lg:w-[25rem] p-4 shadow-lg bg-white rounded-3xl z-40">
           <GuestCounter
             label="Adults"
             description="Ages 13 or above"
@@ -120,8 +143,8 @@ export function GuestSelector({ onGroupSizeChange, resetCounters }: GuestSelecto
             onIncrement={() => setInfants(infants + 1)}
             onDecrement={() => setInfants(Math.max(0, infants - 1))}
           />
-        </PopoverContent>
-      </Popover>
+        </div>
+      )}
     </div>
   );
 }

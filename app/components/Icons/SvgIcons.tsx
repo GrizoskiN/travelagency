@@ -1,4 +1,8 @@
-export function SearchIcon() {
+type SearchIconProps = {
+  isWhite?: boolean; // Boolean prop to determine if the color should be white
+};
+export function SearchIcon({ isWhite = false }: SearchIconProps) {
+  const color = isWhite ? "white" : "black";
   return (
     <>
       <svg
@@ -12,12 +16,12 @@ export function SearchIcon() {
           cx="5.83333"
           cy="5.83333"
           r="5.25"
-          stroke="white"
+          stroke={color}
           strokeWidth="1.16667"
         />
         <path
           d="M13.5876 14.4125C13.8154 14.6403 14.1847 14.6403 14.4125 14.4125C14.6403 14.1847 14.6403 13.8153 14.4125 13.5875L13.5876 14.4125ZM8.9209 9.74581L13.5876 14.4125L14.4125 13.5875L9.74585 8.92085L8.9209 9.74581Z"
-          fill="white"
+          fill={color}
         />
       </svg>
     </>
@@ -114,6 +118,7 @@ export function DestinationIcon() {
 export function DurationIcon() {
   return (
     <svg
+    className="lg:hidden"
       width="54"
       height="38"
       viewBox="0 0 54 38"
@@ -241,6 +246,7 @@ export function DurationIcon() {
 export function GroupIcon() {
   return (
     <svg
+      className="lg:hidden"
       width="54"
       height="38"
       viewBox="0 0 54 38"

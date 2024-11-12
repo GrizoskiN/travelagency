@@ -1,27 +1,9 @@
 "use client";
 
 import * as React from "react";
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { DestinationIcon } from "../Icons/SvgIcons";
+import { motion,  AnimatePresence } from "framer-motion";
 
 type Destination = {
   value: string;
@@ -30,100 +12,171 @@ type Destination = {
 
 type DestinationSelectProps = {
   destinations: Destination[];
-  initialCountry: string; // Updated prop name
+  initialCountry: string;
   onCountryChange: (value: string) => void;
 };
 
 const DestinationSelect: React.FC<DestinationSelectProps> = ({
   destinations,
-  initialCountry, // Use prop name
+  initialCountry,
   onCountryChange,
 }) => {
   const [open, setOpen] = React.useState(false);
-
-  // Ref for CommandList to control scrolling
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const listRef = React.useRef<HTMLDivElement>(null);
+  const [dragConstraints, setDragConstraints] = React.useState({ left: 0, right: 0 });
 
-  // Scroll handlers
-  const scrollUp = () => {
-    if (listRef.current) {
-      listRef.current.scrollBy({ top: -40, behavior: "smooth" });
+  // Filter destinations based on search term
+  const filteredDestinations = destinations.filter((destination) =>
+    destination.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Calculate drag constraints whenever the filtered destinations change
+  React.useEffect(() => {
+    const calculateConstraints = () => {
+      if (containerRef.current && listRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const listWidth = listRef.current.scrollWidth;
+        const rightConstraint = 0;
+        const leftConstraint = containerWidth - listWidth;
+        
+        setDragConstraints({
+          left: Math.min(leftConstraint, 0), // Ensure we don't set a positive left constraint
+          right: rightConstraint
+        });
+      }
+    };
+
+    // Calculate initially and add resize listener
+    calculateConstraints();
+    window.addEventListener('resize', calculateConstraints);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', calculateConstraints);
+  }, [filteredDestinations]);
+
+  // Close popover when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node) &&
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleCountrySelect = (value: string) => {
+    if (!isDragging) {
+      onCountryChange(value);
+      setSearchTerm("");
+      setIsEditing(false);
+      setOpen(false);
     }
   };
 
-  const scrollDown = () => {
-    if (listRef.current) {
-      listRef.current.scrollBy({ top: 40, behavior: "smooth" });
+  const getDisplayValue = () => {
+    if (isEditing) return searchTerm;
+    if (initialCountry && initialCountry !== "all" && !searchTerm) {
+      const selectedDestination = destinations.find(
+        (dest) => dest.value === initialCountry
+      );
+      return selectedDestination ? selectedDestination.label : "";
     }
+    return searchTerm;
   };
 
   return (
-    <div className="w-full lg:w-40 flex lg:flex-col justify-between items-center lg:items-start bg-white lg:bg-transparent p-1 rounded-full lg:rounded-none">
-      <p className="text-gray-500 text-left pl-4 lg:pl-1 text-sm">
-        Destinations
-      </p>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            role="combobox"
-            aria-expanded={open}
-            className="lg:w-auto w-2/3 h-auto p-1 pr-4 lg:p-none lg:pr-none bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between lg:justify-start shadow-none border-none text-xl text-black">
-            <DestinationIcon />
-            {initialCountry && initialCountry !== "all"
-              ? destinations.find((dest) => dest.value === initialCountry)
-                  ?.label
-              : "Select a Country"}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-48 -mt-9 p-0 pl-1 border-none ring-0 shadow-none">
-          <Command>
-            <CommandInput
-              placeholder="Search country..."
-              className="h-9 text-lg hidden"
-            />
-            {/* Scroll Up Button */}
-            <div
-              className="flex items-center justify-center py-1 cursor-pointer"
-              onClick={scrollUp}>
-              <ChevronUpIcon className="h-4 w-4 text-gray-600" />
-            </div>
-            <CommandList
-              ref={listRef}
-              className="overflow-y-auto scrollbar-hide">
-              <CommandEmpty>No country found.</CommandEmpty>
-              <CommandGroup>
-                {destinations.map((destination) => (
-                  <CommandItem
-                    className="my-2 border-b-[1px] border-gray-200"
-                    key={destination.value}
-                    value={destination.value}
-                    onSelect={() => {
-                      onCountryChange(destination.value);
-                      setOpen(false);
-                    }}>
-                    {destination.label}
-                    <CheckIcon
+    <div className="relative w-auto bg-white  rounded-xl lg:rounded-full px-4 lg:pl-7 lg:h-16 p-2">
+      <p className="text-black lg:text-gray-500 lg:text-sm mb-1 text-left">Where to?</p>
+
+      <div
+        className="flex items-center w-full cursor-pointer border rounded-full lg:border-none lg:rounded-none"
+        onClick={() => !isDragging && setOpen(true)}
+      >
+        <DestinationIcon />
+        <input
+          ref={inputRef}
+          type="text"
+          value={getDisplayValue()}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setIsEditing(true);
+            setOpen(true);
+          }}
+          placeholder="Select a Country"
+          className="w-full  bg-transparent text-black placeholder-black text-lg focus:outline-none"
+          onFocus={() => {
+            if (!isDragging) {
+              setOpen(true);
+              setIsEditing(true);
+            }
+          }}
+        />
+      </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="lg:absolute top-[4rem] left-4  lg:w-[50rem]  mt-2 lg:bg-white  lg:rounded-full lg:shadow-md z-10 overflow-hidden"
+            ref={containerRef}
+          >
+            <div className="overflow-hidden">
+              <motion.div
+                ref={listRef}
+                className="grid grid-rows-1 grid-flow-col gap-3 py-3 px-6 "
+                drag="x"
+                dragConstraints={dragConstraints}
+                onDragStart={() => setIsDragging(true)}
+                onDragEnd={() => {
+                  setTimeout(() => setIsDragging(false), 100);
+                }}
+                dragElastic={0.2}
+                style={{
+                  touchAction: "none"
+                }}
+              >
+                {filteredDestinations.length > 0 ? (
+                  filteredDestinations.map((destination) => (
+                    <motion.button
+                      key={destination.value}
+                      onClick={() => handleCountrySelect(destination.value)}
                       className={cn(
-                        "ml-auto h-4 w-4",
+                        "py-2 px-8 rounded-full text-black text-sm  bg-[#ececec] flex items-center justify-center",
                         initialCountry === destination.value
-                          ? "opacity-100"
-                          : "opacity-0",
+                          ? ""
+                          : "hover:bg-accentRed hover:text-white"
                       )}
-                    />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-            {/* Scroll Down Button */}
-            <div
-              className="flex items-center justify-center py-1 cursor-pointer"
-              onClick={scrollDown}>
-              <ChevronDownIcon className="h-4 w-4 text-gray-600" />
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {destination.label}
+                      {initialCountry === destination.value}
+                    </motion.button>
+                  ))
+                ) : (
+                  <p className="text-center text-gray-500 w-full">
+                    No destinations found
+                  </p>
+                )}
+              </motion.div>
             </div>
-          </Command>
-        </PopoverContent>
-      </Popover>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

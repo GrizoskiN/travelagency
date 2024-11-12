@@ -72,10 +72,10 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-[1000px] mx-auto mt-10 z-40 relative">
+    <div className="w-full max-w-[800px] mx-auto mt-10 z-40 relative ">
       {/* Desktop Version */}
-      <div className="hidden lg:flex items-center justify-center bg-background rounded-full pr-2">
-        <div className="w-full flex justify-between items-center bg-white  text-white rounded-full shadow-lg pl-11 pr-2 py-2">
+      <div className="hidden lg:flex items-center justify-center bg-background rounded-full pr-2 ">
+        <div className="w-full flex justify-between items-center bg-white  text-white rounded-full shadow-lg p-2">
           <DestinationSelect
             destinations={uniqueCountries}
             initialCountry={selectedCountry}
@@ -111,7 +111,7 @@ const SearchBar: React.FC = () => {
         {/* Top part visible by default */}
         <div
           onClick={() => setMenuOpen(true)}
-          className="cursor-pointer bg-gray-200 rounded-full p-3">
+          className="cursor-pointer bg-white rounded-full p-3">
           <div className="flex justify-between px-3">
             <span>Any Location</span>
             |
@@ -125,7 +125,7 @@ const SearchBar: React.FC = () => {
         <AnimatePresence>
           {menuOpen && (
             <motion.div
-              className="fixed inset-0 bg-white/80 backdrop-blur-lg z-50 flex flex-col pt-32 px-4"
+              className="fixed inset-0 bg-[#ececec] z-50 flex flex-col pt-48 px-4"
               initial={{ y: "-100%" }}
               animate={{ y: 0 }}
               exit={{ y: "-100%" }}
