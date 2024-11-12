@@ -74,7 +74,8 @@ const config: Config = {
   		}
   	},
   	screens: {
-		xxs: '320px',
+		xxxs: '320px',
+		xxs: '375px',
 		xs: '425px',
   		sm: '640px',
   		md: '768px',

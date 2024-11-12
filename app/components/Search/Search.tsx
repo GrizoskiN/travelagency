@@ -107,7 +107,7 @@ const SearchBar: React.FC = () => {
       </div>
 
       {/* Mobile Version */}
-      <div className="lg:hidden w-11/12 mx-auto mt-10 relative">
+      <div className="lg:hidden w-10/12 md:w-2/3 mx-auto  relative">
         {/* Top part visible by default */}
         <div
           onClick={() => setMenuOpen(true)}

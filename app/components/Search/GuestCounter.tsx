@@ -21,7 +21,7 @@ function GuestCounter({
   onDecrement,
 }: GuestCounterProps) {
   return (
-    <div className="flex justify-between items-center py-4 border-b border-gray-200 last:border-b-0 w-full  p-11">
+    <div className="flex justify-between items-center text-left py-4 border-b bg-white border-gray-200 last:border-b-0 w-full  p-11">
       <div>
         <p className="text-lg font-medium text-black">{label}</p>
         <p className="text-sm text-gray-500">{description}</p>
@@ -104,15 +104,17 @@ export function GuestSelector({
   return (
     <div
       ref={containerRef}
-      className="relative min-w-40 w-full lg:w-auto flex lg:flex-col justify-between items-center lg:items-start bg-white lg:px-6 hover:bg-[#ececec] lg:bg-transparent rounded-full p-1 lg:h-16 ">
-      <p className="text-gray-500 text-left text-sm pl-4 lg:pl-0 mb-1">
+      className={`relative min-w-40 lg:max-w-48 w-full lg:w-auto flex lg:flex-col justify-between items-center lg:items-start bg-white lg:pl-6  lg:hover:bg-[#ececec] lg:bg-transparent rounded-full p-1 lg:h-16  ${infants > 0 ? "lg:pr-14" : "lg:pr-0"}`}>
+      <p className="text-gray-500 text-left text-sm pl-4 lg:pl-0 mb-1 ">
         Group Size
       </p>
       <div onClick={() => setOpen(!open)} className="w-2/3 cursor-pointer ">
-        <button className="w-full lg:w-auto h-auto  bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between lg:justify-start items-center shadow-none border-none text-lg text-black text-nowrap p-1 pr-4">
+        <button
+          className="w-full lg:w-auto h-auto bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between lg:justify-start items-center shadow-none border-none text-lg text-black p-1 pr-4 lg:pr-0
+             hover:bg-[#ececec] focus:bg-[#ececec] active:bg-[#ececec] text-nowrap">
           <GroupIcon />
-          <div className="ml-2 lg:ml-0">
-            <p className="text-lg text-black">
+          <div className="ml-2 lg:ml-0 ">
+            <p className="text-lg text-black ">
               {totalGuests > 0 ? `${totalGuests} guests` : "Add guests"}
               {infants >= 1 && <span>, {infants} infants</span>}
             </p>
