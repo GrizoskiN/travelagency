@@ -18,18 +18,25 @@ const BlogSection: FC = () => {
 
   useEffect(() => {
     const updateWidth = () => {
-      if (carouselRef.current) {
+      if (typeof window !== 'undefined' && carouselRef.current) {
         setCarouselWidth(
           carouselRef.current.scrollWidth - carouselRef.current.offsetWidth
         );
       }
     };
-
-    updateWidth(); // Run once after initial render
-    window.addEventListener("resize", updateWidth); // Recalculate width on resize
-
-    return () => window.removeEventListener("resize", updateWidth); // Cleanup listener
+  
+    updateWidth();
+    if (typeof window !== 'undefined') {
+      window.addEventListener("resize", updateWidth);
+    }
+  
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener("resize", updateWidth);
+      }
+    };
   }, []);
+  
 
   return (
     <motion.div className="w-[95%] rounded-xl ml-auto bg-backgroundColor py-16 overflow-hidden">
