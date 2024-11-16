@@ -232,72 +232,6 @@ type DestinationsDocumentDataSlicesSlice = DestinationPageSlice;
  */
 interface DestinationsDocumentData {
   /**
-   * Start Date field in *destination*
-   *
-   * - **Field Type**: Date
-   * - **Placeholder**: Offer with fixed dates
-   * - **API ID Path**: destinations.start_date
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#date
-   */
-  start_date: prismic.DateField;
-
-  /**
-   * meta_title field in *destination*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Name of the place
-   * - **API ID Path**: destinations.meta_title
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_title: prismic.KeyTextField;
-
-  /**
-   * Country field in *destination*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: France
-   * - **API ID Path**: destinations.country
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  country: prismic.KeyTextField;
-
-  /**
-   * Group Size field in *destination*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: destinations.group_size
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  group_size: prismic.SelectField<"1-2" | "2-4" | "5+">;
-
-  /**
-   * country_image field in *destination*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: destinations.country_image
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  country_image: prismic.ImageField<never>;
-
-  /**
-   * meta_description field in *destination*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Description
-   * - **API ID Path**: destinations.meta_description
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  meta_description: prismic.KeyTextField;
-
-  /**
    * Continent field in *destination*
    *
    * - **Field Type**: Select
@@ -314,6 +248,61 @@ interface DestinationsDocumentData {
     | "Africa"
     | "Australia"
   >;
+
+  /**
+   * Country field in *destination*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: France
+   * - **API ID Path**: destinations.country
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  country: prismic.KeyTextField;
+
+  /**
+   * country_image field in *destination*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destinations.country_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  country_image: prismic.ImageField<never>;
+
+  /**
+   * meta_title field in *destination*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Name of the place
+   * - **API ID Path**: destinations.meta_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * meta_description field in *destination*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Description
+   * - **API ID Path**: destinations.meta_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Start Date field in *destination*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: Offer with fixed dates
+   * - **API ID Path**: destinations.start_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  start_date: prismic.DateField;
 
   /**
    * End Date field in *destination*
@@ -338,6 +327,28 @@ interface DestinationsDocumentData {
   destination_tag: prismic.GroupField<
     Simplify<DestinationsDocumentDataDestinationTagItem>
   >;
+
+  /**
+   * Excerpt field in *destination*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Short destination about the destination
+   * - **API ID Path**: destinations.excerpt
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  excerpt: prismic.KeyTextField;
+
+  /**
+   * Group Size field in *destination*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destinations.group_size
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  group_size: prismic.SelectField<"1-2" | "2-4" | "5+">;
 
   /**
    * Slice Zone field in *destination*
@@ -1018,6 +1029,51 @@ export interface DestinationPageSliceDefaultPrimaryGalleryItem {
 }
 
 /**
+ * Item in *DestinationPage → Default → Primary → Things To Know*
+ */
+export interface DestinationPageSliceDefaultPrimaryThingsToKnowItem {
+  /**
+   * Field number field in *DestinationPage → Default → Primary → Things To Know*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: 1
+   * - **API ID Path**: destination_page.default.primary.things_to_know[].field_number
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  field_number: prismic.NumberField;
+
+  /**
+   * Icon field in *DestinationPage → Default → Primary → Things To Know*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destination_page.default.primary.things_to_know[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *DestinationPage → Default → Primary → Things To Know*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Transport
+   * - **API ID Path**: destination_page.default.primary.things_to_know[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Paragraph field in *DestinationPage → Default → Primary → Things To Know*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Optional excursions with an additional charge
+   * - **API ID Path**: destination_page.default.primary.things_to_know[].paragraph
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  paragraph: prismic.KeyTextField;
+}
+
+/**
  * Primary content in *DestinationPage → Default → Primary*
  */
 export interface DestinationPageSliceDefaultPrimary {
@@ -1044,14 +1100,26 @@ export interface DestinationPageSliceDefaultPrimary {
   >;
 
   /**
-   * Location field in *DestinationPage → Default → Primary*
+   * Things To Know field in *DestinationPage → Default → Primary*
    *
-   * - **Field Type**: GeoPoint
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: destination_page.default.primary.location
-   * - **Documentation**: https://prismic.io/docs/field#geopoint
+   * - **API ID Path**: destination_page.default.primary.things_to_know[]
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  location: prismic.GeoPointField;
+  things_to_know: prismic.GroupField<
+    Simplify<DestinationPageSliceDefaultPrimaryThingsToKnowItem>
+  >;
+
+  /**
+   * Tour description  field in *DestinationPage → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Description
+   * - **API ID Path**: destination_page.default.primary.tour_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  tour_description: prismic.RichTextField;
 }
 
 /**
@@ -1908,6 +1976,7 @@ declare module "@prismicio/client" {
       ContinentsTextSliceDefault,
       DestinationPageSlice,
       DestinationPageSliceDefaultPrimaryGalleryItem,
+      DestinationPageSliceDefaultPrimaryThingsToKnowItem,
       DestinationPageSliceDefaultPrimary,
       DestinationPageSliceVariation,
       DestinationPageSliceDefault,

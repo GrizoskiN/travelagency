@@ -35,8 +35,8 @@ const CountryTagsFilter: FC<CountryTagsFilterProps> = ({ onTagSelect }) => {
   };
 
   return (
-    <div className="flex flex-col items-center my-6">
-      <h4 className="text-xl mb-3">Select your experience type</h4>
+    <div className="flex flex-col items-center my-6 w-2/3 mx-auto mt-24">
+      <h4 className="text-xl mb-11">Select your experience type</h4>
       <Swiper
         slidesPerView={10}
         spaceBetween={10}

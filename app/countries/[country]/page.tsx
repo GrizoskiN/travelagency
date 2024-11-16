@@ -10,7 +10,8 @@ import SearchBar from "@/app/components/Search/Search";
 
 import { useState } from "react";
 import CountryTagsFilter from "@/app/components/Tags/CountryTagsFilter";
-
+import FullButton from "@/app/components/Buttons/FullButton";
+import OutlineButton from "@/app/components/Buttons/OutlineButton";
 
 export default function CountryPage({
   params,
@@ -30,31 +31,27 @@ export default function CountryPage({
 
   if (selectedCountry !== "all") {
     filteredDestinations = filteredDestinations.filter(
-      (dest) => dest.label.toLowerCase() === selectedCountry
+      (dest) => dest.label.toLowerCase() === selectedCountry,
     );
   }
 
-
-// Function to check if a destination's tags match selected tags in tagsDictionary
-const matchesSelectedTags = (destination: Destination) => {
-
-  // Check if the destination has any tag that matches the selected tags using tagsDictionary
-  return (
-    selectedTags.length === 0 || // If no tags are selected, include all destinations
-    selectedTags.some(
-      (tagId) => tagsDictionary[tagId] && destination.tags.includes(tagId) // Check if destination's tags include any selected tag
-    )
-  );
-};
-
-
+  // Function to check if a destination's tags match selected tags in tagsDictionary
+  const matchesSelectedTags = (destination: Destination) => {
+    // Check if the destination has any tag that matches the selected tags using tagsDictionary
+    return (
+      selectedTags.length === 0 || // If no tags are selected, include all destinations
+      selectedTags.some(
+        (tagId) => tagsDictionary[tagId] && destination.tags.includes(tagId), // Check if destination's tags include any selected tag
+      )
+    );
+  };
 
   // Filter and prioritize destinations based on specific date range, group size, and tags
   const matchedDestinations: Destination[] = [];
 
   filteredDestinations.forEach((destination) => {
     const { start_date, end_date, group_size } = destination;
-  
+
     const isInDateRange =
       startDateStr && endDateStr
         ? start_date &&
@@ -62,23 +59,25 @@ const matchesSelectedTags = (destination: Destination) => {
           new Date(start_date) <= new Date(endDateStr) &&
           new Date(end_date) >= new Date(startDateStr)
         : true;
-  
+
     const isInGroupSize =
       groupSizeStr !== null
         ? group_size && checkGroupSize(group_size, groupSizeStr)
         : true;
-  
+
     // Check if the destination matches any of the selected tags in tagsDictionary
     const isInSelectedTags = matchesSelectedTags(destination);
-  
+
     if (isInDateRange && isInGroupSize && isInSelectedTags) {
       matchedDestinations.push(destination);
     }
   });
-  
 
   // Helper function to check group size
-  function checkGroupSize(destinationGroupSize: string, groupSizeStr: string): boolean {
+  function checkGroupSize(
+    destinationGroupSize: string,
+    groupSizeStr: string,
+  ): boolean {
     const groupSize = parseInt(groupSizeStr, 10);
 
     if (isNaN(groupSize)) return false;
@@ -102,9 +101,8 @@ const matchesSelectedTags = (destination: Destination) => {
 
   return (
     <div className="customWidth  mx-auto mt-24">
-      
       <SearchBar />
-   
+
       {/* <MobileSearchBar/> */}
       {/* Tags Filter Component */}
       <CountryTagsFilter onTagSelect={handleTagSelect} />
@@ -116,8 +114,13 @@ const matchesSelectedTags = (destination: Destination) => {
             {startDateStr || endDateStr || groupSizeStr ? (
               <>
                 Destinations from{" "}
-                {startDateStr ? format(new Date(startDateStr), "MMMM dd, yyyy") : ""} to{" "}
-                {endDateStr ? format(new Date(endDateStr), "MMMM dd, yyyy") : ""}
+                {startDateStr
+                  ? format(new Date(startDateStr), "MMMM dd, yyyy")
+                  : ""}{" "}
+                to{" "}
+                {endDateStr
+                  ? format(new Date(endDateStr), "MMMM dd, yyyy")
+                  : ""}
                 {groupSizeStr ? ` for ${groupSizeStr} guests` : ""}
               </>
             ) : (
@@ -126,8 +129,8 @@ const matchesSelectedTags = (destination: Destination) => {
           </h2>
           <div className="destination-grid grid md:grid-cols-2 xl:grid-cols-4 gap-4 ">
             {matchedDestinations.map((dest) => (
-              <Link href={`/destination/${dest.uid}`} key={dest.uid} className="block">
-                <div className="block">
+              <div key={dest.uid}>
+                <Link href={`/destination/${dest.uid}`} className="block">
                   {dest.image && (
                     <Image
                       src={dest.image}
@@ -137,11 +140,20 @@ const matchesSelectedTags = (destination: Destination) => {
                       className="rounded-lg my-4"
                     />
                   )}
-                  <h2 className="text-2xl font-bold mt-2">
+                </Link>
+                <div className="">
+                  <h2 className="text-2xl font-bold mt-2 ">
                     {dest.meta_title || "Untitled Destination"}
                   </h2>
+                  <p className="text-md line-clamp-3 leading-5 mt-4 min-h-16">
+                    {dest.excerpt}
+                  </p>
+                  <div className="flex gap-3 mt-5">
+                    <FullButton link={`/destination/${dest.uid}`} text="Reserve"/>
+                    <OutlineButton link={`/destination/${dest.uid}`} text="View the tour"/>
+                  </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>

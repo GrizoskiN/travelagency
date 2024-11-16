@@ -14,7 +14,7 @@ const config: Config = {
 		
   		colors: {
 			accentRed: "#F22B5D",
-			backgroundColor: '#ececec',
+			backgroundColor: '#F6F8F7',
   			background: 'hsl(var(--background))',
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',

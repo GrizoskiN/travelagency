@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
-
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 
@@ -13,7 +12,23 @@ export default async function Page({ params }: { params: Params }) {
     .getByUID("destinations", params.uid)
     .catch(() => notFound());
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  // Pass the slices and static fields to the SliceZone
+  return (
+    <SliceZone
+      slices={page.data.slices}
+      components={components}
+      context={{
+        continent: page.data.continent,
+        country: page.data.country,
+        meta_title: page.data.meta_title,
+        meta_description: page.data.meta_description,
+        start_date: page.data.start_date,
+        end_date: page.data.end_date,
+        group: page.data.group_size,
+        tags: page.tags || "",
+      }}
+    />
+  );
 }
 
 export async function generateMetadata({

@@ -94,7 +94,7 @@ const AboutUs = ({ slice }: AboutUsProps): JSX.Element => {
           </PrismicNextLink>
         </div>
       </div>
-      <div className="bg-white rounded-xl absolute top-0 right-0 w-full lg:w-2/3 h-full"></div>
+      <div className="bg-backgroundColor rounded-xl absolute top-0 right-0 w-full lg:w-2/3 h-full"></div>
     </section>
   );
 };

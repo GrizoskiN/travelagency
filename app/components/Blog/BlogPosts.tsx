@@ -48,7 +48,7 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ pointer }) => {
 
             <div className="space-y-4 pb-5 items-start px-2">
               <h1 className="text-2xl">{blog.title}</h1>
-              <p className="text-md leading-5 tracking-normal text-justify lg:h-11 line-clamp-2 overflow-y-clip">
+              <p className="text-md leading-5 tracking-normal text-justify  line-clamp-3">
                 {blog.excerpt}
               </p>
             </div>

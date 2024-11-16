@@ -12,50 +12,6 @@
           "label": "UID"
         }
       },
-      "start_date": {
-        "type": "Date",
-        "config": {
-          "label": "Start Date",
-          "placeholder": "Offer with fixed dates"
-        }
-      },
-      "meta_title": {
-        "type": "Text",
-        "config": {
-          "label": "meta_title",
-          "placeholder": "Name of the place"
-        }
-      },
-      "country": {
-        "type": "Text",
-        "config": {
-          "label": "Country",
-          "placeholder": "France"
-        }
-      },
-      "group_size": {
-        "type": "Select",
-        "config": {
-          "label": "Group Size",
-          "placeholder": "",
-          "options": ["1-2", "2-4", "5+"]
-        }
-      },
-      "country_image": {
-        "type": "Image",
-        "config": {
-          "label": "country_image",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
-      "meta_description": {
-        "type": "Text",
-        "config": {
-          "label": "meta_description",
-          "placeholder": "Description"
-        }
-      },
       "continent": {
         "type": "Select",
         "config": {
@@ -69,6 +25,42 @@
             "Africa",
             "Australia"
           ]
+        }
+      },
+      "country": {
+        "type": "Text",
+        "config": {
+          "label": "Country",
+          "placeholder": "France"
+        }
+      },
+      "country_image": {
+        "type": "Image",
+        "config": {
+          "label": "country_image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "meta_title": {
+        "type": "Text",
+        "config": {
+          "label": "meta_title",
+          "placeholder": "Name of the place"
+        }
+      },
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "meta_description",
+          "placeholder": "Description"
+        }
+      },
+      "start_date": {
+        "type": "Date",
+        "config": {
+          "label": "Start Date",
+          "placeholder": "Offer with fixed dates"
         }
       },
       "end_date": {
@@ -93,6 +85,21 @@
               }
             }
           }
+        }
+      },
+      "excerpt": {
+        "type": "Text",
+        "config": {
+          "label": "Excerpt",
+          "placeholder": "Short destination about the destination"
+        }
+      },
+      "group_size": {
+        "type": "Select",
+        "config": {
+          "label": "Group Size",
+          "placeholder": "",
+          "options": ["1-2", "2-4", "5+"]
         }
       },
       "slices": {

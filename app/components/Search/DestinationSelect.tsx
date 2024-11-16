@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { DestinationIcon } from "../Icons/SvgIcons";
-import { motion,  AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Destination = {
   value: string;
@@ -28,11 +28,14 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
   const inputRef = React.useRef<HTMLInputElement>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const listRef = React.useRef<HTMLDivElement>(null);
-  const [dragConstraints, setDragConstraints] = React.useState({ left: 0, right: 0 });
+  const [dragConstraints, setDragConstraints] = React.useState({
+    left: 0,
+    right: 0,
+  });
 
   // Filter destinations based on search term
   const filteredDestinations = destinations.filter((destination) =>
-    destination.label.toLowerCase().includes(searchTerm.toLowerCase())
+    destination.label.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   // Calculate drag constraints whenever the filtered destinations change
@@ -43,20 +46,20 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
         const listWidth = listRef.current.scrollWidth;
         const rightConstraint = 0;
         const leftConstraint = containerWidth - listWidth;
-        
+
         setDragConstraints({
           left: Math.min(leftConstraint, 0), // Ensure we don't set a positive left constraint
-          right: rightConstraint
+          right: rightConstraint,
         });
       }
     };
 
     // Calculate initially and add resize listener
     calculateConstraints();
-    window.addEventListener('resize', calculateConstraints);
+    window.addEventListener("resize", calculateConstraints);
 
     // Cleanup
-    return () => window.removeEventListener('resize', calculateConstraints);
+    return () => window.removeEventListener("resize", calculateConstraints);
   }, [filteredDestinations]);
 
   // Close popover when clicking outside
@@ -89,7 +92,7 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
     if (isEditing) return searchTerm;
     if (initialCountry && initialCountry !== "all" && !searchTerm) {
       const selectedDestination = destinations.find(
-        (dest) => dest.value === initialCountry
+        (dest) => dest.value === initialCountry,
       );
       return selectedDestination ? selectedDestination.label : "";
     }
@@ -97,13 +100,14 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
   };
 
   return (
-    <div className="relative w-auto bg-white  rounded-xl lg:rounded-full px-4 lg:pl-7 lg:h-16 p-2">
-      <p className="text-black lg:text-gray-500 lg:text-sm mb-1 text-left">Where to?</p>
+    <div className="relative  bg-white lg:hover:bg-[#ececec] rounded-xl lg:rounded-full px-6 lg:pl-7 h-24 lg:h-16 p-2 ">
+      <p className="text-black lg:text-gray-500 lg:text-sm font-light mb-1 text-left">
+        Where to?
+      </p>
 
       <div
-        className="flex items-center w-full cursor-pointer border rounded-full lg:border-none lg:rounded-none"
-        onClick={() => !isDragging && setOpen(true)}
-      >
+        className="flex items-center w-full lg:w-[9rem] cursor-pointer border rounded-full lg:border-none lg:rounded-none "
+        onClick={() => !isDragging && setOpen(true)}>
         <DestinationIcon />
         <input
           ref={inputRef}
@@ -115,7 +119,7 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
             setOpen(true);
           }}
           placeholder="Select a Country"
-          className="w-full  bg-transparent text-black placeholder-black text-lg focus:outline-none"
+          className="w-full  bg-transparent text-black placeholder-black xl:text-lg focus:outline-none font-light"
           onFocus={() => {
             if (!isDragging) {
               setOpen(true);
@@ -131,13 +135,12 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="lg:absolute top-[4rem] left-4  lg:w-[50rem]  mt-2 lg:bg-white  lg:rounded-full lg:shadow-md z-10 overflow-hidden"
-            ref={containerRef}
-          >
+            className="lg:absolute top-[4rem] left-0  lg:w-[43rem]  mt-3 lg:bg-white  lg:rounded-full lg:shadow-md z-10 overflow-hidden"
+            ref={containerRef}>
             <div className="overflow-hidden">
               <motion.div
                 ref={listRef}
-                className="grid grid-rows-1 grid-flow-col gap-3 py-3 px-6 "
+                className="grid grid-rows-1 grid-flow-col gap-3 py-2 px-3 "
                 drag="x"
                 dragConstraints={dragConstraints}
                 onDragStart={() => setIsDragging(true)}
@@ -146,23 +149,21 @@ const DestinationSelect: React.FC<DestinationSelectProps> = ({
                 }}
                 dragElastic={0.2}
                 style={{
-                  touchAction: "none"
-                }}
-              >
+                  touchAction: "none",
+                }}>
                 {filteredDestinations.length > 0 ? (
                   filteredDestinations.map((destination) => (
                     <motion.button
                       key={destination.value}
                       onClick={() => handleCountrySelect(destination.value)}
                       className={cn(
-                        "py-2 px-8 rounded-full text-black text-sm  bg-[#ececec] flex items-center justify-center",
+                        "py-1 px-6 rounded-full text-black text-sm  bg-[#ececec] flex items-center justify-center",
                         initialCountry === destination.value
                           ? ""
-                          : "hover:bg-accentRed hover:text-white"
+                          : "hover:bg-accentRed hover:text-white",
                       )}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.95 }}>
                       {destination.label}
                       {initialCountry === destination.value}
                     </motion.button>

@@ -37,10 +37,51 @@
             }
           }
         },
-        "location": {
-          "type": "GeoPoint",
+        "things_to_know": {
+          "type": "Group",
           "config": {
-            "label": "Location"
+            "label": "Things To Know",
+            "repeat": true,
+            "fields": {
+              "field_number": {
+                "type": "Number",
+                "config": {
+                  "label": "Field number",
+                  "placeholder": "1"
+                }
+              },
+              "icon": {
+                "type": "Image",
+                "config": {
+                  "label": "Icon",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "heading": {
+                "type": "Text",
+                "config": {
+                  "label": "Heading",
+                  "placeholder": "Transport"
+                }
+              },
+              "paragraph": {
+                "type": "Text",
+                "config": {
+                  "label": "Paragraph",
+                  "placeholder": "Optional excursions with an additional charge"
+                }
+              }
+            }
+          }
+        },
+        "tour_description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Tour description ",
+            "placeholder": "Description",
+            "allowTargetBlank": false,
+            "multi": "heading1,heading2,heading3,paragraph,image,strong,em,list-item"
           }
         }
       },

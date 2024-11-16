@@ -14,7 +14,7 @@ const SliderDestinations = () => {
   const { uniqueCountries } = useDestinations(); // Fetch unique countries from context
 
   return (
-    <div className="overflow-hidden customWidth py-11 my-6 bg-white rounded-xl">
+    <div className="overflow-hidden customWidth py-11 my-6 bg-backgroundColor rounded-xl">
       <div className=" mx-auto  text-center mb-11">
         <HeadingText
           customWidth

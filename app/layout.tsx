@@ -1,7 +1,8 @@
 import "@/app/globals.css";
 import { ReactNode } from "react";
 import Menu from "./components/MainMenu";
-import { abel } from "./fonts";
+import { GeistSans } from 'geist/font/sans';
+
 import { fetchDestinations, fetchTags, fetchContinentDetails, fetchTestimonials, fetchBlogPosts } from "@/lib/fetchData";
 import { DestinationsProvider } from "./contexts/DestinationsContext";
 import Footer from "./components/Footer";
@@ -25,11 +26,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   );
 
   return (
-    <html lang="en" className={abel.className}>
-      <body className="bg-backgroundColor">
+    <html lang="en" className={GeistSans.className}>
+      <body className="bg-white">
         <DestinationsProvider
           destinations={destinations}
-          tagsDictionary={tagsDictionary} // Pass tagsDictionary here
+          tagsDictionary={tagsDictionary}
           continentDetails={continentDetails}
           uniqueCountries={uniqueCountries}
           testimonials={testimonials}

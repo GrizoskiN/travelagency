@@ -52,10 +52,10 @@ export function DatePickerWithRange({
 
   return (
     <div
-      className={cn("grid gap-4 lg:grid-cols-2 w-full lg:w-auto ", className)}>
+      className={cn("grid gap-4 lg:grid-cols-2  ", className)}>
       {/* Check-in Button */}
-      <div className="flex lg:flex-col  justify-between lg:items-start items-center bg-white lg:lg:hover:bg-[#ececec] lg:bg-transparent rounded-full p-1  lg:px-6  lg:h-16">
-        <p className="text-gray-500 text-left text-sm pl-4 lg:pl-0 mb-1">
+      <div className="flex lg:flex-col justify-between lg:items-start items-center bg-white lg:hover:bg-[#ececec] lg:bg-transparent rounded-full p-1  lg:px-6  lg:h-16 ">
+        <p className="text-gray-500 text-left text-sm pl-4 lg:pl-0 mb-1 font-light">
           Check In
         </p>
         <Popover open={open} onOpenChange={setOpen}>
@@ -63,7 +63,7 @@ export function DatePickerWithRange({
             <button
               id="check-in"
               className={cn(
-                " w-2/3 lg:min-w-40  lg:p-none lg:pr-none bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between  items-center lg:justify-start shadow-none border-none text-lg text-black p-1 pr-4 lg:px-0 ",
+                "w-2/3 lg:w-auto  lg:p-none lg:pr-none bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between  items-center lg:justify-start shadow-none border-none xl:text-lg text-black p-1 pr-4 lg:px-0 font-light",
               )}
               onClick={() => setOpen(true)}>
               <DurationIcon />
@@ -78,7 +78,7 @@ export function DatePickerWithRange({
       </div>
       {/* Check-out Button */}
       <div className="flex lg:flex-col  justify-between lg:items-start items-center bg-white lg:hover:bg-[#ececec] lg:bg-transparent rounded-full p-1  lg:px-6  lg:h-16">
-        <p className="text-gray-500 text-left text-sm pl-4 lg:pl-0 mb-1">
+        <p className="text-gray-500 text-left text-sm pl-4 lg:pl-0 mb-1 font-light">
           Check Out
         </p>
         <Popover open={open} onOpenChange={setOpen}>
@@ -86,7 +86,7 @@ export function DatePickerWithRange({
             <button
               id="check-out"
               className={cn(
-                " w-2/3 lg:min-w-40  lg:p-none lg:pr-none bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between  items-center lg:justify-start shadow-none border-none text-lg text-black p-1 pr-4 lg:px-0",
+                "w-2/3 lg:w-auto   lg:p-none lg:pr-none bg-[#ececec] rounded-full lg:bg-transparent lg:rounded-none flex justify-between  items-center lg:justify-start shadow-none border-none xl:text-lg text-black p-1 pr-4 lg:px-0 font-light",
               )}
               onClick={() => setOpen(true)}>
               <DurationIcon />
@@ -97,7 +97,7 @@ export function DatePickerWithRange({
               )}
             </button>
           </PopoverTrigger>
-          <PopoverContent className=" md:w-auto ml-auto lg:w-auto  lg:-ml-40 w-full" align="end">
+          <PopoverContent className="" align="center">
             <Calendar
               mode="range"
               defaultMonth={date?.from}

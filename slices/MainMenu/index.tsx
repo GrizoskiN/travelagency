@@ -38,7 +38,7 @@ const MainMenu = ({ slice }: MainMenuProps): JSX.Element => {
             <span className="last:hidden">|</span>
             {/* The dividers, but only show if it's not the last item */}
             {index < slice.primary.menulink.length - 1 && (
-              <div className="h-2/3 w-[1px] mx-5 bg-accentColor"></div>
+              <div className="h-2/3 w-[1px] mx-5 "></div>
             )}
           </div>
         ))}

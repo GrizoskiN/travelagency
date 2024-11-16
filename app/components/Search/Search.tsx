@@ -72,7 +72,7 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-[800px] mx-auto mt-10 z-40 relative ">
+    <div className="w-full lg:w-auto  mx-auto mt-10 z-40 relative ">
       {/* Desktop Version */}
       <div className="hidden lg:flex items-center justify-center bg-background rounded-full pr-2 ">
         <div className="w-full flex justify-between items-center bg-white  text-white rounded-full shadow-lg p-2">
@@ -107,12 +107,12 @@ const SearchBar: React.FC = () => {
       </div>
 
       {/* Mobile Version */}
-      <div className="lg:hidden w-10/12 md:w-2/3 mx-auto  relative">
+      <div className="lg:hidden w-11/12 md:w-2/4 mx-auto  relative">
         {/* Top part visible by default */}
         <div
           onClick={() => setMenuOpen(true)}
           className="cursor-pointer bg-white rounded-full p-3">
-          <div className="flex justify-between px-3">
+          <div className="flex font-light text-sm md:text-md justify-between px-3">
             <span>Any Location</span>
             |
             <span>Any Date</span>

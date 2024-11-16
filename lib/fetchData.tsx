@@ -31,7 +31,9 @@ export interface Destination {
   start_date?: string; // Optional: Start date for availability
   end_date?: string; // Optional: End date for availability
   group_size?: string; // Optional: Group size information (e.g., "2-4", "5+")
-  meta_title?: string; // Optional: Title for displaying purposes
+  meta_title?: string;
+  excerpt?: string; // Optional: Title for displaying purposes
+  location?: string;
 }
 
 export interface Testimonial {
@@ -105,6 +107,8 @@ export async function fetchDestinations(): Promise<Destination[]> {
       end_date: doc.data.end_date || "",
       group_size: doc.data.group_size || "",
       meta_title: doc.data.meta_title || "",
+      excerpt: doc.data.excerpt || "",
+    
     };
   });
 }

@@ -62,12 +62,76 @@
 					}
 				]
 			},
-			"location": {
-				"position": {
-					"lat": 48.8583736,
-					"lng": 2.2922926
-				},
-				"__TYPE__": "GeoPointContent"
+			"things_to_know": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"heading",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "unhappy",
+									"type": "Text"
+								}
+							],
+							[
+								"icon",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c",
+										"width": 3424,
+										"height": 3424
+									},
+									"url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c",
+									"width": 3424,
+									"height": 3424,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"paragraph",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "cream",
+									"type": "Text"
+								}
+							],
+							[
+								"field_number",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "37",
+									"type": "Number"
+								}
+							]
+						]
+					}
+				]
+			},
+			"tour_description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Anim qui ipsum amet cupidatat proident exercitation aliquip qui est elit deserunt sunt laborum sit dolor. Fugiat eu ex laboris excepteur et labore eu. Et occaecat nostrud fugiat et."
+						}
+					}
+				]
 			}
 		},
 		"items": []

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { FC, useState, useEffect } from "react";
 import DestinationGallery from "../Gallery/DestinationGallery";
 import FeaturedCountryCard from "../Gallery/FeaturedCountryCard";
@@ -10,15 +10,19 @@ import GridTagsFilter from "../Tags/GridTagsFilter";
 const GridDestinations: FC = () => {
   const { destinations, continentDetails, tagsDictionary } = useDestinations();
 
-  const [filteredDestinations, setFilteredDestinations] = useState(destinations);
+  const [filteredDestinations, setFilteredDestinations] =
+    useState(destinations);
   const [selectedContinent, setSelectedContinent] = useState("Earth");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const countryDestinationCount = destinations.reduce((acc, destination) => {
-    const country = destination.label.trim().toLowerCase();
-    acc[country] = (acc[country] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const countryDestinationCount = destinations.reduce(
+    (acc, destination) => {
+      const country = destination.label.trim().toLowerCase();
+      acc[country] = (acc[country] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
 
   const handleContinentChange = (continent: string) => {
     setSelectedContinent(continent);
@@ -36,14 +40,14 @@ const GridDestinations: FC = () => {
 
     if (selectedContinent !== "Earth") {
       filtered = filtered.filter(
-        (destination) => destination.continent === selectedContinent
+        (destination) => destination.continent === selectedContinent,
       );
     }
 
     // Filter by selected tags only if tags are selected
     if (selectedTags.length > 0) {
       filtered = filtered.filter((destination) =>
-        selectedTags.every((tagId) => destination.tags.includes(tagId))
+        selectedTags.every((tagId) => destination.tags.includes(tagId)),
       );
     }
 
@@ -60,7 +64,7 @@ const GridDestinations: FC = () => {
   }, [selectedContinent, selectedTags, destinations, tagsDictionary]);
 
   const matchedContinentDetail = continentDetails.find(
-    (detail) => detail.uid.toLowerCase() === selectedContinent.toLowerCase()
+    (detail) => detail.uid.toLowerCase() === selectedContinent.toLowerCase(),
   );
 
   const limitedDestinations = filteredDestinations.slice(0, 6);
@@ -73,8 +77,12 @@ const GridDestinations: FC = () => {
   return (
     <div className="customWidth my-8">
       <div className="flex flex-col lg:flex-row justify-between">
-        <div className="bg-white lg:w-1/2 text-center py-11 rounded-xl">
-          <HeadingText heading3="Best Locations" heading2="Travel by continent" customWidth={false} />
+        <div className="bg-backgroundColor lg:w-1/2 text-center py-11 rounded-xl">
+          <HeadingText
+            heading3="Best Locations"
+            heading2="Travel by continent"
+            customWidth={false}
+          />
         </div>
 
         <GridTagsFilter key={selectedContinent} onTagSelect={handleTagSelect} />
@@ -83,7 +91,9 @@ const GridDestinations: FC = () => {
       <div className="destination-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-11 my-8">
         <FeaturedCountryCard
           featuredCountry={filteredDestinations[0] || destinations[0]}
-          continents={Array.from(new Set(destinations.map((dest) => dest.continent)))}
+          continents={Array.from(
+            new Set(destinations.map((dest) => dest.continent)),
+          )}
           continentDetails={continentDetails}
           onContinentChange={handleContinentChange}
         />
@@ -93,14 +103,19 @@ const GridDestinations: FC = () => {
             <div key={index} className="relative">
               <DestinationGallery
                 destination={destination}
-                destinationCount={countryDestinationCount[destination.label.trim().toLowerCase()] || 0}
+                destinationCount={
+                  countryDestinationCount[
+                    destination.label.trim().toLowerCase()
+                  ] || 0
+                }
                 tagsDictionary={tagsDictionary} // Pass tagsDictionary here
               />
             </div>
           ))
         ) : (
           <div className="col-span-full text-center text-gray-600">
-            No destinations match your selected tags. Please try selecting different tags.
+            No destinations match your selected tags. Please try selecting
+            different tags.
           </div>
         )}
 
