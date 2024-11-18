@@ -30,22 +30,24 @@ const DestinationPage = ({
   slice,
   context,
 }: DestinationPageProps): JSX.Element => {
-
   return (
     <section
       className="customWidth max-w-[1300px] mx-auto"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}>
       {/* Header Information */}
-      <div className="customWidth flex flex-col lg:justify-between space-y-4 lg:space-y-0 lg:items-end">
+      <div className=" flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0 md:items-end">
         <div className="">
           <h1 className="text-3xl ">{context.meta_title}</h1>
-          <div className="flex gap-2 text-sm text-gray-500">
+          <div className="flex flex-wrap gap-2 text-sm text-gray-500 ">
             <p>{context.group} Group Size | </p>
             {context.tags.map((tag, index) => (
-              <div key={index}>
+              <div key={index} className="flex relative items-center space-x-2">
                 <p className="capitalize">{tag}</p>
-                <div className="last:hidden">|</div>
+                <span className="last:hidden">|</span>
+                {index < tag.length - 1 && (
+              <div className="h-2/3 w-[1px] mx-5 "></div>
+            )}
               </div>
             ))}
           </div>

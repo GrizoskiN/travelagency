@@ -19,12 +19,12 @@ const DestinationGallery: FC<DestinationGalleryProps> = ({
 }) => {
   return (
     <Link href={`/countries/${destination.label}`} className="block">
-      <div className="relative w-full h-full min-h-80 min-w-80 lg:min-w-[18rem] lg:min-h-[18rem] xl:min-h-[33.5rem] xxl:min-h-[45rem]">
+      <div className="relative w-full h-full min-h-80 min-w-80 lg:min-w-[18rem] lg:min-h-[18rem] xl:min-h-[33.5rem] xxl:min-h-[45rem] overflow-hidden">
       {destination.destination_image ? (
           <Image
             src={destination.destination_image}
             alt={destination.label}
-            className="object-cover w-full h-full min-h-80 min-w-80 md:min-w-[21rem] md:min-h-[21rem] lg:min-w-[18rem] lg:h-full xl:min-h-[33.5rem] xxl:min-h-[45rem] rounded-2xl"
+            className="object-cover w-full h-full min-h-80 min-w-80 md:min-w-[21rem] md:min-h-[21rem] lg:min-w-[18rem] lg:h-full xl:min-h-[34.5rem] xxl:min-h-[45rem] rounded-2xl"
             width={500}
             height={500}
           />

@@ -41,9 +41,9 @@ const CountryTagsFilter: FC<CountryTagsFilterProps> = ({ onTagSelect }) => {
       </p>
       <h4 className="text-xl mb-11">Select your experience type</h4>
       <Swiper
-        slidesPerView={10}
-        spaceBetween={10}
-        className="w-full flex justify-center px-8">
+        slidesPerView={8}
+        
+        className="w-full ">
         <SwiperSlide className="">
           <button
             className={`flex flex-col items-center justify-center px-6 py-4 rounded-lg space-y-2 text-nowrap ${
@@ -65,7 +65,7 @@ const CountryTagsFilter: FC<CountryTagsFilterProps> = ({ onTagSelect }) => {
           </button>
         </SwiperSlide>
         {uniqueTags.map((tag) => (
-          <SwiperSlide key={tag.id} className="flex ">
+          <SwiperSlide key={tag.id} className=" ml-11">
             <button
               className={`flex flex-col items-center  px-6 py-4 rounded-lg space-y-2 ${
                 selectedTags.includes(tag.id)
