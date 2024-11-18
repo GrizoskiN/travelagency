@@ -81,6 +81,7 @@ const config: Config = {
   		md: '768px',
   		lg: '1024px',
   		xl: '1440px',
+  		xxl: '2560px',
   		'2xl': '1536px'
   	},
   	// fontFamily: {

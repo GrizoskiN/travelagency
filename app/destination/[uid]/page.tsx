@@ -20,12 +20,14 @@ export default async function Page({ params }: { params: Params }) {
       context={{
         continent: page.data.continent,
         country: page.data.country,
+        destination_image: page.data.destination_image?.url,
         meta_title: page.data.meta_title,
         meta_description: page.data.meta_description,
         start_date: page.data.start_date,
         end_date: page.data.end_date,
         group: page.data.group_size,
         tags: page.tags || "",
+        price: page.data.price || "",
       }}
     />
   );

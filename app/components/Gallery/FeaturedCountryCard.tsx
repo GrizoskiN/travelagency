@@ -3,7 +3,6 @@ import { FC, useState } from 'react';
 interface FeaturedCountryCardProps {
   featuredCountry: {
     label: string;
-    image: string;
     continent: string;
   } | null;
   continents: string[];
@@ -44,7 +43,7 @@ const FeaturedCountryCard: FC<FeaturedCountryCardProps> = ({
           <select
             value={selectedContinent}
             onChange={handleContinentChange}
-            className="px-11 my-1 py-2 text-primary rounded-full bg-[#D9D9D9] focus:outline-none"
+            className="px-11 my-1 py-2 text-primary rounded-full bg-backgroundColor focus:outline-none"
           >
             {['Earth', ...continents].map((continent, index) => (
               <option key={index} value={continent}>
@@ -56,7 +55,7 @@ const FeaturedCountryCard: FC<FeaturedCountryCardProps> = ({
       </div>
 
       {/* Heading Text or Fallback Text */}
-      <p className="mt-4 text-gray-700">
+      <p className="mt-4 text-gray-700 font-light">
         {matchedContinentDetail?.heading_text ||
           `Explore the beauty and unique experiences that ${
             featuredCountry?.label || 'this destination'

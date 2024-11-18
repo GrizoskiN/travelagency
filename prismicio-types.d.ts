@@ -261,15 +261,15 @@ interface DestinationsDocumentData {
   country: prismic.KeyTextField;
 
   /**
-   * country_image field in *destination*
+   * destination_image field in *destination*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: destinations.country_image
+   * - **API ID Path**: destinations.destination_image
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  country_image: prismic.ImageField<never>;
+  destination_image: prismic.ImageField<never>;
 
   /**
    * meta_title field in *destination*
@@ -314,6 +314,17 @@ interface DestinationsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#date
    */
   end_date: prismic.DateField;
+
+  /**
+   * Price field in *destination*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: $ 325
+   * - **API ID Path**: destinations.price
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  price: prismic.KeyTextField;
 
   /**
    * Destination tag field in *destination*
@@ -1074,19 +1085,64 @@ export interface DestinationPageSliceDefaultPrimaryThingsToKnowItem {
 }
 
 /**
+ * Item in *DestinationPage → Default → Primary → Included*
+ */
+export interface DestinationPageSliceDefaultPrimaryIncludedItem {
+  /**
+   * Text field in *DestinationPage → Default → Primary → Included*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Breakfast, lunch and dinner
+   * - **API ID Path**: destination_page.default.primary.included[].text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+}
+
+/**
+ * Item in *DestinationPage → Default → Primary → Excluded*
+ */
+export interface DestinationPageSliceDefaultPrimaryExcludedItem {
+  /**
+   * text field in *DestinationPage → Default → Primary → Excluded*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destination_page.default.primary.excluded[].text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  text: prismic.KeyTextField;
+}
+
+/**
+ * Item in *DestinationPage → Default → Primary → Itinerary*
+ */
+export interface DestinationPageSliceDefaultPrimaryItineraryItem {
+  /**
+   * Heading field in *DestinationPage → Default → Primary → Itinerary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Day 1: Arrival & Introduction to the City
+   * - **API ID Path**: destination_page.default.primary.itinerary[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * paragraph field in *DestinationPage → Default → Primary → Itinerary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destination_page.default.primary.itinerary[].paragraph
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  paragraph: prismic.RichTextField;
+}
+
+/**
  * Primary content in *DestinationPage → Default → Primary*
  */
 export interface DestinationPageSliceDefaultPrimary {
-  /**
-   * Header Image field in *DestinationPage → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: destination_page.default.primary.header_image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  header_image: prismic.ImageField<never>;
-
   /**
    * Gallery field in *DestinationPage → Default → Primary*
    *
@@ -1112,14 +1168,50 @@ export interface DestinationPageSliceDefaultPrimary {
   >;
 
   /**
-   * Tour description  field in *DestinationPage → Default → Primary*
+   * Tour Description field in *DestinationPage → Default → Primary*
    *
    * - **Field Type**: Rich Text
-   * - **Placeholder**: Description
+   * - **Placeholder**: *None*
    * - **API ID Path**: destination_page.default.primary.tour_description
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   tour_description: prismic.RichTextField;
+
+  /**
+   * Included field in *DestinationPage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destination_page.default.primary.included[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  included: prismic.GroupField<
+    Simplify<DestinationPageSliceDefaultPrimaryIncludedItem>
+  >;
+
+  /**
+   * Excluded field in *DestinationPage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destination_page.default.primary.excluded[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  excluded: prismic.GroupField<
+    Simplify<DestinationPageSliceDefaultPrimaryExcludedItem>
+  >;
+
+  /**
+   * Itinerary field in *DestinationPage → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: destination_page.default.primary.itinerary[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  itinerary: prismic.GroupField<
+    Simplify<DestinationPageSliceDefaultPrimaryItineraryItem>
+  >;
 }
 
 /**
@@ -1977,6 +2069,9 @@ declare module "@prismicio/client" {
       DestinationPageSlice,
       DestinationPageSliceDefaultPrimaryGalleryItem,
       DestinationPageSliceDefaultPrimaryThingsToKnowItem,
+      DestinationPageSliceDefaultPrimaryIncludedItem,
+      DestinationPageSliceDefaultPrimaryExcludedItem,
+      DestinationPageSliceDefaultPrimaryItineraryItem,
       DestinationPageSliceDefaultPrimary,
       DestinationPageSliceVariation,
       DestinationPageSliceDefault,

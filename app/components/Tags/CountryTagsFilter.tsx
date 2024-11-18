@@ -35,31 +35,39 @@ const CountryTagsFilter: FC<CountryTagsFilterProps> = ({ onTagSelect }) => {
   };
 
   return (
-    <div className="flex flex-col items-center my-6 w-2/3 mx-auto mt-24">
+    <div className="flex flex-col items-center my-6  mx-auto mt-24">
+      <p className="font-light text-primary-foreground">
+        *You can select multiple
+      </p>
       <h4 className="text-xl mb-11">Select your experience type</h4>
       <Swiper
         slidesPerView={10}
         spaceBetween={10}
-        freeMode={true}
         className="w-full flex justify-center px-8">
-        <SwiperSlide>
-          
+        <SwiperSlide className="">
           <button
-            className={`flex flex-col items-center justify-center px-6 py-4 rounded-lg space-y-2 ${
+            className={`flex flex-col items-center justify-center px-6 py-4 rounded-lg space-y-2 text-nowrap ${
               selectedTags.length === 0
                 ? "text-primary after:absolute after:bg-primary after:h-[2px] after:rounded-full after:w-10 after:bottom-2"
                 : "text-gray-700 after:absolute after:bg-gray-400 after:h-[2px] after:rounded-full after:w-10 after:bottom-2"
             }`}
             onClick={handleAllExperiencesClick}>
-              <span className={`w-10 h-10 ${  selectedTags.length === 0 ? "opacity-100" : "opacity-60"}`}  ><AllExperiences /></span>
-              <span className={`${
-                selectedTags.length === 0 ? "text-primary" : "text-gray-400"} text-md  `}>All Experiences</span>
+            <span
+              className={`w-10 h-10 ${selectedTags.length === 0 ? "opacity-100" : "opacity-60"}`}>
+              <AllExperiences />
+            </span>
+            <span
+              className={`${
+                selectedTags.length === 0 ? "text-primary" : "text-gray-400"
+              } text-md  `}>
+              All Experiences
+            </span>
           </button>
         </SwiperSlide>
         {uniqueTags.map((tag) => (
-          <SwiperSlide key={tag.id} className="flex justify-center">
+          <SwiperSlide key={tag.id} className="flex ">
             <button
-              className={`flex flex-col items-center justify-center px-6 py-4 rounded-lg space-y-2 ${
+              className={`flex flex-col items-center  px-6 py-4 rounded-lg space-y-2 ${
                 selectedTags.includes(tag.id)
                   ? " text-primary after:absolute after:bg-primary after:h-[2px] after:rounded-full after:w-10 after:bottom-2"
                   : " text-gray-700 after:absolute after:bg-gray-400 after:h-[2px] after:rounded-full after:w-10 after:bottom-2"
@@ -69,10 +77,17 @@ const CountryTagsFilter: FC<CountryTagsFilterProps> = ({ onTagSelect }) => {
                 src={tag.image}
                 alt={tag.name}
                 width={50}
-                height={50} 
-                className={`w-10 h-10 ${ selectedTags.includes(tag.id) ? "opacity-100" : "opacity-60"}`}              />
-              <span className={`${
-                selectedTags.includes(tag.id) ? "text-primary" : "text-gray-400"} text-md  `}>{tag.name}</span>
+                height={50}
+                className={`w-10 h-10 ${selectedTags.includes(tag.id) ? "opacity-100" : "opacity-60"}`}
+              />
+              <span
+                className={`${
+                  selectedTags.includes(tag.id)
+                    ? "text-primary"
+                    : "text-gray-400"
+                } text-md  `}>
+                {tag.name}
+              </span>
             </button>
           </SwiperSlide>
         ))}

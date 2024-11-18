@@ -25,15 +25,16 @@ export interface Tag {
 export interface Destination {
   uid: string; // Unique identifier for destination
   label: string; // Country label
-  image: string; // URL for the country image
   continent: string; // Continent
-  tags: string[]; // Tags for the destination
+  tags?: string[] | null | undefined; // Tags for the destination
   start_date?: string; // Optional: Start date for availability
   end_date?: string; // Optional: End date for availability
   group_size?: string; // Optional: Group size information (e.g., "2-4", "5+")
   meta_title?: string;
   excerpt?: string; // Optional: Title for displaying purposes
   location?: string;
+  price?: string;
+  destination_image?: string | null | undefined;
 }
 
 export interface Testimonial {
@@ -52,21 +53,24 @@ export interface BlogPost {
   date: string;
   author: string;
   minutes: string;
-  tags: string[] ;
+  tags: string[];
 }
 // Function to fetch all tags separately and build tagsDictionary
 export async function fetchTags(): Promise<Record<string, Tag>> {
   const client = createClient();
   const allTags = await client.getAllByType("tags");
 
-  const tagsDictionary = allTags.reduce((acc, tagDoc) => {
-    acc[tagDoc.id] = {
-      id: tagDoc.id,
-      name: tagDoc.data.tag_name || "",
-      image: tagDoc.data.icon?.url || "",
-    };
-    return acc;
-  }, {} as Record<string, Tag>);
+  const tagsDictionary = allTags.reduce(
+    (acc, tagDoc) => {
+      acc[tagDoc.id] = {
+        id: tagDoc.id,
+        name: tagDoc.data.tag_name || "",
+        image: tagDoc.data.icon?.url || "",
+      };
+      return acc;
+    },
+    {} as Record<string, Tag>,
+  );
 
   return tagsDictionary;
 }
@@ -86,32 +90,34 @@ export async function fetchDestinations(): Promise<Destination[]> {
       Array.isArray(doc.data.country) && doc.data.country.length > 0
         ? doc.data.country[0]?.text || ""
         : typeof doc.data.country === "string"
-        ? doc.data.country
-        : "";
+          ? doc.data.country
+          : "";
 
-      const tags = Array.isArray(doc.data.destination_tag)
-  ? doc.data.destination_tag
-      .map((tag) => (tag.tags_link as { id?: string })?.id)
-      .filter((tagId): tagId is string => tagId !== undefined && tagsDictionary[tagId] !== undefined) // Ensures only defined string values
-  : [];
-
-      
+    const tags = Array.isArray(doc.data.destination_tag)
+      ? doc.data.destination_tag
+          .map((tag) => (tag.tags_link as { id?: string })?.id)
+          .filter(
+            (tagId): tagId is string =>
+              tagId !== undefined && tagsDictionary[tagId] !== undefined,
+          ) // Ensures only defined string values
+      : [];
 
     return {
       uid: doc.uid || "",
       label: country.charAt(0).toUpperCase() + country.slice(1).trim(),
-      image: doc.data.country_image?.url || "",
+      destination_image: doc.data.destination_image.url || "",
       continent: doc.data.continent || "",
-      tags, // Only tag IDs here
+      tags,
       start_date: doc.data.start_date || "",
       end_date: doc.data.end_date || "",
       group_size: doc.data.group_size || "",
       meta_title: doc.data.meta_title || "",
       excerpt: doc.data.excerpt || "",
-    
+      price: doc.data.price || "",
     };
   });
 }
+
 // Function to fetch continent texts
 export async function fetchContinentDetails() {
   const client = createClient();

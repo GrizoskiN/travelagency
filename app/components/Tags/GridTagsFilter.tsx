@@ -30,10 +30,10 @@ const GridTagsFilter: FC<GridTagsFilterProps> = ({ onTagSelect }) => {
 
   return (
     <div className="tag-filter lg:px-11 my-6 items-center justify-center lg:w-1/2">
-      <h4 className="text-3xl">Select your experience type</h4>
-      <div className="flex flex-wrap gap-2">
+      <h4 className="text-3xl font-light">Select your experience type</h4>
+      <div className="flex flex-wrap gap-2 mt-5">
         <button
-          className={`px-11 py-2 h-fit rounded-full capitalize ${
+          className={`px-11 py-2 h-fit rounded-full text-sm capitalize ${
             selectedTags.length === 0
               ? "bg-primary text-white"
               : "bg-none border-[1px] border-gray-400 text-gray-700"
@@ -45,7 +45,7 @@ const GridTagsFilter: FC<GridTagsFilterProps> = ({ onTagSelect }) => {
         {uniqueTags.map((tag) => (
          <button
          key={tag.id}
-         className={`px-11 py-2 h-fit rounded-full capitalize ${
+         className={`px-11 py-2 h-fit text-sm rounded-full capitalize ${
            selectedTags.includes(tag.id)
              ? "bg-primary-foreground text-white"
              : "bg-none border-[1px] border-gray-400 text-gray-700"

@@ -34,14 +34,14 @@ export default async function Page() {
           <h1 className="text-4xl font-bold">{country}</h1>
           <div className="destination-grid grid grid-cols-5 gap-4">
             {destinations.map((destinationDoc: PrismicDocument) => {
-              const { country_image, meta_title } = destinationDoc.data;
+              const { destination_image, meta_title } = destinationDoc.data;
               const uid = destinationDoc.uid;
 
               return (
                 <Link href={`/destination/${uid}`} key={destinationDoc.id} className="block">
-                  {country_image?.url && (
+                  {destination_image?.url && (
                     <Image
-                      src={country_image.url} priority
+                      src={destination_image.url} priority
                       alt={`Travel in ${country} with ${agencyName}`}
                       width={500}
                       height={500}

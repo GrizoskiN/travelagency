@@ -44,12 +44,15 @@ const GridDestinations: FC = () => {
       );
     }
 
-    // Filter by selected tags only if tags are selected
-    if (selectedTags.length > 0) {
-      filtered = filtered.filter((destination) =>
-        selectedTags.every((tagId) => destination.tags.includes(tagId)),
-      );
-    }
+  // Filter by selected tags only if tags are selected
+if (selectedTags.length > 0) {
+  filtered = filtered.filter(
+    (destination) =>
+      destination.tags &&
+      selectedTags.every((tagId) => destination.tags!.includes(tagId))
+  );
+}
+
 
     // Ensure we only display unique countries in the filtered destinations
     const uniqueCountries = new Set<string>();
@@ -88,7 +91,7 @@ const GridDestinations: FC = () => {
         <GridTagsFilter key={selectedContinent} onTagSelect={handleTagSelect} />
       </div>
 
-      <div className="destination-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-11 my-8">
+      <div className="destination-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  my-6">
         <FeaturedCountryCard
           featuredCountry={filteredDestinations[0] || destinations[0]}
           continents={Array.from(

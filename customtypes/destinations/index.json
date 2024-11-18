@@ -34,10 +34,10 @@
           "placeholder": "France"
         }
       },
-      "country_image": {
+      "destination_image": {
         "type": "Image",
         "config": {
-          "label": "country_image",
+          "label": "destination_image",
           "constraint": {},
           "thumbnails": []
         }
@@ -68,6 +68,13 @@
         "config": {
           "label": "End Date",
           "placeholder": ""
+        }
+      },
+      "price": {
+        "type": "Text",
+        "config": {
+          "label": "Price",
+          "placeholder": "$ 325"
         }
       },
       "destination_tag": {

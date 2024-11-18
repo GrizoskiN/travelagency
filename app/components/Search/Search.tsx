@@ -72,7 +72,7 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div className="w-full lg:w-auto  mx-auto mt-10 z-40 relative ">
+    <div className="w-full lg:w-auto max-w-[900px] mx-auto mt-10 z-40 relative ">
       {/* Desktop Version */}
       <div className="hidden lg:flex items-center justify-center bg-background rounded-full pr-2 ">
         <div className="w-full flex justify-between items-center bg-white  text-white rounded-full shadow-lg p-2">

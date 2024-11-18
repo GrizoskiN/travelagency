@@ -46,8 +46,7 @@ const AboutUs = ({ slice }: AboutUsProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="customWidth relative  mt-32 py-16"
-    >
+      className="customWidth relative  mt-32 py-16">
       <div className="flex flex-col lg:flex-row items-center">
         <div className="lg:w-1/2">
           <PrismicNextImage
@@ -62,17 +61,19 @@ const AboutUs = ({ slice }: AboutUsProps): JSX.Element => {
           />
           <ul className="z-40 relative mt-11">
             {slice.primary.list_items.map((item: ListItem, index: number) => (
-              <li key={item.id || index} className="flex flex-col lg:flex-row my-3">
+              <li
+                key={item.id || index}
+                className="flex flex-col lg:flex-row my-3">
                 <PrismicNextImage
                   field={item.list_icon}
-                  quality={100}
-                  className="w-9 lg:w-16 h-9 lg:h-16"
+                  
+                  className="w-9 lg:w-11 h-9 lg:h-11"
                 />
                 <div className="lg:pl-6 lg:w-2/3">
-                  <h3 className="text-xl font-bold">
+                  <h3 className="lg:text-2xl font-light text-primary -mt-1">
                     {item.list_title ? item.list_title : "No title available"}
                   </h3>
-                  <p>
+                  <p className="text-light text-sm">
                     {item.list_description
                       ? item.list_description
                       : "No description available"}
@@ -83,8 +84,7 @@ const AboutUs = ({ slice }: AboutUsProps): JSX.Element => {
           </ul>
           <PrismicNextLink
             field={slice.primary.button_link}
-            className="relative inline-flex items-center justify-center px-11 py-2 mt-6 overflow-hidden font-medium text-white transition duration-300 ease-out rounded-xl bg-primary-foreground group hover:bg-primary"
-          >
+            className="relative inline-flex items-center justify-center px-11 py-2 mt-6 overflow-hidden font-light text-white transition duration-300 ease-out rounded-xl bg-primary-foreground group hover:bg-primary">
             <span className="absolute w-[140%] h-full bg-gradient-to-br from-primary to-primary transform translate-y-[100%] group-hover:translate-y-0 transition duration-300 ease-out rounded-full"></span>
             <span className="absolute w-[140%] h-full bg-gradient-to-br from-primary-foreground to-primary translate-y-[100%] group-hover:translate-y-0 transition duration-500 ease-out rounded-full"></span>
             <span className="relative">Contact Us</span>

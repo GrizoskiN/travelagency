@@ -22,31 +22,37 @@ export default async function Page() {
     }
     groupedByCountry[country].push(destinationDoc);
   });
-  
+
   // Return the component with the grouped countries
   return (
-    <div className="customWidth">
+    <div className="customWidth ">
       {Object.keys(groupedByCountry).length === 0 && <p>No data available</p>}
       {Object.entries(groupedByCountry).map(([country, destinations]) => (
         <section key={country} className="country-section my-8">
           <h1 className="text-4xl font-bold">{country}</h1>
-          <div className="destination-grid grid grid-cols-5 gap-4">
+          <div className="destination-grid grid  xl:grid-cols-5 gap-4">
             {destinations.map((destinationDoc: PrismicDocument) => {
-              const { country_image, meta_title } = destinationDoc.data;
+              const { destination_image, meta_title } = destinationDoc.data;
               const uid = destinationDoc.uid;
 
               return (
-                <Link href={`/destination/${uid}`} key={destinationDoc.id} className="block">
-                  {country_image?.url && (
+                <Link
+                  href={`/destination/${uid}`}
+                  key={destinationDoc.id}
+                  className="block">
+                  {destination_image?.url && (
                     <Image
-                      src={country_image.url} priority
-                     alt={`Travel in ${country} with ${agencyName}`}
+                      src={destination_image.url}
+                      priority
+                      alt={`Travel in ${country} with ${agencyName}`}
                       width={500}
                       height={500}
                       className="rounded-lg my-4"
                     />
                   )}
-                  <h2 className="text-2xl font-bold mt-2">{meta_title || "Untitled Destination"}</h2>
+                  <h2 className="text-2xl font-bold mt-2">
+                    {meta_title || "Untitled Destination"}
+                  </h2>
                 </Link>
               );
             })}

@@ -12,14 +12,6 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "header_image": {
-          "type": "Image",
-          "config": {
-            "label": "Header Image",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
         "gallery": {
           "type": "Group",
           "config": {
@@ -78,10 +70,67 @@
         "tour_description": {
           "type": "StructuredText",
           "config": {
-            "label": "Tour description ",
-            "placeholder": "Description",
-            "allowTargetBlank": false,
-            "multi": "heading1,heading2,heading3,paragraph,image,strong,em,list-item"
+            "label": "Tour Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1,paragraph,strong,heading2,heading3,hyperlink,image,list-item"
+          }
+        },
+        "included": {
+          "type": "Group",
+          "config": {
+            "label": "Included",
+            "repeat": true,
+            "fields": {
+              "text": {
+                "type": "Text",
+                "config": {
+                  "label": "Text",
+                  "placeholder": "Breakfast, lunch and dinner"
+                }
+              }
+            }
+          }
+        },
+        "excluded": {
+          "type": "Group",
+          "config": {
+            "label": "Excluded",
+            "repeat": true,
+            "fields": {
+              "text": {
+                "type": "Text",
+                "config": {
+                  "label": "text",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "itinerary": {
+          "type": "Group",
+          "config": {
+            "label": "Itinerary",
+            "repeat": true,
+            "fields": {
+              "heading": {
+                "type": "Text",
+                "config": {
+                  "label": "Heading",
+                  "placeholder": "Day 1: Arrival & Introduction to the City"
+                }
+              },
+              "paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "paragraph",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,heading2,list-item,image"
+                }
+              }
+            }
           }
         }
       },

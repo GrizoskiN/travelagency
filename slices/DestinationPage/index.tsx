@@ -2,14 +2,18 @@ import { SliceComponentProps } from "@prismicio/react";
 import { Content } from "@prismicio/client";
 import ImageGallery from "@/app/components/Destination/ImageGallery";
 import ThingsToKnow from "@/app/components/Destination/ThingsToKnow";
+import Description from "@/app/components/Destination/Description"; // Import the new Description component
+import IncludedExcluded from "@/app/components/Destination/IncludedExcluded";
+import Itinerary from "@/app/components/Destination/Itinerary";
+import ReservationForm from "@/app/components/Destination/ReservationForm";
 
 /**
  * Props for `DestinationPage`.
  */
-
 interface DestinationPageProps
   extends SliceComponentProps<Content.DestinationPageSlice> {
   context: {
+    destination_image: string;
     group: string;
     tags: string[];
     continent: string;
@@ -18,6 +22,7 @@ interface DestinationPageProps
     meta_description: string;
     start_date: string;
     end_date: string;
+    price: string;
   };
 }
 
@@ -25,21 +30,22 @@ const DestinationPage = ({
   slice,
   context,
 }: DestinationPageProps): JSX.Element => {
+
   return (
     <section
       className="customWidth max-w-[1300px] mx-auto"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}>
-      {/* <HeaderImage image={slice.primary.header_image} /> */}
-      <div className="flex justify-between items-end">
+      {/* Header Information */}
+      <div className="customWidth flex flex-col lg:justify-between space-y-4 lg:space-y-0 lg:items-end">
         <div className="">
           <h1 className="text-3xl ">{context.meta_title}</h1>
-          <div className="flex  gap-2 text-sm text-gray-500">
+          <div className="flex gap-2 text-sm text-gray-500">
             <p>{context.group} Group Size | </p>
             {context.tags.map((tag, index) => (
               <div key={index}>
                 <p className="capitalize">{tag}</p>
-                <span className="last:hidden">|</span>
+                <div className="last:hidden">|</div>
               </div>
             ))}
           </div>
@@ -72,10 +78,45 @@ const DestinationPage = ({
         </p>
       </div>
       {/* Image Gallery */}
-      <ImageGallery gallery={slice.primary.gallery} />
+      {slice.primary.gallery && (
+        <ImageGallery gallery={slice.primary.gallery} />
+      )}
+      <div className="flex flex-col-reverse lg:flex-row gap-6">
+        <div className="lg:w-2/3  space-y-6">
+          {/* Things to Know Section */}
+          {slice.primary.things_to_know &&
+            slice.primary.things_to_know.length > 0 && (
+              <ThingsToKnow thingsToKnow={slice.primary.things_to_know} />
+            )}
 
-      {/* Things to Know Section */}
-      <ThingsToKnow thingsToKnow={slice.primary.things_to_know} />
+          {/* Description Section */}
+          {slice.primary.tour_description && (
+            <Description description={slice.primary.tour_description} />
+          )}
+
+          {/* Included and Excluded Section */}
+          {(slice.primary.included.length > 0 ||
+            slice.primary.excluded.length > 0) && (
+            <IncludedExcluded
+              included={slice.primary.included}
+              excluded={slice.primary.excluded}
+            />
+          )}
+          {/* Itinerary Section */}
+          {slice.primary.itinerary && slice.primary.itinerary.length > 0 && (
+            <Itinerary itinerary={slice.primary.itinerary} />
+          )}
+        </div>
+        <div className="lg:w-1/3">
+          <ReservationForm
+            image={context.destination_image}
+            price={context.price}
+            startDate={context.start_date}
+            endDate={context.end_date}
+            meta_title={context.meta_title}
+          />
+        </div>
+      </div>
     </section>
   );
 };

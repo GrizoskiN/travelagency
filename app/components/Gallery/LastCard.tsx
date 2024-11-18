@@ -7,7 +7,7 @@ interface LastCardProps {
 
 const LastCard: FC<LastCardProps> = ({ lastCardText }) => {
   return (
-    <div className="relative w-full h-full flex flex-col items-start justify-end p-5 xl:p-11">
+    <div className="relative w-full h-full flex flex-col items-start justify-end p-5 xl:p-11 font-light">
       <p className="mb-32 text-xl">
         {lastCardText ||
           "No matter what your dream adventure looks like, we’ll help you create unforgettable memories, one destination at a time"}

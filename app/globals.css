@@ -16,7 +16,8 @@
 
 body {
   color: var(--accentColor);
- 
+  max-width: 95%;
+  margin:auto;
  
 }
 .svg-icon {
@@ -27,6 +28,7 @@ body {
 }
 .customWidth {
   width: 95%;
+  
   margin-left: auto;
   margin-right: auto;
 }

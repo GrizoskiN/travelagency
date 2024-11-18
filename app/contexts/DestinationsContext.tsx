@@ -10,10 +10,10 @@ interface TagDictionary {
 interface Destination {
   uid: string; // Unique identifier
   label: string; // Country label
-  image: string; // URL for the country image
   continent: string;
-  tags: string[]; // Allow both string[] (IDs) or Tag[]
-
+  destination_image?: string | null ;
+  tags?: string[] | null; // Allow both string[] (IDs) or Tag[]
+  price?: string;
   start_date?: string; // Optional: Start date for availability
   end_date?: string; // Optional: End date for availability
   group_size?: string; // Optional: Group size information (e.g., "2-4", "5+")
@@ -33,9 +33,10 @@ interface DestinationsProviderProps {
   uniqueCountries: Destination[];
   testimonials: Testimonial[];
   blogPosts: BlogPost[];
-  tagsDictionary: TagDictionary; // Add tagsDictionary as a prop
+  tagsDictionary: TagDictionary;
   children: ReactNode;
 }
+
 
 const DestinationsContext = createContext<DestinationsProviderProps | undefined>(undefined);
 

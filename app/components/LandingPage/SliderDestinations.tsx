@@ -11,8 +11,7 @@ import Link from "next/link";
 import HeadingText from "../TextModules/HeadingText";
 
 const SliderDestinations = () => {
-  const { uniqueCountries } = useDestinations(); // Fetch unique countries from context
-
+  const { uniqueCountries } = useDestinations(); // Fetch unique countries from context console.log(uniqueCountries)
   return (
     <div className="overflow-hidden customWidth py-11 my-6 bg-backgroundColor rounded-xl">
       <div className=" mx-auto  text-center mb-11">
@@ -43,13 +42,19 @@ const SliderDestinations = () => {
             <SwiperSlide key={index}>
               <Link href={`/countries/${destination.label}`} className="">
                 <div className="relative w-[19rem] h-[25rem] lg:w-[35rem] lg:h-auto m-auto -ml-24 md:-ml-0">
-                  <Image
-                    src={destination.image} // Dynamic image from context
-                    alt={destination.label} // Alt text from the context
-                    className=" w-full lg:w-[35rem] h-full lg:h-[35rem] object-cover rounded-lg"
-                    width={300}
-                    height={400}
-                  />
+                {destination.destination_image ? ( // Check if the image URL is defined
+                    <Image
+                      src={destination.destination_image}
+                      alt={destination.label}
+                      className="w-full lg:w-[35rem] h-full lg:h-[35rem] object-cover rounded-lg"
+                      width={300}
+                      height={400}
+                    />
+                  ) : (
+                    <div className="w-full lg:w-[35rem] h-full lg:h-[35rem] bg-gray-200 rounded-lg flex items-center justify-center">
+                      <p className="text-gray-500">Image not available</p>
+                    </div>
+                  )}
                   <div className="flex justify-between absolute bottom-4 left-4 right-4 bg-black/30 backdrop-blur-sm bg-opacity-50 text-white p-2 rounded-lg">
                     <h3 className="text-sm flex flex-col font-light">
                       Visit the beautiful{" "}

@@ -80,7 +80,7 @@ const TestimonialCarousel = () => {
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
-                className="min-w-[300px] p-4 m-4 bg-backgr rounded-lg shadow-sm relative"
+                className="min-w-[300px] p-4 m-4 bg-backgroundColor rounded-lg shadow-sm relative"
                 whileHover={{ translateY: -30 }}
                 whileTap={{ y: -20 }}
                 transition={{ duration: 0.5 }}>
