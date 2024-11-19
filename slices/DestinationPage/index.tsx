@@ -32,7 +32,7 @@ const DestinationPage = ({
 }: DestinationPageProps): JSX.Element => {
   return (
     <section
-      className="customWidth max-w-[1300px] mx-auto"
+      className="customWidth w-[1300px] mx-auto mt-24"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}>
       {/* Header Information */}

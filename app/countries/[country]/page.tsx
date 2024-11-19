@@ -41,7 +41,7 @@ export default function CountryPage({
       selectedTags.length === 0 || // If no tags are selected, include all destinations
       (destination.tags &&
         selectedTags.some(
-          (tagId) => tagsDictionary[tagId] && destination.tags!.includes(tagId)
+          (tagId) => tagsDictionary[tagId] && destination.tags!.includes(tagId),
         ))
     );
   };
@@ -49,80 +49,76 @@ export default function CountryPage({
   // Filter and prioritize destinations based on specific date range, group size, and tags
   const matchedDestinations: Destination[] = [];
 
-// Filtering logic
-filteredDestinations.forEach((destination) => {
-  const { start_date, end_date, group_size } = destination;
+  // Filtering logic
+  filteredDestinations.forEach((destination) => {
+    const { start_date, end_date, group_size } = destination;
 
-  const isInDateRange =
-    startDateStr && endDateStr
-      ? start_date &&
-        end_date &&
-        new Date(start_date) <= new Date(endDateStr) &&
-        new Date(end_date) >= new Date(startDateStr)
-      : true;
+    const isInDateRange =
+      startDateStr && endDateStr
+        ? start_date &&
+          end_date &&
+          new Date(start_date) <= new Date(endDateStr) &&
+          new Date(end_date) >= new Date(startDateStr)
+        : true;
 
-  const isInGroupSize = group_size && checkGroupSize(group_size, groupSizeStr || "2+");
-  const isInSelectedTags = matchesSelectedTags(destination);
+    const isInGroupSize =
+      group_size && checkGroupSize(group_size, groupSizeStr || "2+");
+    const isInSelectedTags = matchesSelectedTags(destination);
 
-  if (isInDateRange && isInGroupSize && isInSelectedTags) {
-    matchedDestinations.push(destination);
-  }
-});
+    if (isInDateRange && isInGroupSize && isInSelectedTags) {
+      matchedDestinations.push(destination);
+    }
+  });
 
-  
-  
+  // Helper function to check if a destination's group size matches or exceeds the selected group size
+  function checkGroupSize(
+    destinationGroupSize: string,
+    groupSizeStr: string,
+  ): boolean {
+    const groupSize = parseInt(groupSizeStr, 10);
 
+    // If no group size is selected or if "2+" is selected, show all destinations
+    if (!groupSizeStr || groupSizeStr === "2+") {
+      return true;
+    }
 
-// Helper function to check if a destination's group size matches or exceeds the selected group size
-function checkGroupSize(
-  destinationGroupSize: string,
-  groupSizeStr: string
-): boolean {
-  const groupSize = parseInt(groupSizeStr, 10);
+    // Handle cases where "2" should include all destinations with "2+" or higher
+    if (groupSize === 2) {
+      if (destinationGroupSize.includes("+")) {
+        const min = parseInt(destinationGroupSize.replace("+", ""), 10);
+        return min >= 2; // Include any destination with a minimum of 2 guests or more
+      }
+      if (destinationGroupSize.includes("-")) {
+        const [min] = destinationGroupSize.split("-").map(Number);
+        return min <= 2; // Include any range that starts at 2 or lower
+      }
+      const exactSize = parseInt(destinationGroupSize, 10);
+      return exactSize >= 2; // Include exact sizes that are 2 or more
+    }
 
-  // If no group size is selected or if "2+" is selected, show all destinations
-  if (!groupSizeStr || groupSizeStr === "2+") {
-    return true;
-  }
-
-  // Handle cases where "2" should include all destinations with "2+" or higher
-  if (groupSize === 2) {
+    // Handle cases like "5+" which mean 5 or more guests
     if (destinationGroupSize.includes("+")) {
       const min = parseInt(destinationGroupSize.replace("+", ""), 10);
-      return min >= 2; // Include any destination with a minimum of 2 guests or more
+      return groupSize >= min; // Check if the selected group size is at least the minimum
     }
+
+    // Handle ranges like "2-4"
     if (destinationGroupSize.includes("-")) {
-      const [min] = destinationGroupSize.split("-").map(Number);
-      return min <= 2; // Include any range that starts at 2 or lower
+      const [min, max] = destinationGroupSize.split("-").map(Number);
+      return groupSize >= min && groupSize <= max; // Check if the selected group size falls within the range
     }
+
+    // Handle exact numbers like "2", "3", "4", etc.
     const exactSize = parseInt(destinationGroupSize, 10);
-    return exactSize >= 2; // Include exact sizes that are 2 or more
+    return groupSize === exactSize; // Check if the selected group size matches the exact number
   }
-
-  // Handle cases like "5+" which mean 5 or more guests
-  if (destinationGroupSize.includes("+")) {
-    const min = parseInt(destinationGroupSize.replace("+", ""), 10);
-    return groupSize >= min; // Check if the selected group size is at least the minimum
-  }
-
-  // Handle ranges like "2-4"
-  if (destinationGroupSize.includes("-")) {
-    const [min, max] = destinationGroupSize.split("-").map(Number);
-    return groupSize >= min && groupSize <= max; // Check if the selected group size falls within the range
-  }
-
-  // Handle exact numbers like "2", "3", "4", etc.
-  const exactSize = parseInt(destinationGroupSize, 10);
-  return groupSize === exactSize; // Check if the selected group size matches the exact number
-}
-
 
   const handleTagSelect = (selectedTags: string[]) => {
     setSelectedTags(selectedTags);
   };
 
   return (
-    <div className="customWidth max-w-[1300px] bg-white mx-auto mt-24">
+    <div className="customWidth w-[1300px] bg-white mx-auto mt-24">
       <SearchBar />
 
       {/* Tags Filter Component */}
@@ -151,7 +147,9 @@ function checkGroupSize(
           <div className="destination-grid grid md:grid-cols-2 xl:grid-cols-3 gap-4 :gap-7">
             {matchedDestinations.map((dest) => (
               <div key={dest.uid} className="flex flex-col justify-between">
-                <Link href={`/destination/${dest.uid}`} className="block md:h-[20rem] my-4">
+                <Link
+                  href={`/destination/${dest.uid}`}
+                  className="block md:h-[20rem] xl:h-[25rem] my-4">
                   {dest.destination_image && (
                     <Image
                       src={dest.destination_image}
@@ -170,8 +168,14 @@ function checkGroupSize(
                     {dest.excerpt}
                   </p>
                   <div className="flex  gap-3 mt-5">
-                    <FullButton link={`/destination/${dest.uid}`} text="Reserve"/>
-                    <OutlineButton link={`/destination/${dest.uid}`} text="View the tour"/>
+                    <FullButton
+                      link={`/destination/${dest.uid}`}
+                      text="Reserve"
+                    />
+                    <OutlineButton
+                      link={`/destination/${dest.uid}`}
+                      text="View the tour"
+                    />
                   </div>
                 </div>
               </div>

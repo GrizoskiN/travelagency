@@ -23,11 +23,11 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
             width={200}
             height={100} className="w-1/3 lg:w-48 object-contain"
           />
-          <div className="xl:text-right">
-            <h3 className="lg:text-2xl">
+          <div className="text-right">
+            <h3 className="text-sm md:text-md lg:text-2xl">
               <span>📞</span> Need help? Call us
             </h3>
-            <h2 className="text-white text-2xl lg:text-4xl">
+            <h2 className="text-white md:text-2xl lg:text-4xl">
               {slice.primary.phone_number}
             </h2>
           </div>
@@ -37,15 +37,15 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
           <div className="col-span-4 lg:col-span-2 flex flex-col md:flex-row lg:flex-col items-start justify-between">
             <div className="">
               <h3 className="text-white text-xl pb-3">Contact Us</h3>
-              <p className="hover:text-white duration-300 text-lg">
+              <p className="hover:text-white duration-300 ">
                 <span>📞</span>
                 {slice.primary.address}
               </p>
-              <p className="hover:text-white duration-300 text-lg">
+              <p className="hover:text-white duration-300 ">
                 <span>📞</span>
                 {slice.primary.working_hours}
               </p>
-              <p className="hover:text-white duration-300 text-lg">
+              <p className="hover:text-white duration-300 ">
                 <span>📞</span>
                 {slice.primary.email_address}
               </p>
@@ -69,7 +69,7 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
               <PrismicNextLink
                 field={item.support_links}
                 key={index}
-                className="first:text-white first:text-xl first:pb-3 text-lg hover:text-white duration-300">
+                className="first:text-white first:text-xl first:pb-3  hover:text-white duration-300">
                 {item.support_sub_menu}
               </PrismicNextLink>
             ))}
@@ -79,7 +79,7 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
               <PrismicNextLink
                 field={item.company_links}
                 key={index}
-                className="first:text-white first:text-xl first:pb-3 text-lg hover:text-white duration-300">
+                className="first:text-white first:text-xl first:pb-3  hover:text-white duration-300">
                 {item.company_sub_menu}
               </PrismicNextLink>
             ))}
@@ -89,7 +89,7 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
               <PrismicNextLink
                 field={item.services_links}
                 key={index}
-                className="first:text-white first:text-xl first:pb-3 text-lg hover:text-white duration-300">
+                className="first:text-white first:text-xl first:pb-3  hover:text-white duration-300">
                 {item.services_sub_items}
               </PrismicNextLink>
             ))}
@@ -99,7 +99,7 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
               <PrismicNextLink
                 field={item.legal_sub_links}
                 key={index}
-                className="first:text-white first:text-xl first:pb-3 text-lg hover:text-white duration-300">
+                className="first:text-white first:text-xl first:pb-3  hover:text-white duration-300">
                 {item.legal_sub_items}
               </PrismicNextLink>
             ))}
@@ -108,7 +108,7 @@ const Footer = ({ slice }: FooterProps): JSX.Element => {
 
         <div className="flex flex-col-reverse text-center md:flex-row justify-between mt-4">
           <p className="mt-3 md:mt-0">{slice.primary.all_rights_reserved}</p>
-          <div className="text-white text-lg space-x-4">
+          <div className="text-white  space-x-4">
             {slice.primary.footer_menu.map((item, index) => (
               <PrismicNextLink key={index} field={item.footer_link}>
                 {item.footer_item}

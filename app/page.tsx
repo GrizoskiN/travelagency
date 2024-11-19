@@ -7,8 +7,9 @@ import TestimonialCarousel from "./components/LandingPage/Testimonials";
 import SignUp from "./components/Newsletter/SignUp";
 
 
-
 export default async function HomePage() {
+
+  
 
   return (
     <div>

@@ -4,7 +4,7 @@
 
 :root {
   --accentColor: #3b4e60;
- 
+
   --container: "95%";
 }
 
@@ -16,18 +16,17 @@
 
 body {
   color: var(--accentColor);
-  max-width: 95%;
-  margin:auto;
- 
+
+  margin: auto;
 }
 .svg-icon {
   stroke-width: black;
 }
 .offWhite {
-  background:"black";
+  background: "black";
 }
 .customWidth {
-  width: 95%;
+  max-width: 95%;
   
   margin-left: auto;
   margin-right: auto;
@@ -38,7 +37,7 @@ body {
 .cta_button {
   background: var(--accentColor);
   color: white;
-  padding: .8em 2.5em;
+  padding: 0.8em 2.5em;
   border-radius: 30px;
 }
 @layer utilities {
@@ -110,10 +109,9 @@ body {
   }
 }
 .swiper-3d .swiper-slide-shadow {
-  background: none!important;
+  background: none !important;
 }
 /* Blurring all slides by default */
-
 
 /* Remove blur and scale for the active (centered) slide */
 .swiper-slide-active .slide-content {

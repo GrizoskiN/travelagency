@@ -6,7 +6,12 @@ import { GeistSans } from 'geist/font/sans';
 import { fetchDestinations, fetchTags, fetchContinentDetails, fetchTestimonials, fetchBlogPosts } from "@/lib/fetchData";
 import { DestinationsProvider } from "./contexts/DestinationsContext";
 import Footer from "./components/Footer";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Travel Agency - GoBro Studio",
+  description:"Travel Agency - GoBro Studio"
+}
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // Fetch data
   const destinations = await fetchDestinations();
